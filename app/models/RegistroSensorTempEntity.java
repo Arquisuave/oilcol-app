@@ -1,8 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.sun.istack.internal.NotNull;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -23,6 +22,7 @@ public class RegistroSensorTempEntity implements Serializable
     {
 
     }
+
     public RegistroSensorTempEntity(Long idP)
     {
         idSensorTemp = idP;
