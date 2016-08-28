@@ -1,5 +1,6 @@
 package models;
 
+import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.*;
 public class RegistroSensorEnerEntity implements Serializable
 {
     private static final long serialVersionUID = 3L;
+    public static Model.Finder<Long,RegistroSensorEnerEntity> FINDER = new Model.Finder<>(RegistroSensorEnerEntity.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

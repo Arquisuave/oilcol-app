@@ -35,9 +35,10 @@ public class AuthController extends Controller {
                         if(hash == auth.getPassword())
                         {
                             Long token = System.currentTimeMillis() / 1000L;
-                            byte[] b = md.digest(token.getBytes());
-                            String token = hashToString(b);
-                            resp.setToken(token);
+                            String tok = token.toString();
+                            byte[] b = md.digest(tok.getBytes());
+                            tok = hashToString(b);
+                            resp.setToken(tok);
                             resp.setMessage("Login successful!");
                         }
                         else
@@ -57,11 +58,11 @@ public class AuthController extends Controller {
                 entity -> {
                     if(entity.getToken() != null)
                     {
-                        return ok(entity.toJson());
+                        return ok(Json.toJson(entity));
                     }
                     else
                     {
-                        return unauthorized(entity.toJson());
+                        return unauthorized(Json.toJson(entity));
                     }
                 }
         );
