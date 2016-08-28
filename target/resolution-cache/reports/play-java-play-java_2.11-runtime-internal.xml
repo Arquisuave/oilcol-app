@@ -7,8 +7,20 @@
 		revision="1.0-SNAPSHOT"
 		conf="runtime-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, fork-run"
-		date="20160828125921"/>
+		date="20160828153636"/>
 	<dependencies>
+		<module organisation="org.bouncycastle" name="bcprov-jdk15on">
+			<revision name="1.55" status="release" pubdate="20160821005524" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.bouncycastle.org/java.html" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="100">
+				<license name="Bouncy Castle Licence" url="http://www.bouncycastle.org/licence.html"/>
+				<metadata-artifact status="no" details="" size="2676" time="0" location="/Users/camilagarciahernandez/.ivy2/cache/org.bouncycastle/bcprov-jdk15on/ivy-1.55.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.55/bcprov-jdk15on-1.55.pom"/>
+				<caller organisation="play-java" name="play-java_2.11" conf="compile, runtime-internal, runtime, optional" rev="1.55" rev-constraint-default="1.55" rev-constraint-dynamic="1.55" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="bcprov-jdk15on" type="jar" ext="jar" status="successful" details="" size="3398948" time="42546" location="/Users/camilagarciahernandez/.ivy2/cache/org.bouncycastle/bcprov-jdk15on/jars/bcprov-jdk15on-1.55.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.55/bcprov-jdk15on-1.55.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="org.postgresql" name="postgresql">
 			<revision name="9.4-1206-jdbc42" status="release" pubdate="20151125150416" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://jdbc.postgresql.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="99">
 				<license name="The PostgreSQL License" url="http://www.postgresql.org/about/licence/"/>

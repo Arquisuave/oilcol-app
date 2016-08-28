@@ -3371,9 +3371,9 @@
 [debug] 	[NOT REQUIRED] asm#asm;3.1!asm.jar
 [debug] 	[NOT REQUIRED] jfree#jcommon;1.0.12!jcommon.jar
 [debug] 	[NOT REQUIRED] jfree#jfreechart;1.0.8a!jfreechart.jar
-[debug] :: resolution report :: resolve 1281ms :: artifacts dl 56ms
+[debug] :: resolution report :: resolve 1717ms :: artifacts dl 54ms
 [debug] 	report for play-java#play-java$sbt_2.11;1.0-SNAPSHOT default produced in /Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/target/resolution-cache/reports/play-java-play-java$sbt_2.11-default.xml
-[debug] 	resolve done (1281ms resolve - 56ms download)
+[debug] 	resolve done (1717ms resolve - 54ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: play-java#play-java$sources_2.11;1.0-SNAPSHOT
 [debug] 	confs: [default]
@@ -5827,14 +5827,7 @@
 [debug] 	[NOT REQUIRED] org.eclipse.sisu#org.eclipse.sisu.inject;0.0.0.M5!org.eclipse.sisu.inject.jar(src)
 [debug] 	[NOT REQUIRED] org.apache.maven#maven-aether-provider;3.2.2!maven-aether-provider.jar(src)
 [debug] 	[NOT REQUIRED] org.codehaus.plexus#plexus-classworlds;2.5.1!plexus-classworlds.jar(src)
-[debug] 		tried https://repo.typesafe.com/typesafe/ivy-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar
-[debug] CLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar
-[debug] 		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar
-[info] downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar ...
-[debug] 	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar
-[debug] 	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar.sha1
-[debug] sha1 OK for https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.typesafe.sbt/sbt-play-ebean/scala_2.10/sbt_0.13/1.0.0/srcs/sbt-play-ebean-sources.jar
-[info] 	[SUCCESSFUL ] com.typesafe.sbt#sbt-play-ebean;1.0.0!sbt-play-ebean.jar(src) (2336ms)
+[debug] 	[NOT REQUIRED] com.typesafe.sbt#sbt-play-ebean;1.0.0!sbt-play-ebean.jar(src)
 [debug] 	[NOT REQUIRED] org.apache.maven#maven-settings-builder;3.2.2!maven-settings-builder.jar(src)
 [debug] 	[NOT REQUIRED] org.javassist#javassist;3.18.2-GA!javassist.jar(src)
 [debug] 	[NOT REQUIRED] com.typesafe.sbt#sbt-mocha;1.1.0!sbt-mocha.jar(src)
@@ -5878,17 +5871,7 @@
 [debug] 	[NOT REQUIRED] com.nativelibs4java#ochafik-util;0.12!ochafik-util.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#testing;0.13.11!testing.jar(src)
 [debug] 	[NOT REQUIRED] jline#jline;2.13!jline.jar(src)
-[debug] 		tried https://repo.typesafe.com/typesafe/ivy-releases/javax.persistence/persistence-api/1.0/srcs/persistence-api-sources.jar
-[debug] CLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/javax.persistence/persistence-api/1.0/srcs/persistence-api-sources.jar
-[debug] 		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/javax.persistence/persistence-api/1.0/srcs/persistence-api-sources.jar
-[debug] CLIENT ERROR: Not Found url=https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/javax.persistence/persistence-api/1.0/srcs/persistence-api-sources.jar
-[debug] 		tried /Users/camilagarciahernandez/.ivy2/local/javax.persistence/persistence-api/1.0/srcs/persistence-api-sources.jar
-[debug] 		tried https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar
-[info] downloading https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar
-[info] 	[SUCCESSFUL ] javax.persistence#persistence-api;1.0!persistence-api.jar(src) (961ms)
+[debug] 	[NOT REQUIRED] javax.persistence#persistence-api;1.0!persistence-api.jar(src)
 [debug] 	[NOT REQUIRED] com.typesafe.sbt#sbt-native-packager;1.0.3!sbt-native-packager.jar(src)
 [debug] 	[NOT REQUIRED] org.apache.ant#ant-launcher;1.9.3!ant-launcher.jar(src)
 [debug] 	[NOT REQUIRED] com.typesafe.sbt#sbt-js-engine;1.1.3!sbt-js-engine.jar(src)
@@ -5986,17 +5969,7 @@
 [debug] 	[NOT REQUIRED] io.apigee#rhino;1.7R5pre4!rhino.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-interface;1.0!test-interface.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.10.6!scala-compiler.jar(src)
-[debug] 		tried https://repo.typesafe.com/typesafe/ivy-releases/org.avaje.ebeanorm/avaje-ebeanorm-agent/4.5.3/srcs/avaje-ebeanorm-agent-sources.jar
-[debug] CLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/org.avaje.ebeanorm/avaje-ebeanorm-agent/4.5.3/srcs/avaje-ebeanorm-agent-sources.jar
-[debug] 		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.avaje.ebeanorm/avaje-ebeanorm-agent/4.5.3/srcs/avaje-ebeanorm-agent-sources.jar
-[debug] CLIENT ERROR: Not Found url=https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.avaje.ebeanorm/avaje-ebeanorm-agent/4.5.3/srcs/avaje-ebeanorm-agent-sources.jar
-[debug] 		tried /Users/camilagarciahernandez/.ivy2/local/org.avaje.ebeanorm/avaje-ebeanorm-agent/4.5.3/srcs/avaje-ebeanorm-agent-sources.jar
-[debug] 		tried https://repo1.maven.org/maven2/org/avaje/ebeanorm/avaje-ebeanorm-agent/4.5.3/avaje-ebeanorm-agent-4.5.3-sources.jar
-[info] downloading https://repo1.maven.org/maven2/org/avaje/ebeanorm/avaje-ebeanorm-agent/4.5.3/avaje-ebeanorm-agent-4.5.3-sources.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/avaje/ebeanorm/avaje-ebeanorm-agent/4.5.3/avaje-ebeanorm-agent-4.5.3-sources.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/avaje/ebeanorm/avaje-ebeanorm-agent/4.5.3/avaje-ebeanorm-agent-4.5.3-sources.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/avaje/ebeanorm/avaje-ebeanorm-agent/4.5.3/avaje-ebeanorm-agent-4.5.3-sources.jar
-[info] 	[SUCCESSFUL ] org.avaje.ebeanorm#avaje-ebeanorm-agent;4.5.3!avaje-ebeanorm-agent.jar(src) (665ms)
+[debug] 	[NOT REQUIRED] org.avaje.ebeanorm#avaje-ebeanorm-agent;4.5.3!avaje-ebeanorm-agent.jar(src)
 [debug] 	[NOT REQUIRED] com.typesafe#config;1.3.0!config.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#logging;0.13.11!logging.jar(src)
 [debug] 	[NOT REQUIRED] com.typesafe.sbt#sbt-coffeescript;1.0.0!sbt-coffeescript.jar(src)
@@ -6008,6 +5981,6 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#control;0.13.11!control.jar(src)
 [debug] 	[NOT REQUIRED] org.apache.maven#maven-repository-metadata;3.2.2!maven-repository-metadata.jar(src)
 [debug] 	[NOT REQUIRED] org.bouncycastle#bcpg-jdk15on;1.51!bcpg-jdk15on.jar(src)
-[debug] :: resolution report :: resolve 857ms :: artifacts dl 7454ms
+[debug] :: resolution report :: resolve 1287ms :: artifacts dl 59ms
 [debug] 	report for play-java#play-java$sources_2.11;1.0-SNAPSHOT default produced in /Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/target/resolution-cache/reports/play-java-play-java$sources_2.11-default.xml
-[debug] 	resolve done (857ms resolve - 7454ms download)
+[debug] 	resolve done (1287ms resolve - 59ms download)

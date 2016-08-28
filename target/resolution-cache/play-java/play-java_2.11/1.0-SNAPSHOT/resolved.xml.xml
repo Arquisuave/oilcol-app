@@ -4,7 +4,7 @@
 		module="play-java_2.11"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20160828112435"
+		publication="20160828153636"
 	>
 		<description>
 		play-java
@@ -35,8 +35,9 @@
 	<dependencies>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.11.7" conf="scala-tool->default,optional(default)"/>
 		<dependency org="org.scala-lang" name="scala-library" rev="2.11.7" conf="scala-tool->default,optional(default);compile->default(compile)"/>
-		<dependency org="com.typesafe.play" name="twirl-api_2.11" rev="1.1.1" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-enhancer" rev="1.1.0" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.play" name="twirl-api_2.11" rev="1.1.1" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.play" name="play-ebean_2.11" rev="1.0.0" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-server_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-test_2.11" rev="2.5.6" conf="test->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-omnidoc_2.11" rev="2.5.6" conf="docs->default(compile)"/>
@@ -44,8 +45,12 @@
 		<dependency org="com.typesafe.play" name="play-netty-server_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-logback_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="fork-run_2.11" rev="2.5.6" conf="fork-run->default(compile)"/>
+		<dependency org="com.typesafe.play" name="play-jdbc-evolutions_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-java-jdbc_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-cache_2.11" rev="2.5.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-java-ws_2.11" rev="2.5.6" conf="compile->default(compile)"/>
+		<dependency org="org.postgresql" name="postgresql" rev="9.4-1206-jdbc42" conf="compile->default(compile)"/>
+		<dependency org="com.fasterxml.jackson.core" name="jackson-annotations" rev="2.8.1" conf="compile->default(compile)"/>
+		<dependency org="org.bouncycastle" name="bcprov-jdk15on" rev="1.55" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Entity
 public class PozoEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private Long lon;
@@ -19,16 +20,37 @@ public class PozoEntity {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional = false)
     private CampoEntity campo;
 
-    @OneToMany(mappedBy="pozo")
+    @OneToMany(mappedBy = "pozo")
     private List<RegistroSensorTempEntity> registrosTemp;
 
-    private enum Estado{
+    @OneToMany(mappedBy = "pozo")
+    private List<RegistroSensorEmergEntity> registrosEmerg;
+
+    @OneToMany(mappedBy = "pozo")
+    private List<RegistroSensorEnerEntity> registrosEner;
+
+    @OneToMany(mappedBy = "pozo")
+    private List<RegistroSensorBarrilesEntity> registrosBarriles;
+
+    private enum Estado {
         ABIERTO, PRODUCCION, PARADO, CLAUSURADO
     }
 
+    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo,
+                      List<RegistroSensorTempEntity> registrosTemp, List<RegistroSensorEmergEntity> registrosEmerg,
+                      List<RegistroSensorEnerEntity> registrosEner, List<RegistroSensorBarrilesEntity> registrosBarriles) {
+        this.lon = lon;
+        this.lat = lat;
+        this.estado = estado;
+        this.campo = campo;
+        this.registrosTemp = registrosTemp;
+        this.registrosEmerg = registrosEmerg;
+        this.registrosEner = registrosEner;
+        this.registrosBarriles = registrosBarriles;
+    }
 
     public Long getId() {
         return id;
@@ -70,11 +92,35 @@ public class PozoEntity {
         this.campo = campo;
     }
 
-    public List<RegistroEntity> getRegistros() {
-        return registros;
+    public List<RegistroSensorTempEntity> getRegistrosTemp() {
+        return registrosTemp;
     }
 
-    public void setRegistros(List<RegistroEntity> registros) {
-        this.registros = registros;
+    public void setRegistrosTemp(List<RegistroSensorTempEntity> registrosTemp) {
+        this.registrosTemp = registrosTemp;
+    }
+
+    public List<RegistroSensorEmergEntity> getRegistrosEmerg() {
+        return registrosEmerg;
+    }
+
+    public void setRegistrosEmerg(List<RegistroSensorEmergEntity> registrosEmerg) {
+        this.registrosEmerg = registrosEmerg;
+    }
+
+    public List<RegistroSensorEnerEntity> getRegistrosEner() {
+        return registrosEner;
+    }
+
+    public void setRegistrosEner(List<RegistroSensorEnerEntity> registrosEner) {
+        this.registrosEner = registrosEner;
+    }
+
+    public List<RegistroSensorBarrilesEntity> getRegistrosBarriles() {
+        return registrosBarriles;
+    }
+
+    public void setRegistrosBarriles(List<RegistroSensorBarrilesEntity> registrosBarriles) {
+        this.registrosBarriles = registrosBarriles;
     }
 }
