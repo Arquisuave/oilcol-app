@@ -14,3 +14,4 @@ libraryDependencies ++= Seq(
 
 
 fork in run := true
+libraryDependencies += "org.bouncycastle" % "bcprov-jdk15on" % "1.55"
