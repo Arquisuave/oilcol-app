@@ -1,0 +1,89 @@
+[0m[[0mdebug[0m] [0m[naha] [0m
+[0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
+[0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set(/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java)[0m
+[0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java)[0m
+[0m[[0mdebug[0m] [0m[naha] [0m
+[0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java)[0m
+[0m[[0minfo[0m] [0mCompiling 1 Java source to /Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/target/scala-2.11/classes...[0m
+[0m[[0mdebug[0m] [0mAttempting to call com.sun.tools.javac.api.JavacTool@540530a5 directly...[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:6: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol: class Entity[0m
+[0m[[31merror[0m] [0m@Entity[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:20: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class CampoEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    private CampoEntity campo;[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:23: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class List[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    private List<RegistroEntity> registros;[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:23: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class RegistroEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    private List<RegistroEntity> registros;[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:29: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class CampoEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo, List<RegistroEntity> registros) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:29: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class List[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo, List<RegistroEntity> registros) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:29: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class RegistroEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo, List<RegistroEntity> registros) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:69: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class CampoEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public CampoEntity getCampo() {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:73: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class CampoEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public void setCampo(CampoEntity campo) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:77: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class List[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public List<RegistroEntity> getRegistros() {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:77: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class RegistroEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public List<RegistroEntity> getRegistros() {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:81: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class List[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public void setRegistros(List<RegistroEntity> registros) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:81: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class RegistroEntity[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    public void setRegistros(List<RegistroEntity> registros) {[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:9: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class Id[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    @Id @GeneratedValue[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:9: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class GeneratedValue[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    @Id @GeneratedValue[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:16: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class Enumerated[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    @Enumerated(EnumType.STRING)[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:19: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class ManyToOne[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    @ManyToOne(optional=false)[0m
+[0m[[31merror[0m] [0m/Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/app/models/PozoEntity.java:22: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class OneToMany[0m
+[0m[[31merror[0m] [0m  location: class models.PozoEntity[0m
+[0m[[31merror[0m] [0m    @OneToMany(mappedBy="campo")[0m
+[0m[[31merror[0m] [0m(compile:[31mcompileIncremental[0m) javac returned nonzero exit code[0m
