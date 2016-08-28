@@ -3371,9 +3371,9 @@
 [debug] 	[NOT REQUIRED] asm#asm;3.1!asm.jar
 [debug] 	[NOT REQUIRED] jfree#jcommon;1.0.12!jcommon.jar
 [debug] 	[NOT REQUIRED] jfree#jfreechart;1.0.8a!jfreechart.jar
-[debug] :: resolution report :: resolve 1717ms :: artifacts dl 54ms
-[debug] 	report for play-java#play-java$sbt_2.11;1.0-SNAPSHOT default produced in /Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/target/resolution-cache/reports/play-java-play-java$sbt_2.11-default.xml
-[debug] 	resolve done (1717ms resolve - 54ms download)
+[debug] :: resolution report :: resolve 2048ms :: artifacts dl 136ms
+[debug] 	report for play-java#play-java$sbt_2.11;1.0-SNAPSHOT default produced in C:\Users\USUARIO\Documents\AQuinto\ArquiSoft\oilcol-app-play\target\resolution-cache\reports\play-java-play-java$sbt_2.11-default.xml
+[debug] 	resolve done (2048ms resolve - 136ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: play-java#play-java$sources_2.11;1.0-SNAPSHOT
 [debug] 	confs: [default]
@@ -5981,6 +5981,6 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#control;0.13.11!control.jar(src)
 [debug] 	[NOT REQUIRED] org.apache.maven#maven-repository-metadata;3.2.2!maven-repository-metadata.jar(src)
 [debug] 	[NOT REQUIRED] org.bouncycastle#bcpg-jdk15on;1.51!bcpg-jdk15on.jar(src)
-[debug] :: resolution report :: resolve 1287ms :: artifacts dl 59ms
-[debug] 	report for play-java#play-java$sources_2.11;1.0-SNAPSHOT default produced in /Users/camilagarciahernandez/Documents/Universidad/Semestre7/Arquisoft/oilcol-app-play/target/resolution-cache/reports/play-java-play-java$sources_2.11-default.xml
-[debug] 	resolve done (1287ms resolve - 59ms download)
+[debug] :: resolution report :: resolve 1052ms :: artifacts dl 100ms
+[debug] 	report for play-java#play-java$sources_2.11;1.0-SNAPSHOT default produced in C:\Users\USUARIO\Documents\AQuinto\ArquiSoft\oilcol-app-play\target\resolution-cache\reports\play-java-play-java$sources_2.11-default.xml
+[debug] 	resolve done (1052ms resolve - 100ms download)
