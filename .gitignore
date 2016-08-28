@@ -28,3 +28,28 @@ server.pid
 *.eml
 /dist/
 .cache
+
+*~
+*.log
+tmp
+dump
+
+# Eclipse
+.settings
+.cache
+.project
+.classpath
+.scala_dependencies
+bin
+
+# SBT
+dist
+project/boot
+project/target
+project/plugins/target
+target
+.target
+
+# Play
+logs
+RUNNING_PID
