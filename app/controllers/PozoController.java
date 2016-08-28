@@ -1,83 +1,74 @@
 package controllers;
 
+import akka.dispatch.MessageDispatcher;
+import com.fasterxml.jackson.databind.JsonNode;
+import dispatchers.AkkaDispatcher;
+import models.PozoEntity;
+import play.libs.Json;
 import play.mvc.*;
 
-/**
- * Created by camilagarciahernandez on 8/28/16.
- */
+import java.util.concurrent.*;
+
+import static play.libs.Json.toJson;
+
 public class PozoController extends Controller{
 
-    public CompletionStage<Result> getProducts() {
+    public CompletionStage<Result> getPozos() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return ProductEntity.FINDER.all();
+                            return PozoEntity.FINDER.all();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        productEntities -> {
-                            return ok(toJson(productEntities));
+                        pozoEntities -> {
+                            return ok(toJson(pozoEntities));
                         }
                 );
     }
 
-    public CompletionStage<Result> createProduct(){
+    public CompletionStage<Result> createPozo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nProduct = request().body().asJson();
-        ProductEntity product = Json.fromJson( nProduct , ProductEntity.class ) ;
+        JsonNode nPozo = request().body().asJson();
+        PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    product.save();
-                    return product;
+                    pozo.save();
+                    return pozo;
                 }
                 ,jdbcDispatcher
         ).thenApply(
-                productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                pozoEntity -> {
+                    return ok(Json.toJson(pozoEntity));
                 }
         );
     }
 
-    public CompletionStage<Result> updateProduct(){
+    public CompletionStage<Result> updatePozo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nProduct = request().body().asJson();
-        ProductEntity product = Json.fromJson( nProduct , ProductEntity.class ) ;
+        JsonNode nPozo = request().body().asJson();
+        PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    product.update();
-                    return product;
+                    pozo.update();
+                    return pozo;
                 }
                 ,jdbcDispatcher
         ).thenApply(
-                productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                pozoEntity -> {
+                    return ok(Json.toJson(pozoEntity));
                 }
         );
     }
 
-    public CompletionStage<Result> deleteProduct(Long id){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    ProductEntity product = ProductEntity.FINDER.byId(id);
-                    product.delete();
-                    return product;
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                productEntity -> {
-                    return ok(Json.toJson(productEntity));
-                }
-        );
-    }
 
-    public CompletionStage<Result> getProduct(Long id){
+    public CompletionStage<Result> getPozo(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    return ProductEntity.FINDER.byId(id);
+                    return PozoEntity.FINDER.byId(id);
                 }
                 ,jdbcDispatcher
         ).thenApply(
