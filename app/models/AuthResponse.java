@@ -1,10 +1,12 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
 import java.util.List;
 
 
-public class AuthResponse
+public class AuthResponse extends Model
 {
     private String token;
     private String message;
