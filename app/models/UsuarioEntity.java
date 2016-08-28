@@ -29,7 +29,7 @@ public class UsuarioEntity extends Model
         }
     } 
 
-    public static Model.Finder<Long,UsuarioEntity> FINDER = new Model.Finder<>(UsuarioEntity.class);
+    public static Model.Finder<String,UsuarioEntity> FINDER = new Model.Finder<>(UsuarioEntity.class);
 
     @Id
     private String username;

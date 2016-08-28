@@ -29,12 +29,29 @@ public class CampoEntity extends Model{
 
     private Long idJefeCampo;
 
+    @Enumerated(EnumType.STRING)
+    private Region region;
+
     @OneToMany(mappedBy ="campo")
     private List<PozoEntity> pozos;
 
     public CampoEntity(Long pId, Long pIdJefeCampo){
         id = pId;
         idJefeCampo = pIdJefeCampo;
+    }
+
+    public CampoEntity(Long idJefeCampo, Region region, List<PozoEntity> pozos) {
+        this.idJefeCampo = idJefeCampo;
+        this.region = region;
+        this.pozos = pozos;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     public Long getId(){
@@ -53,8 +70,10 @@ public class CampoEntity extends Model{
         idJefeCampo = pIdJefeCampo;
     }
 
-    public java.util.List<PozoEntity> getPozos() {
+    public List<PozoEntity> getPozos() {
         return pozos;
     }
+
+    public void setPozos(List<PozoEntity> pPozos){pozos=pPozos;}
 
 }
