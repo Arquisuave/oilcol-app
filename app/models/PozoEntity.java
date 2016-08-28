@@ -1,12 +1,14 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
 
 /**
  * Created by camilagarciahernandez on 8/28/16.
  */
 @Entity
-public class PozoEntity {
+public class PozoEntity extends Model{
 
     @Id
     @GeneratedValue

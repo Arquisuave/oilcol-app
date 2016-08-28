@@ -3,12 +3,14 @@ package models;
 import com.sun.javafx.beans.IDProperty;
 
 import java.util.List;
+import javax.persistence.*;
+import com.avaje.ebean.Model;
 
 /**
  * Created by mm.gomez10 on 28/08/2016.
  */
 @Entity
-@Table(name = campoentity)
+@Table(name = "campoentity")
 public class CampoEntity extends Model{
 
     public enum Region{
