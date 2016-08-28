@@ -4,7 +4,7 @@
 		module="play-java$sbt_2.11"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20160828125501"
+		publication="20160828154540"
 	/>
 	<configurations>
 		<conf name="default" visibility="public"/>
