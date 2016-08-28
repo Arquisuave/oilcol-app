@@ -13,6 +13,7 @@ public class PozoEntity {
 
     private Long lon;
 
+
     private Long lat;
 
     @Enumerated(EnumType.STRING)
@@ -21,20 +22,13 @@ public class PozoEntity {
     @ManyToOne(optional=false)
     private CampoEntity campo;
 
-    @OneToMany(mappedBy="campo")
-    private List<RegistroEntity> registros;
+    @OneToMany(mappedBy="pozo")
+    private List<RegistroSensorTempEntity> registrosTemp;
 
     private enum Estado{
         ABIERTO, PRODUCCION, PARADO, CLAUSURADO
     }
 
-    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo, List<RegistroEntity> registros) {
-        this.lon = lon;
-        this.lat = lat;
-        this.estado = estado;
-        this.campo = campo;
-        this.registros = registros;
-    }
 
     public Long getId() {
         return id;
