@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/andfoy/Documentos/Universidad/2016/VI_Semestre/Arquisoft/oilcol-app-play/play-java/conf/routes
-// @DATE:Sun Aug 28 00:40:21 COT 2016
+// @SOURCE:C:/Users/USUARIO/Documents/AQuinto/ArquiSoft/oilcol-app-play/oilcol-app-play/conf/routes
+// @DATE:Sun Aug 28 11:19:47 COT 2016
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
