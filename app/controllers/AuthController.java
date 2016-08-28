@@ -6,7 +6,9 @@ import play.mvc.*;
 import static play.libs.Json.toJson;
 import models.AuthEntity;
 import models.UsuarioEntity;
+import models.AuthResponse;
 import akka.dispatch.MessageDispatcher;
+import java.util.Date;
 
 
 import java.util.concurrent.CompletionStage;
@@ -21,6 +23,7 @@ public class AuthController extends Controller {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nAuth = request().body().asJson();
         AuthEntity auth = Json.fromJson( nAuth , AuthEntity.class ) ;
+        AuthResponse resp = new AuthResponse(null, "", null);
         return CompletableFuture.supplyAsync(
                 ()->{
                     UsuarioEntity user = UsuarioEntity.FINDER.byId(auth.getUsername());
@@ -29,13 +32,37 @@ public class AuthController extends Controller {
                         DigestSHA3 md = new SHA3.DigestSHA3(512);
                         byte[] digest = md.digest(user.getPassword().getBytes());
                         String hash = hashToString(digest);
-                        return product;
+                        if(hash == auth.getPassword())
+                        {
+                            Long token = System.currentTimeMillis() / 1000L;
+                            byte[] b = md.digest(token.getBytes());
+                            String token = hashToString(b);
+                            resp.setToken(token);
+                            resp.setMessage("Login successful!");
+                        }
+                        else
+                        {
+                            resp.setMessage("Wrong User/Password combination");
+                        }
                     }
+                    else
+                    {
+                        resp.setMessage("User does not exist");
+                    }
+                    return resp; 
+
                 }
                 ,jdbcDispatcher
         ).thenApply(
                 entity -> {
-                    return ok(entity.toJson());
+                    if(entity.getToken() != null)
+                    {
+                        return ok(entity.toJson());
+                    }
+                    else
+                    {
+                        return unauthorized(entity.toJson());
+                    }
                 }
         );
     }
