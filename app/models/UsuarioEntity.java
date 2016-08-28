@@ -2,6 +2,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,6 @@ public class UsuarioEntity extends Model
 
     @NotNull
     private String password;
-
 
     public UsuarioEntity() 
     {

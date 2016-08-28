@@ -1,15 +1,20 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by camilagarciahernandez on 8/28/16.
  */
 @Entity
-public class PozoEntity {
+public class PozoEntity extends Model{
+
+    public static Finder<Long,PozoEntity> FINDER = new Finder<>(PozoEntity.class);
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Product")
     private Long id;
 
     private Long lon;
@@ -23,16 +28,16 @@ public class PozoEntity {
     @ManyToOne(optional = false)
     private CampoEntity campo;
 
-    @OneToMany(mappedBy = "pozo")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
     private List<RegistroSensorTempEntity> registrosTemp;
 
-    @OneToMany(mappedBy = "pozo")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
     private List<RegistroSensorEmergEntity> registrosEmerg;
 
-    @OneToMany(mappedBy = "pozo")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
     private List<RegistroSensorEnerEntity> registrosEner;
 
-    @OneToMany(mappedBy = "pozo")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
     private List<RegistroSensorBarrilesEntity> registrosBarriles;
 
     private enum Estado {
