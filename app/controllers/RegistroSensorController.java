@@ -3,62 +3,61 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.CampoEntity;
-import play.libs.Json;
-import play.mvc.Result;
+import models.RegistroSensorBarrilesEntity;
+import play.libs.*;
+import play.mvc.*;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
+import java.util.concurrent.*;
 
 import static play.libs.Json.toJson;
 
 /**
  * Created by Margarita on 28/08/2016.
  */
-public class SensorController {
-
-    public CompletionStage<Result> getCampos() {
+public class RegistroSensorController {
+    //CRUD sensor barriles
+    public CompletionStage<Result> getRegistrosSensorBarriles() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return CampoEntity.FINDER.all();
+                            return RegistroSensorBarrilesEntity.FINDER.all();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        campoEntities -> {
-                            return ok(toJson(campoEntities));
+                        registroSensorBarrilesEntities -> {
+                            return ok(toJson(registroSensorBarrilesEntities));
                         }
                 );
     }
 
-    public CompletionStage<Result> createCampo(){
+    public CompletionStage<Result> createRegistroSensorBarriles(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nCampo = request().body().asJson();
-        CampoEntity campo = Json.fromJson( nCampo , CampoEntity.class ) ;
+        JsonNode nRegistroSensorBarriles = request().body().asJson();
+        RegistroSensorBarrilesEntity reg = Json.fromJson( nRegistroSensorBarriles , RegistroSensorBarrilesEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    campo.save();
-                    return campo;
+                    reg.save();
+                    return reg;
                 }
         ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
+                registroSensorBarrilesEntity -> {
+                    return ok(Json.toJson(registroSensorBarrilesEntity));
                 }
         );
     }
 
-    public CompletionStage<Result> getCampo(Long id){
+    public CompletionStage<Result> getRegistroSensorBarriles(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    return CampoEntity.FINDER.byId(id);
+                    return RegistroSensorBarrilesEntity.FINDER.byId(id);
                 }
                 ,jdbcDispatcher
         ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
+                registroSensorBarrilesEntity -> {
+                    return ok(Json.toJson(registroSensorBarrilesEntity));
                 }
         );
     }
