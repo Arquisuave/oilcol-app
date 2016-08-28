@@ -67,6 +67,11 @@ public class UsuarioEntity extends Model
         return username;
     }
 
+    public String getPassword()
+    {
+        return password;
+    }
+
     public void setType(TipoUsuario type)
     {
         this.type = type;
@@ -75,6 +80,11 @@ public class UsuarioEntity extends Model
     public void setUsername(String username)
     {
         this.username = username;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
 
 }
