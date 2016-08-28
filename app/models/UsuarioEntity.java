@@ -67,5 +67,14 @@ public class UsuarioEntity extends Model
         return username;
     }
 
-    
+    public void setType(TipoUsuario type)
+    {
+        this.type = type;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
 }
