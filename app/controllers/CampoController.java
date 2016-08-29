@@ -62,4 +62,18 @@ public class CampoController extends Controller{
         );
     }
 
+    public CompletionStage<Result> getCampoReg(String reg){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    return CampoEntity.FINDER.where().eq("region", reg).findList();
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                campoEntity -> {
+                    return ok(Json.toJson(campoEntity));
+                }
+        );
+    }
+
 }
