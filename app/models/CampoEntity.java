@@ -27,7 +27,7 @@ public class CampoEntity extends Model{
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Campo")
     private Long id;
 
-    private Long idJefeCampo;
+    private String idJefeCampo;
 
     @Enumerated(EnumType.STRING)
     private Region region;
@@ -35,12 +35,12 @@ public class CampoEntity extends Model{
     @OneToMany(mappedBy ="campo")
     private List<PozoEntity> pozos;
 
-    public CampoEntity(Long pId, Long pIdJefeCampo){
+    public CampoEntity(Long pId, String pIdJefeCampo){
         id = pId;
         idJefeCampo = pIdJefeCampo;
     }
 
-    public CampoEntity(Long idJefeCampo, Region region, List<PozoEntity> pozos) {
+    public CampoEntity(String idJefeCampo, Region region, List<PozoEntity> pozos) {
         this.idJefeCampo = idJefeCampo;
         this.region = region;
         this.pozos = pozos;
@@ -62,11 +62,11 @@ public class CampoEntity extends Model{
         id = pId;
     }
 
-    public Long getIdJefeCampo(){
+    public String getIdJefeCampo(){
         return idJefeCampo;
     }
 
-    public void setIdJefeCampo(Long pIdJefeCampo){
+    public void setIdJefeCampo(String pIdJefeCampo){
         idJefeCampo = pIdJefeCampo;
     }
 

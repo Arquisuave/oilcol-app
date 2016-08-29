@@ -5,7 +5,7 @@
 
 create table campoentity (
   id                        bigint not null,
-  id_jefe_campo             bigint,
+  id_jefe_campo             varchar(255),
   region                    varchar(9),
   constraint ck_campoentity_region check (region in ('ANDINA','CARIBE','PACIFICA','ORINOQUIA','AMAZONAS')),
   constraint pk_campoentity primary key (id))
