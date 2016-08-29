@@ -58,9 +58,9 @@ create table registro_sensor_temp_entity (
 
 create table usuarioentity (
   username                  varchar(255) not null,
-  type                      integer not null,
+  type                      varchar(15) not null,
   password                  varchar(255) not null,
-  constraint ck_usuarioentity_type check (type in (0,1,2)),
+  constraint ck_usuarioentity_type check (type in ('JEFE_CAMPO','JEFE_PRODUCCION','PERSONAL')),
   constraint pk_usuarioentity primary key (username))
 ;
 

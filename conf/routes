@@ -16,4 +16,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 POST    /pozo                       controllers.PozoController.createPozo
 
 
+#Listar todos los Usuarios
+GET /users controllers.UserController.getUsers
 

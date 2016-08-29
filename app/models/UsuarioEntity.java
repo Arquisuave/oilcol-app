@@ -35,6 +35,7 @@ public class UsuarioEntity extends Model
     private String username;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private TipoUsuario type;
 
     @NotNull
