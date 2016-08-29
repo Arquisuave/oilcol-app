@@ -11,7 +11,7 @@ import java.util.*;
  * Created by jg.tamura10 on 28/08/2016.
  */
 @Entity
-public class RegistroSensorBarrilesEntity implements Serializable
+public class RegistroSensorBarrilesEntity extends Model
 {
     private static final long serialVersionUID = 5L;
     public static Model.Finder<Long,RegistroSensorBarrilesEntity> FINDER = new Model.Finder<>(RegistroSensorBarrilesEntity.class);

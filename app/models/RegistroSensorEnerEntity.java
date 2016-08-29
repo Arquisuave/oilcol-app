@@ -11,7 +11,7 @@ import java.util.*;
  * Created by jg.tamura10 on 28/08/2016.
  */
 @Entity
-public class RegistroSensorEnerEntity implements Serializable
+public class RegistroSensorEnerEntity extends Model
 {
     private static final long serialVersionUID = 3L;
     public static Model.Finder<Long,RegistroSensorEnerEntity> FINDER = new Model.Finder<>(RegistroSensorEnerEntity.class);

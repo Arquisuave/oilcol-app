@@ -9,6 +9,7 @@ import models.RegistroSensorEnerEntity;
 import models.RegistroSensorTempEntity;
 import play.libs.*;
 import play.mvc.*;
+import static play.mvc.Results.*;
 
 import java.util.concurrent.*;
 
@@ -17,7 +18,7 @@ import static play.libs.Json.toJson;
 /**
  * Created by Margarita on 28/08/2016.
  */
-public class RegistroSensorController {
+public class RegistroSensorController extends Controller {
     //CRUD sensor barriles
     public CompletionStage<Result> getRegistrosSensorBarriles() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
