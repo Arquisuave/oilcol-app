@@ -19,3 +19,6 @@ POST    /pozo                       controllers.PozoController.createPozo
 #Listar todos los Usuarios
 GET /users controllers.UserController.getUsers
 
+#Agregar un campo
+POST    /campo  controllers.CampoController.createCampo
+
