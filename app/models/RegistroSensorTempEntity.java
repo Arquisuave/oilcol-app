@@ -2,6 +2,8 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +43,7 @@ public class RegistroSensorTempEntity extends Model
 
     @NotNull
     @ManyToOne(optional = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private PozoEntity pozo;
 
     public PozoEntity getPozo()

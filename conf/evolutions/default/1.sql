@@ -48,7 +48,7 @@ create table registro_sensor_ener_entity (
 ;
 
 create table registro_sensor_temp_entity (
-  id_sensor_temp            bigserial not null,
+  id_sensor_temp            bigint not null,
   pozo_id                   bigint not null,
   INFO                      float not null,
   TIMESTAMP                 timestamp not null,
@@ -67,6 +67,8 @@ create table usuarioentity (
 create sequence Campo;
 
 create sequence Product;
+
+create sequence registro_sensor_temp_entity_seq;
 
 alter table pozo_entity add constraint fk_pozo_entity_campo_1 foreign key (campo_id) references campoentity (id);
 create index ix_pozo_entity_campo_1 on pozo_entity (campo_id);
@@ -100,4 +102,6 @@ drop table if exists usuarioentity cascade;
 drop sequence if exists Campo;
 
 drop sequence if exists Product;
+
+drop sequence if exists registro_sensor_temp_entity_seq;
 

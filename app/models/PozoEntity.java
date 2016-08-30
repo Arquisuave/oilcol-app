@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +27,7 @@ public class PozoEntity extends Model{
     private Estado estado;
 
     @ManyToOne(optional = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private CampoEntity campo;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")

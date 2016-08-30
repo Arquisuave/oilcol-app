@@ -18,6 +18,8 @@ POST /login controllers.AuthController.authenticate
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
 
+#Mostrar pozos
+GET /pozo controllers.PozoController.getPozos
 
 #Listar todos los Usuarios
 GET /users controllers.UserController.getUsers
@@ -25,6 +27,12 @@ GET /users controllers.UserController.getUsers
 #Agregar un campo
 POST    /campo  controllers.CampoController.createCampo
 
+#Mostrar campos
+GET /campo controllers.CampoController.getCampos
+
 GET /campo/:id controllers.CampoController.getCampo(id: Long)
 
 GET /campo/:reg controllers.CampoController.getCampoReg(reg: String)
+
+#Agregar un registro de temperatura
+POST /registro/temp controllers.RegistroSensorController.createRegistroSensorTemp
