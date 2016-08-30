@@ -17,7 +17,7 @@ public class RegistroSensorTempEntity extends Model
     public static Model.Finder<Long,RegistroSensorTempEntity> FINDER = new Model.Finder<>(RegistroSensorTempEntity.class);
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idSensorTemp;
 
     public RegistroSensorTempEntity()
@@ -27,15 +27,18 @@ public class RegistroSensorTempEntity extends Model
 
     public RegistroSensorTempEntity(Long idP)
     {
+
         idSensorTemp = idP;
     }
-    public RegistroSensorTempEntity(PozoEntity pozoP, Date timeStampP, int entradas, double msg)
+
+    public RegistroSensorTempEntity(PozoEntity pozoP, Date timeStampP, double msg)
     {
         pozo = pozoP;
         timeStamp = timeStampP;
-        numEntradas = entradas;
+        numEntradas = 0;
         info = msg;
     }
+
     @NotNull
     @ManyToOne(optional = false)
     private PozoEntity pozo;
@@ -73,4 +76,23 @@ public class RegistroSensorTempEntity extends Model
         return numEntradas;
     }
 
+    public void setIdSensorTemp(Long idSensorTemp) {
+        this.idSensorTemp = idSensorTemp;
+    }
+
+    public void setPozo(PozoEntity pozo) {
+        this.pozo = pozo;
+    }
+
+    public void setInfo(double info) {
+        this.info = info;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public void setNumEntradas(int numEntradas) {
+        this.numEntradas = numEntradas;
+    }
 }
