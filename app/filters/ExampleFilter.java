@@ -6,7 +6,12 @@ import java.util.concurrent.Executor;
 import java.util.function.Function;
 import javax.inject.*;
 import play.mvc.*;
+import static play.mvc.Results.*;
 import play.mvc.Http.RequestHeader;
+import models.*;
+import static play.libs.Json.toJson;
+import play.libs.Json;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -35,11 +40,26 @@ public class ExampleFilter extends Filter {
     public CompletionStage<Result> apply(
         Function<RequestHeader, CompletionStage<Result>> next,
         RequestHeader requestHeader) {
-
-        return next.apply(requestHeader).thenApplyAsync(
-            result -> {result.withHeader("X-ExampleFilter", "foo")},
-            exec
-        );
+        if(requestHeader.hasHeader("Oilcol-Token"))
+        {
+            return next.apply(requestHeader).thenApplyAsync(
+                result -> result.withHeader("X-ExampleFilter", "foo"),
+                exec
+            );
+        }
+        else
+        {
+            return CompletableFuture.supplyAsync(
+                () ->
+                {
+                    return new AuthResponse(null, "Restricted Access Area", System.currentTimeMillis() / 1000L);
+                }
+            ).thenApply(
+                entity -> {
+                    return forbidden(Json.toJson(entity));
+                }
+            );
+        }
     }
 
 }
