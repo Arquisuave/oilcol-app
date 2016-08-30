@@ -29,16 +29,20 @@ public class AuthController extends Controller {
                     UsuarioEntity user = UsuarioEntity.FINDER.byId(auth.getUsername());
                     if(user != null)
                     {
-                        DigestSHA3 md = new SHA3.DigestSHA3(512);
+                        DigestSHA3 md = new SHA3.DigestSHA3(256);
                         byte[] digest = md.digest(user.getPassword().getBytes());
                         String hash = hashToString(digest);
-                        if(hash == auth.getPassword())
+                        System.out.println(hash);
+                        System.out.println(auth.getPassword());
+                        if(hash.equals(auth.getPassword()))
                         {
                             Long token = System.currentTimeMillis() / 1000L;
                             String tok = token.toString();
+                            tok = tok + user.getUsername();
                             byte[] b = md.digest(tok.getBytes());
                             tok = hashToString(b);
                             resp.setToken(tok);
+                            resp.setTimestamp(token);
                             resp.setMessage("Login successful!");
                         }
                         else
