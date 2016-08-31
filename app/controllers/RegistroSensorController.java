@@ -3,6 +3,7 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
+import logic.RegistroSensorBarrilesLogic;
 import logic.RegistroSensorTempLogic;
 import models.RegistroSensorBarrilesEntity;
 import models.RegistroSensorEmergEntity;
@@ -43,8 +44,8 @@ public class RegistroSensorController extends Controller {
         RegistroSensorBarrilesEntity reg = Json.fromJson( nRegistroSensorBarriles , RegistroSensorBarrilesEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    reg.save();
-                    return reg;
+                    RegistroSensorBarrilesEntity result = RegistroSensorBarrilesLogic.crearActualizarRegistro(reg);
+                    return result;
                 }
         ).thenApply(
                 registroSensorBarrilesEntity -> {
