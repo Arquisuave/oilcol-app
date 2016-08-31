@@ -31,15 +31,19 @@ public class PozoEntity extends Model{
     private CampoEntity campo;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<RegistroSensorTempEntity> registrosTemp;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<RegistroSensorEmergEntity> registrosEmerg;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<RegistroSensorEnerEntity> registrosEner;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "pozo")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<RegistroSensorBarrilesEntity> registrosBarriles;
 
     private enum Estado {
