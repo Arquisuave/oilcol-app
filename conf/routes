@@ -46,7 +46,7 @@ POST    /registro/temp              controllers.RegistroSensorController.createR
 #Agregar un registro de barril
 POST    /registro/barril            controllers.RegistroSensorController.createRegistroSensorBarriles
 
-#REGISTRO SENSOR DE ENERGÍA
+#REGISTRO SENSOR DE ENERGIA
 #Agregar un registro de energia
 POST    /registro/energia           controllers.RegistroSensorController.createRegistroSensorEner
 
@@ -59,7 +59,7 @@ DELETE  /notification/:id           controllers.AlertController.removeNotificati
 #REPORTES
 #Genera un reporte de TEMPERATURA con filtros temporales
 POST    /reporte/temp               controllers.ReportController.generateReportTemp
-#Genera un reporte de ENERGÍA con filtros temporales
+#Genera un reporte de ENERGIA con filtros temporales
 POST    /reporte/ener               controllers.ReportController.generateReportEner
 #Genera un reporte de EMERGENCIAS con filtros temporales
 POST    /reporte/emerg              controllers.ReportController.generateReportEmerg
