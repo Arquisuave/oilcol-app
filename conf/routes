@@ -15,52 +15,55 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #Login
 POST /login controllers.AuthController.authenticate
 
+#POZO
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
-
 #Modifica el estado del pozo
-PUT /registro/temp controllers.PozoController.updatePozo
-
+PUT     /registro/temp              controllers.PozoController.updatePozo
 #Mostrar pozos
-GET /pozo controllers.PozoController.getPozos
+GET     /pozo                       controllers.PozoController.getPozos
 
+#USUARIO
 #Listar todos los Usuarios
-GET /users controllers.UserController.getUsers
+GET     /users                      controllers.UserController.getUsers
 
+
+#CAMPO
 #Agregar un campo
-POST    /campo  controllers.CampoController.createCampo
-
+POST    /campo                      controllers.CampoController.createCampo
 #Mostrar campos
-GET /campo controllers.CampoController.getCampos
+GET     /campo                      controllers.CampoController.getCampos
+#Mostrar campo por ID
+GET     /campo/:id                  controllers.CampoController.getCampo(id: Long)
+#Muestra todos los campos dada una región
+GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
 
-GET /campo/:id controllers.CampoController.getCampo(id: Long)
-
-GET /campo/:reg controllers.CampoController.getCampoReg(reg: String)
-
+#REGISTRO SENSOR DE TEMPERATURA
 #Agregar un registro de temperatura
-POST /registro/temp controllers.RegistroSensorController.createRegistroSensorTemp
+POST    /registro/temp              controllers.RegistroSensorController.createRegistroSensorTemp
 
+#REGISTRO SENSOR DE BARRILES
 #Agregar un registro de barril
-POST /registro/temp controllers.RegistroSensorController.createRegistroSensorBarriles
+POST    /registro/barril            controllers.RegistroSensorController.createRegistroSensorBarriles
 
+#REGISTRO SENSOR DE ENERGÍA
 #Agregar un registro de energia
-POST /registro/temp controllers.RegistroSensorController.createRegistroSensorEner
+POST    /registro/energia           controllers.RegistroSensorController.createRegistroSensorEner
 
-#Genera un reporte de temperatura con filtros temporales
-POST /reporte/temp controllers.ReportController.generateReportTemp
-
-#Genera un reporte de temperatura con filtros temporales
-POST /reporte/ener controllers.ReportController.generateReportEner
-
-#Genera un reporte de temperatura con filtros temporales
-POST /reporte/emerg controllers.ReportController.generateReportEmerg
-
-#Genera un reporte de temperatura con filtros temporales
-POST /reporte/bar controllers.ReportController.generateReportBarriles
-
+#REGISTRO SENSOR DE EMERGENCIA
 #Emite un registro de emergencia
-POST /emergencia controllers.AlertController.reportAlert
-
+POST    /emergencia                 controllers.AlertController.reportAlert
 #Marca una emergencia como resuelta y la elimina de la lista de notificaciones
-DELETE /notification/:id controllers.AlertController.removeNotification(id: Long)
+DELETE  /notification/:id           controllers.AlertController.removeNotification(id: Long)
+
+#REPORTES
+#Genera un reporte de TEMPERATURA con filtros temporales
+POST    /reporte/temp               controllers.ReportController.generateReportTemp
+#Genera un reporte de ENERGÍA con filtros temporales
+POST    /reporte/ener               controllers.ReportController.generateReportEner
+#Genera un reporte de EMERGENCIAS con filtros temporales
+POST    /reporte/emerg              controllers.ReportController.generateReportEmerg
+#Genera un reporte de BARRILES con filtros temporales
+POST    /reporte/bar                controllers.ReportController.generateReportBarriles
+
 
