@@ -9,12 +9,13 @@ import java.util.List;
 @Table(name = "usuarioentity")
 public class UsuarioEntity extends Model
 {
-    private enum TipoUsuario
+    public enum TipoUsuario
     {
 
         JEFE_CAMPO("Jefe de Campo"),
         JEFE_PRODUCCION("Jefe de Producción"),
-        PERSONAL("Personal");
+        PERSONAL("Personal"),
+        NONE("Ninguno");
 
         public String type;
 
@@ -40,6 +41,9 @@ public class UsuarioEntity extends Model
 
     @NotNull
     private String password;
+
+    @OneToMany(mappedBy="username")
+    private List<NotificationEntity> notifications;
 
     public UsuarioEntity() 
     {
@@ -71,6 +75,11 @@ public class UsuarioEntity extends Model
     public String getPassword()
     {
         return password;
+    }
+
+    public List<NotificationEntity> getNotifications()
+    {
+        return notifications;
     }
 
     public void setType(TipoUsuario type)

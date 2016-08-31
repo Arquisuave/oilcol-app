@@ -6,6 +6,7 @@ import play.mvc.*;
 import static play.libs.Json.toJson;
 import models.AuthEntity;
 import models.UsuarioEntity;
+import static models.UsuarioEntity.TipoUsuario;
 import models.AuthResponse;
 import akka.dispatch.MessageDispatcher;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class AuthController extends Controller {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nAuth = request().body().asJson();
         AuthEntity auth = Json.fromJson( nAuth , AuthEntity.class ) ;
-        AuthResponse resp = new AuthResponse(null, "", null);
+        AuthResponse resp = new AuthResponse(null, "", null, TipoUsuario.NONE);
         return CompletableFuture.supplyAsync(
                 ()->{
                     UsuarioEntity user = UsuarioEntity.FINDER.byId(auth.getUsername());
@@ -32,8 +33,6 @@ public class AuthController extends Controller {
                         DigestSHA3 md = new SHA3.DigestSHA3(256);
                         byte[] digest = md.digest(user.getPassword().getBytes());
                         String hash = hashToString(digest);
-                        System.out.println(hash);
-                        System.out.println(auth.getPassword());
                         if(hash.equals(auth.getPassword()))
                         {
                             Long token = System.currentTimeMillis() / 1000L;
@@ -43,6 +42,7 @@ public class AuthController extends Controller {
                             tok = hashToString(b);
                             resp.setToken(tok);
                             resp.setTimestamp(token);
+                            resp.setRole(user.getType());
                             resp.setMessage("Login successful!");
                         }
                         else

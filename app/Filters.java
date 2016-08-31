@@ -4,7 +4,7 @@ import play.mvc.EssentialFilter;
 import play.http.HttpFilters;
 import play.mvc.*;
 
-import filters.ExampleFilter;
+import filters.AuthFilter;
 
 /**
  * This class configures filters that run on every request. This
@@ -19,14 +19,14 @@ import filters.ExampleFilter;
 public class Filters implements HttpFilters {
 
     private final Environment env;
-    private final EssentialFilter exampleFilter;
+    private final AuthFilter exampleFilter;
 
     /**
      * @param env Basic environment settings for the current application.
      * @param exampleFilter A demonstration filter that adds a header to
      */
     @Inject
-    public Filters(Environment env, ExampleFilter exampleFilter) {
+    public Filters(Environment env, AuthFilter exampleFilter) {
         this.env = env;
         this.exampleFilter = exampleFilter;
     }

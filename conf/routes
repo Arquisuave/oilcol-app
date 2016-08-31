@@ -19,7 +19,7 @@ POST /login controllers.AuthController.authenticate
 POST    /pozo                       controllers.PozoController.createPozo
 
 #Modifica el estado del pozo
-PUT /registro/temp controllers.RegistroSensorController.updatePozo
+#PUT /registro/temp controllers.RegistroSensorController.updatePozo
 
 #Mostrar pozos
 GET /pozo controllers.PozoController.getPozos

@@ -10,13 +10,15 @@ public class AuthResponse extends Model
 {
     private String token;
     private String message;
+    private UsuarioEntity.TipoUsuario role;
     private Long timestamp;
 
-    public AuthResponse(String token, String message, Long timestamp)
+    public AuthResponse(String token, String message, Long timestamp, UsuarioEntity.TipoUsuario type)
     {
         this.token = token;
         this.message = message;
         this.timestamp = timestamp;
+        this.role = type;
     }
 
     public String getToken()
@@ -34,6 +36,11 @@ public class AuthResponse extends Model
         return timestamp;
     }
 
+    public UsuarioEntity.TipoUsuario getRole()
+    {
+        return role;
+    }
+
     public void setToken(String token)
     {
         this.token = token;
@@ -47,6 +54,11 @@ public class AuthResponse extends Model
     public void setTimestamp(Long timestamp)
     {
         this.timestamp = timestamp;
+    }
+
+    public void setRole(UsuarioEntity.TipoUsuario role)
+    {
+        this.role = role;
     }
 
 }
