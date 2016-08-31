@@ -46,7 +46,7 @@ public class PozoEntity extends Model{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<RegistroSensorBarrilesEntity> registrosBarriles;
 
-    private enum Estado {
+    public enum Estado {
         ABIERTO, PRODUCCION, PARADO, CLAUSURADO
     }
     public Estado getEstado(String estado)

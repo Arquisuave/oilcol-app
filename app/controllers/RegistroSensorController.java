@@ -6,10 +6,7 @@ import dispatchers.AkkaDispatcher;
 import logic.RegistroSensorBarrilesLogic;
 import logic.RegistroSensorEnerLogic;
 import logic.RegistroSensorTempLogic;
-import models.RegistroSensorBarrilesEntity;
-import models.RegistroSensorEmergEntity;
-import models.RegistroSensorEnerEntity;
-import models.RegistroSensorTempEntity;
+import models.*;
 import play.libs.*;
 import play.mvc.*;
 import static play.mvc.Results.*;
@@ -45,11 +42,15 @@ public class RegistroSensorController extends Controller {
         RegistroSensorBarrilesEntity reg = Json.fromJson( nRegistroSensorBarriles , RegistroSensorBarrilesEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
+                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
                     RegistroSensorBarrilesEntity result = RegistroSensorBarrilesLogic.crearActualizarRegistro(reg);
                     return result;
                 }
         ).thenApply(
                 registroSensorBarrilesEntity -> {
+                    if (registroSensorBarrilesEntity==null){
+                        return forbidden("Pozo no esta habilitado");
+                    }
                     return ok(Json.toJson(registroSensorBarrilesEntity));
                 }
         );
@@ -140,10 +141,14 @@ public class RegistroSensorController extends Controller {
         RegistroSensorEnerEntity reg = Json.fromJson( nRegistroSensorEner , RegistroSensorEnerEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
+                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
                     return RegistroSensorEnerLogic.promediar(reg);
                 }
         ).thenApply(
                 registroSensorEnerEntity -> {
+                    if (registroSensorEnerEntity==null){
+                        return forbidden("Pozo no esta habilitado");
+                    }
                     return ok(Json.toJson(registroSensorEnerEntity));
                 }
         );
@@ -187,11 +192,15 @@ public class RegistroSensorController extends Controller {
         RegistroSensorTempEntity reg = Json.fromJson( nRegistroSensorTemp , RegistroSensorTempEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
+                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
                     return RegistroSensorTempLogic.actualizarRegistro(reg);
                 }
                 ,jdbcDispatcher)
         .thenApply(
                 registroSensorTempEntity -> {
+                    if (registroSensorTempEntity==null){
+                        return forbidden("Pozo no esta habilitado");
+                    }
                     return ok(Json.toJson(registroSensorTempEntity));
                 }
         );
