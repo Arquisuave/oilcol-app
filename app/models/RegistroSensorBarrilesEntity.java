@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -59,6 +60,7 @@ public class RegistroSensorBarrilesEntity extends Model
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "TIMESTAMP")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Date timeStamp;
 
     public Date getTimeStamp()
