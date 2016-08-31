@@ -19,14 +19,17 @@ POST /login controllers.AuthController.authenticate
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
 #Modifica el estado del pozo
+
 PUT     /pozo              controllers.PozoController.updatePozo
+
 #Mostrar pozos
 GET     /pozo                       controllers.PozoController.getPozos
+#Borrar un pozo dado su ID
+DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Long)
 
 #USUARIO
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
-
 
 #CAMPO
 #Agregar un campo
@@ -37,6 +40,8 @@ GET     /campo                      controllers.CampoController.getCampos
 GET     /campo/:id                  controllers.CampoController.getCampo(id: Long)
 #Muestra todos los campos dada una región
 GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
+#Borrar un campo
+DELETE  /campo/:id                  controllers.CampoController.deleteCampo(id: Long)
 
 #REGISTRO SENSOR DE TEMPERATURA
 #Agregar un registro de temperatura

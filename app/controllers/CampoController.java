@@ -62,6 +62,22 @@ public class CampoController extends Controller{
         );
     }
 
+    public CompletionStage<Result> deleteCampo(Long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    CampoEntity.FINDER.byId(id).delete();
+                    return "Campo con id "+id+" eliminado";
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                campoEntity -> {
+                    return ok(Json.toJson(campoEntity));
+                }
+        );
+    }
+
+
     public CompletionStage<Result> getCampoReg(String reg){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
@@ -75,5 +91,4 @@ public class CampoController extends Controller{
                 }
         );
     }
-
 }
