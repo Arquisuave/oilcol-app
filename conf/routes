@@ -27,6 +27,9 @@ GET     /pozo                       controllers.PozoController.getPozos
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
 
+POST /users controllers.UserController.createUser
+
+
 
 #CAMPO
 #Agregar un campo
