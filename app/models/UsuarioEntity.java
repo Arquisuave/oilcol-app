@@ -9,10 +9,7 @@ import java.util.List;
 @Table(name = "usuarioentity")
 public class UsuarioEntity extends Model
 {
-    public TipoUsuario getTipoUsuario(String tipo)
-    {
-         return TipoUsuario.valueOf(tipo);
-    }
+
     public enum TipoUsuario
     {
 
@@ -99,6 +96,11 @@ public class UsuarioEntity extends Model
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public TipoUsuario getTipoUsuario(String tipo)
+    {
+         return TipoUsuario.valueOf(tipo);
     }
 
 }
