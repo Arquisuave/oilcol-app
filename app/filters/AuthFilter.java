@@ -44,6 +44,7 @@ public class AuthFilter extends Filter {
         RequestHeader requestHeader) {
         Map<String, String> tags = requestHeader.tags();
         String route = tags.get("ROUTE_PATTERN");
+        System.out.println(route);
         if(!route.equals("/login") && !route.startsWith("/registro") && !route.startsWith("/emergencia"))
         {
             if(requestHeader.hasHeader("Oilcol-Token"))

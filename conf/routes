@@ -22,6 +22,8 @@ POST    /pozo                       controllers.PozoController.createPozo
 PUT     /updatePozo              controllers.PozoController.updatePozo
 #Mostrar pozos
 GET     /pozo                       controllers.PozoController.getPozos
+#Borrar un pozo dado su ID
+DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Long)
 
 #USUARIO
 #Listar todos los Usuarios
