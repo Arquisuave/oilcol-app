@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.javafx.beans.IDProperty;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class NotificationEntity extends Model{
     private Long id;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UsuarioEntity username;
 
     @NotNull
