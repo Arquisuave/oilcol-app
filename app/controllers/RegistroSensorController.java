@@ -42,7 +42,6 @@ public class RegistroSensorController extends Controller {
         RegistroSensorBarrilesEntity reg = Json.fromJson( nRegistroSensorBarriles , RegistroSensorBarrilesEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
                     RegistroSensorBarrilesEntity result = RegistroSensorBarrilesLogic.crearActualizarRegistro(reg);
                     return result;
                 }
@@ -141,7 +140,6 @@ public class RegistroSensorController extends Controller {
         RegistroSensorEnerEntity reg = Json.fromJson( nRegistroSensorEner , RegistroSensorEnerEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
                     return RegistroSensorEnerLogic.promediar(reg);
                 }
         ).thenApply(
@@ -192,7 +190,7 @@ public class RegistroSensorController extends Controller {
         RegistroSensorTempEntity reg = Json.fromJson( nRegistroSensorTemp , RegistroSensorTempEntity.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    if (reg.getPozo().getEstado()!= PozoEntity.Estado.ABIERTO) return null;
+
                     return RegistroSensorTempLogic.actualizarRegistro(reg);
                 }
                 ,jdbcDispatcher)

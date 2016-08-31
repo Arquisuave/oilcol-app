@@ -64,9 +64,12 @@ public class PozoController extends Controller{
         MensajeDeUsuarioDTO mensajeCompleto  = Json.fromJson( nMessage, MensajeDeUsuarioDTO.class ) ;
 
         JsonNode payload = Json.parse(mensajeCompleto.getPayload());
+        System.out.println(mensajeCompleto.getPayload());
+        System.out.println(payload);
+        PozoEntity nuevoPozo = Json.fromJson(payload,PozoEntity.class);
 
-        String nuevoStatus = payload.get("Status").toString();
-        String idPozo = payload.get("Id").toString();
+        PozoEntity.Estado nuevoStatus = nuevoPozo.getEstado();
+        Long idPozo = nuevoPozo.getId();
 
         //usuario.setPassword(mensajeCompleto.getPassword());
         //usuario.setUsername(mensajeCompleto.getUser());
@@ -78,49 +81,61 @@ public class PozoController extends Controller{
                     //verifica el campo del jefe
                     if (mensajeCompleto.getUser()!=null)
                     {
-                        UsuarioEntity usuario = UsuarioEntity.FINDER.where().eq("user", mensajeCompleto.getUser()).setMaxRows(1).findUnique();//.eq("password",mensajeCompleto.getPassword())
+                        System.out.println(1);
+                        UsuarioEntity usuario = UsuarioEntity.FINDER.byId(mensajeCompleto.getUser());//.eq("password",mensajeCompleto.getPassword())
                         if(usuario != null && usuario.getType() == ( usuario.getTipoUsuario(mensajeCompleto.getType()))) {
+                            System.out.println(2);
                             //si es jefe
                             //si es jefe de produccion no se le aplican mas filtros
                             if(usuario.getType() == UsuarioEntity.TipoUsuario.JEFE_PRODUCCION)
                             {
-                                PozoEntity pozoBuscado = PozoEntity.FINDER.byId(Long.parseLong(idPozo));
+                                System.out.println(3);
+                                PozoEntity pozoBuscado = PozoEntity.FINDER.byId(idPozo);
                                 if(pozoBuscado != null)
                                 {
-                                    System.out.println("El JEFE DE PRODUCCION esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ pozoBuscado.getEstado(nuevoStatus));
-                                    pozoBuscado.setEstado(pozoBuscado.getEstado(nuevoStatus));
+                                    System.out.println(4);
+                                    System.out.println("El JEFE DE PRODUCCION esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ (nuevoStatus));
+                                    pozoBuscado.setEstado(pozoBuscado.getEstado());
                                     pozoBuscado.update();
                                     return pozoBuscado;
                                 }
                                 else
                                 {
+                                    System.out.println(5);
                                     return elNull;
                                 }
 
                             }
                             else
                             {
-                                CampoEntity campo = CampoEntity.FINDER.where().eq("idJefeCampo", usuario.getUsername()).setMaxRows(1).findUnique();
+                                System.out.println(6);
+                                CampoEntity campo = CampoEntity.FINDER.where().eq("idJefeCampo.username", usuario.getUsername()).setMaxRows(1).findUnique();
                                 //si si es jefe de campo enotnces no sera null
                                 if(campo != null)
                                 {
-                                    PozoEntity pozoBuscado = PozoEntity.FINDER.where().conjunction().eq("campo", campo.getId()).eq("id".toString(), idPozo).setMaxRows(1).findUnique();
+                                    System.out.println(7);
+                                    System.out.println("id campo :"+campo.getId());
+                                    System.out.println("id pozo :"+idPozo);
+                                    PozoEntity pozoBuscado = PozoEntity.FINDER.where().conjunction().eq("campo.id", campo.getId()).eq("id", idPozo).setMaxRows(1).findUnique();
                                     //si existe el pozo es que ese jefe de campo si tenia entre sus campos el pozo
                                     if(pozoBuscado != null)
                                     {
-                                        System.out.println("El JEFE DE CAMPO esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ pozoBuscado.getEstado(nuevoStatus));
-                                        pozoBuscado.setEstado(pozoBuscado.getEstado(nuevoStatus));
+                                        System.out.println(8);
+                                        System.out.println("El JEFE DE CAMPO esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ pozoBuscado.getEstado());
+                                        pozoBuscado.setEstado(nuevoStatus);
                                         pozoBuscado.update();
                                         return pozoBuscado;
                                     }
                                     else
                                     {
+                                        System.out.println(9);
                                         return elNull;
                                     }
 
                                 }
                                 else
                                 {
+                                    System.out.println(10);
                                     return elNull;
                                 }
 
@@ -130,12 +145,15 @@ public class PozoController extends Controller{
                         }
                         else
                         {
+                            System.out.println(11);
                                 // mal usuario
                             return elNull;
                         }
                     }
                     else
                     {
+
+                        System.out.println(12);
                         return elNull;
                     }
 
