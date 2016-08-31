@@ -82,10 +82,7 @@ public class PozoController extends Controller{
                         {
                             //si es jefe
                             //CampoEntity campo = CampoEntity.FINDER.where().eq("jefeCampo", usuario.getUsername());
-                            //public TipoUsuario getTipoUsuario(String tipo)
-                            {
-                               // return TipoUsuario.valueOf(tipo);
-                            }
+
                         }
                         else
                         {
