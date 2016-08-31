@@ -74,6 +74,7 @@ public class PozoController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()->{
+                    PozoEntity elNull = null;
                     //verifica el campo del jefe
                     if (mensajeCompleto.getUser()!=null)
                     {
@@ -93,7 +94,7 @@ public class PozoController extends Controller{
                                 }
                                 else
                                 {
-                                    return null;
+                                    return elNull;
                                 }
 
                             }
@@ -114,13 +115,13 @@ public class PozoController extends Controller{
                                     }
                                     else
                                     {
-                                        return null;
+                                        return elNull;
                                     }
 
                                 }
                                 else
                                 {
-                                    return null;
+                                    return elNull;
                                 }
 
 
@@ -130,12 +131,12 @@ public class PozoController extends Controller{
                         else
                         {
                                 // mal usuario
-                                return null;
+                            return elNull;
                         }
                     }
                     else
                     {
-                        return null;
+                        return elNull;
                     }
 
 
@@ -143,6 +144,10 @@ public class PozoController extends Controller{
                 ,jdbcDispatcher
         ).thenApply(
                 pozoEntity -> {
+                    if(pozoEntity == null)
+                    {
+                        return forbidden("No eres un usuario valido");
+                    }
                     return ok(Json.toJson(pozoEntity));
                 }
 
