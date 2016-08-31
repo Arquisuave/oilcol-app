@@ -78,16 +78,15 @@ public class PozoController extends Controller{
                     if (mensajeCompleto.getUser()!=null)
                     {
                         UsuarioEntity usuario = UsuarioEntity.FINDER.where().eq("user", mensajeCompleto.getUser()).eq("password",mensajeCompleto.getPassword()).setMaxRows(1).findUnique();
-                        if(usuario != null && usuario.getType() == ( usuario.getTipoUsuario(mensajeCompleto.getType())))
-                        {
+                        if(usuario != null && usuario.getType() == ( usuario.getTipoUsuario(mensajeCompleto.getType()))) {
                             //si es jefe
-                            CampoEntity campo = CampoEntity.FINDER.where().eq("idJefeCampo", usuario.getUsername()).setMaxRows(1).findUnique();
-                            if(campo != null)
+                            //si es jefe de produccion no se le aplican mas filtros
+                            if(usuario.getType() == UsuarioEntity.TipoUsuario.JEFE_PRODUCCION)
                             {
-                                PozoEntity pozoBuscado = PozoEntity.FINDER.where().eq("campo", campo.getId()).eq("id", idPozo).setMaxRows(1).findUnique();
-
+                                PozoEntity pozoBuscado = PozoEntity.FINDER.byId(Long.parseLong(idPozo));
                                 if(pozoBuscado != null)
                                 {
+                                    System.out.println("El JEFE DE PRODUCCION esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ pozoBuscado.getEstado(nuevoStatus));
                                     pozoBuscado.setEstado(pozoBuscado.getEstado(nuevoStatus));
                                     pozoBuscado.update();
                                     return pozoBuscado;
@@ -100,15 +99,38 @@ public class PozoController extends Controller{
                             }
                             else
                             {
-                                return null;
-                            }
+                                CampoEntity campo = CampoEntity.FINDER.where().eq("idJefeCampo", usuario.getUsername()).setMaxRows(1).findUnique();
+                                //si si es jefe de campo enotnces no sera null
+                                if(campo != null)
+                                {
+                                    PozoEntity pozoBuscado = PozoEntity.FINDER.where().conjunction().eq("campo", campo.getId()).eq("id".toString(), idPozo).setMaxRows(1).findUnique();
+                                    //si existe el pozo es que ese jefe de campo si tenia entre sus campos el pozo
+                                    if(pozoBuscado != null)
+                                    {
+                                        System.out.println("El JEFE DE CAMPO esta actualizando el pozo: "+ pozoBuscado.getId() + "  al estado: "+ pozoBuscado.getEstado(nuevoStatus));
+                                        pozoBuscado.setEstado(pozoBuscado.getEstado(nuevoStatus));
+                                        pozoBuscado.update();
+                                        return pozoBuscado;
+                                    }
+                                    else
+                                    {
+                                        return null;
+                                    }
 
+                                }
+                                else
+                                {
+                                    return null;
+                                }
+
+
+                            }
 
                         }
                         else
                         {
-                            // mal usuario
-                            return null;
+                                // mal usuario
+                                return null;
                         }
                     }
                     else
