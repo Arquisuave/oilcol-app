@@ -54,9 +54,9 @@ public class PozoController extends Controller{
         //debe llegar asi:
         //{ "user":"jg",
         //  "password" : "123",
-        //  "type":"JEFE_DE_CAMPO",
-        //  "payload":"{"Status":"enProduccion" , "Id": 123}"}
-        // o "parado"   si es JEFE_DE_PRODUCCION el status puede ser abierto o clausurado
+        //  "type":"Jefe de Campo",
+        //  "payload":"{"Status":"PRODUCCION" , "Id": 123}"}
+        // o "PARADO"   si es "Jefe de Produccion" el status puede ser "ABIERTO" o "CLAUSURADO"
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         //llega el json con el username, password, type, payload
@@ -77,7 +77,7 @@ public class PozoController extends Controller{
                     //verifica el campo del jefe
                     if (mensajeCompleto.getUser()!=null)
                     {
-                        UsuarioEntity usuario = UsuarioEntity.FINDER.where().eq("user", mensajeCompleto.getUser()).eq("password",mensajeCompleto.getPassword()).setMaxRows(1).findUnique();
+                        UsuarioEntity usuario = UsuarioEntity.FINDER.where().eq("user", mensajeCompleto.getUser()).setMaxRows(1).findUnique();//.eq("password",mensajeCompleto.getPassword())
                         if(usuario != null && usuario.getType() == ( usuario.getTipoUsuario(mensajeCompleto.getType()))) {
                             //si es jefe
                             //si es jefe de produccion no se le aplican mas filtros
