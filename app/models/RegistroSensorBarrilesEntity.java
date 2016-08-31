@@ -16,7 +16,7 @@ public class RegistroSensorBarrilesEntity extends Model
     private static final long serialVersionUID = 5L;
     public static Model.Finder<Long,RegistroSensorBarrilesEntity> FINDER = new Model.Finder<>(RegistroSensorBarrilesEntity.class);
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idSensorBarriles;
 
     public RegistroSensorBarrilesEntity()
@@ -51,6 +51,10 @@ public class RegistroSensorBarrilesEntity extends Model
     {
         return info;
     }
+    public void setInfo(double inf)
+    {
+         info = inf;
+    }
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -70,5 +74,8 @@ public class RegistroSensorBarrilesEntity extends Model
     {
         return numEntradas;
     }
-
+    public void setNumEntradas(int nuevoNum)
+    {
+         numEntradas = nuevoNum;
+    }
 }
