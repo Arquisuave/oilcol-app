@@ -9,16 +9,18 @@ public class ParamReport {
 
     private Date fechaInicio;
     private Date fechaFin;
-    private UsuarioEntity jefeDeCampo;
+    private String jefeDeCampo;
+    private String region;
 
     private ParamReport(){
 
     }
 
-    public ParamReport(Date fechaInicio, Date fechaFin, UsuarioEntity jefeDeCampo) {
+    public ParamReport(Date fechaInicio, Date fechaFin, String jefeDeCampo, String region) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.jefeDeCampo = jefeDeCampo;
+        this.region = region;
     }
 
     public ParamReport(Date fechaInicio, Date fechaFin) {
@@ -26,7 +28,7 @@ public class ParamReport {
         this.fechaFin = fechaFin;
     }
 
-    public ParamReport(UsuarioEntity jefeDeCampo) {
+    public ParamReport(String jefeDeCampo) {
         this.jefeDeCampo = jefeDeCampo;
     }
 
@@ -46,11 +48,29 @@ public class ParamReport {
         this.fechaFin = fechaFin;
     }
 
-    public UsuarioEntity getJefeDeCampo() {
+    public String getJefeDeCampo() {
         return jefeDeCampo;
     }
 
-    public void setJefeDeCampo(UsuarioEntity jefeDeCampo) {
+    public void setJefeDeCampo(String jefeDeCampo) {
         this.jefeDeCampo = jefeDeCampo;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    @Override
+    public String toString(){
+        String total = "";
+        total+= "fecha incio :"+fechaInicio+"\n";
+        total+= "fecha fin :"+fechaFin+"\n";
+        total+= "jefe :"+jefeDeCampo+"\n";
+        total+= "region :"+region+"\n";
+        return total;
     }
 }

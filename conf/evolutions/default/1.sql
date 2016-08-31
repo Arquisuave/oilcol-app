@@ -23,7 +23,7 @@ create table pozo_entity (
 ;
 
 create table registro_sensor_barriles_entity (
-  id_sensor_barriles        bigserial not null,
+  id_sensor_barriles        bigint not null,
   pozo_id                   bigint not null,
   INFO                      float not null,
   TIMESTAMP                 timestamp not null,
@@ -65,9 +65,11 @@ create table usuarioentity (
   constraint pk_usuarioentity primary key (username))
 ;
 
-create sequence Campo;
+create sequence campoentity_seq;
 
 create sequence Product;
+
+create sequence registro_sensor_barriles_entity_seq;
 
 create sequence registro_sensor_temp_entity_seq;
 
@@ -102,9 +104,11 @@ drop table if exists registro_sensor_temp_entity cascade;
 
 drop table if exists usuarioentity cascade;
 
-drop sequence if exists Campo;
+drop sequence if exists campoentity_seq;
 
 drop sequence if exists Product;
+
+drop sequence if exists registro_sensor_barriles_entity_seq;
 
 drop sequence if exists registro_sensor_temp_entity_seq;
 

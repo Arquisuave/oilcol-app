@@ -24,7 +24,7 @@ public class CampoEntity extends Model{
     public static Finder<Long,CampoEntity> FINDER = new Finder<>(CampoEntity.class);
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Campo")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
     @OneToOne
