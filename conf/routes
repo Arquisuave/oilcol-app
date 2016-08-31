@@ -18,6 +18,9 @@ POST /login controllers.AuthController.authenticate
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
 
+#Modifica el estado del pozo
+PUT /registro/temp controllers.RegistroSensorController.updatePozo
+
 #Mostrar pozos
 GET /pozo controllers.PozoController.getPozos
 
@@ -36,3 +39,10 @@ GET /campo/:reg controllers.CampoController.getCampoReg(reg: String)
 
 #Agregar un registro de temperatura
 POST /registro/temp controllers.RegistroSensorController.createRegistroSensorTemp
+
+#Agregar un registro de barril
+POST /registro/temp controllers.RegistroSensorController.createRegistroSensorBarriles
+
+#Agregar un registro de energia
+POST /registro/temp controllers.RegistroSensorController.createRegistroSensorEner
+
