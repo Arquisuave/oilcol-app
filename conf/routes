@@ -46,3 +46,6 @@ POST /registro/temp controllers.RegistroSensorController.createRegistroSensorBar
 #Agregar un registro de energia
 POST /registro/temp controllers.RegistroSensorController.createRegistroSensorEner
 
+#Genera un reporte con filtros temporales
+POST /reporte controllers.ReportController.generateReport
+
