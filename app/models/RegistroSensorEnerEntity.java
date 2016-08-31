@@ -43,6 +43,7 @@ public class RegistroSensorEnerEntity extends Model
     {
         return pozo;
     }
+    public void setPozo (PozoEntity pPozo){pozo = pPozo;}
 
     @NotNull
     @Column(name = "INFO")
@@ -52,6 +53,7 @@ public class RegistroSensorEnerEntity extends Model
     {
         return info;
     }
+    public void setInfo(double pInfo) { info = pInfo; }
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -62,6 +64,7 @@ public class RegistroSensorEnerEntity extends Model
     {
         return timeStamp;
     }
+    public void setTimeStamp(Date pTimeStamp) { timeStamp = pTimeStamp; }
 
     @NotNull
     @Column(name = "ENTRADAS")
@@ -71,5 +74,6 @@ public class RegistroSensorEnerEntity extends Model
     {
         return numEntradas;
     }
+    public void setNumEntradas(int pNumEntradas) { numEntradas = pNumEntradas; }
 
 }
