@@ -45,6 +45,10 @@ public class PozoEntity extends Model{
     private enum Estado {
         ABIERTO, PRODUCCION, PARADO, CLAUSURADO
     }
+    public Estado getEstado(String estado)
+    {
+        return Estado.valueOf(estado);
+    }
 
     public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo,
                       List<RegistroSensorTempEntity> registrosTemp, List<RegistroSensorEmergEntity> registrosEmerg,
