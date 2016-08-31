@@ -5,9 +5,10 @@
 
 create table campoentity (
   id                        bigint not null,
-  id_jefe_campo             varchar(255),
+  id_jefe_campo_username    varchar(255),
   region                    varchar(9),
   constraint ck_campoentity_region check (region in ('ANDINA','CARIBE','PACIFICA','ORINOQUIA','AMAZONAS')),
+  constraint uq_campoentity_id_jefe_campo_use unique (id_jefe_campo_username),
   constraint pk_campoentity primary key (id))
 ;
 
@@ -22,7 +23,7 @@ create table pozo_entity (
 ;
 
 create table registro_sensor_barriles_entity (
-  id_sensor_barriles        bigserial not null,
+  id_sensor_barriles        bigint not null,
   pozo_id                   bigint not null,
   INFO                      float not null,
   TIMESTAMP                 timestamp not null,
@@ -64,22 +65,26 @@ create table usuarioentity (
   constraint pk_usuarioentity primary key (username))
 ;
 
-create sequence Campo;
+create sequence campoentity_seq;
 
 create sequence Product;
 
+create sequence registro_sensor_barriles_entity_seq;
+
 create sequence registro_sensor_temp_entity_seq;
 
-alter table pozo_entity add constraint fk_pozo_entity_campo_1 foreign key (campo_id) references campoentity (id);
-create index ix_pozo_entity_campo_1 on pozo_entity (campo_id);
-alter table registro_sensor_barriles_entity add constraint fk_registro_sensor_barriles_en_2 foreign key (pozo_id) references pozo_entity (id);
-create index ix_registro_sensor_barriles_en_2 on registro_sensor_barriles_entity (pozo_id);
-alter table registro_sensor_emerg_entity add constraint fk_registro_sensor_emerg_entit_3 foreign key (pozo_id) references pozo_entity (id);
-create index ix_registro_sensor_emerg_entit_3 on registro_sensor_emerg_entity (pozo_id);
-alter table registro_sensor_ener_entity add constraint fk_registro_sensor_ener_entity_4 foreign key (pozo_id) references pozo_entity (id);
-create index ix_registro_sensor_ener_entity_4 on registro_sensor_ener_entity (pozo_id);
-alter table registro_sensor_temp_entity add constraint fk_registro_sensor_temp_entity_5 foreign key (pozo_id) references pozo_entity (id);
-create index ix_registro_sensor_temp_entity_5 on registro_sensor_temp_entity (pozo_id);
+alter table campoentity add constraint fk_campoentity_idJefeCampo_1 foreign key (id_jefe_campo_username) references usuarioentity (username);
+create index ix_campoentity_idJefeCampo_1 on campoentity (id_jefe_campo_username);
+alter table pozo_entity add constraint fk_pozo_entity_campo_2 foreign key (campo_id) references campoentity (id);
+create index ix_pozo_entity_campo_2 on pozo_entity (campo_id);
+alter table registro_sensor_barriles_entity add constraint fk_registro_sensor_barriles_en_3 foreign key (pozo_id) references pozo_entity (id);
+create index ix_registro_sensor_barriles_en_3 on registro_sensor_barriles_entity (pozo_id);
+alter table registro_sensor_emerg_entity add constraint fk_registro_sensor_emerg_entit_4 foreign key (pozo_id) references pozo_entity (id);
+create index ix_registro_sensor_emerg_entit_4 on registro_sensor_emerg_entity (pozo_id);
+alter table registro_sensor_ener_entity add constraint fk_registro_sensor_ener_entity_5 foreign key (pozo_id) references pozo_entity (id);
+create index ix_registro_sensor_ener_entity_5 on registro_sensor_ener_entity (pozo_id);
+alter table registro_sensor_temp_entity add constraint fk_registro_sensor_temp_entity_6 foreign key (pozo_id) references pozo_entity (id);
+create index ix_registro_sensor_temp_entity_6 on registro_sensor_temp_entity (pozo_id);
 
 
 
@@ -99,9 +104,11 @@ drop table if exists registro_sensor_temp_entity cascade;
 
 drop table if exists usuarioentity cascade;
 
-drop sequence if exists Campo;
+drop sequence if exists campoentity_seq;
 
 drop sequence if exists Product;
+
+drop sequence if exists registro_sensor_barriles_entity_seq;
 
 drop sequence if exists registro_sensor_temp_entity_seq;
 

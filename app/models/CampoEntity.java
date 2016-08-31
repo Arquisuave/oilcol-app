@@ -24,10 +24,11 @@ public class CampoEntity extends Model{
     public static Finder<Long,CampoEntity> FINDER = new Finder<>(CampoEntity.class);
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Campo")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
-    private String idJefeCampo;
+    @OneToOne
+    private UsuarioEntity idJefeCampo;
 
     @Enumerated(EnumType.STRING)
     private Region region;
@@ -35,12 +36,12 @@ public class CampoEntity extends Model{
     @OneToMany(mappedBy ="campo")
     private List<PozoEntity> pozos;
 
-    public CampoEntity(Long pId, String pIdJefeCampo){
+    public CampoEntity(Long pId, UsuarioEntity pIdJefeCampo){
         id = pId;
         idJefeCampo = pIdJefeCampo;
     }
 
-    public CampoEntity(String idJefeCampo, Region region, List<PozoEntity> pozos) {
+    public CampoEntity(UsuarioEntity idJefeCampo, Region region, List<PozoEntity> pozos) {
         this.idJefeCampo = idJefeCampo;
         this.region = region;
         this.pozos = pozos;
@@ -62,11 +63,11 @@ public class CampoEntity extends Model{
         id = pId;
     }
 
-    public String getIdJefeCampo(){
+    public UsuarioEntity getIdJefeCampo(){
         return idJefeCampo;
     }
 
-    public void setIdJefeCampo(String pIdJefeCampo){
+    public void setIdJefeCampo(UsuarioEntity pIdJefeCampo){
         idJefeCampo = pIdJefeCampo;
     }
 
