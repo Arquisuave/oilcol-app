@@ -164,4 +164,19 @@ public class PozoController extends Controller{
                 }
         );
     }
+
+    public CompletionStage<Result> deletePozo(Long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    PozoEntity.FINDER.byId(id).delete();
+                    return "Pozo con id "+id+" eliminado";
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                productEntity -> {
+                    return ok(Json.toJson(productEntity));
+                }
+        );
+    }
 }
