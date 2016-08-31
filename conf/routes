@@ -19,7 +19,7 @@ POST /login controllers.AuthController.authenticate
 POST    /pozo                       controllers.PozoController.createPozo
 
 #Modifica el estado del pozo
-#PUT /registro/temp controllers.RegistroSensorController.updatePozo
+PUT /registro/temp controllers.PozoController.updatePozo
 
 #Mostrar pozos
 GET /pozo controllers.PozoController.getPozos
@@ -46,6 +46,21 @@ POST /registro/temp controllers.RegistroSensorController.createRegistroSensorBar
 #Agregar un registro de energia
 POST /registro/temp controllers.RegistroSensorController.createRegistroSensorEner
 
-#Genera un reporte con filtros temporales
-POST /reporte controllers.ReportController.generateReport
+#Genera un reporte de temperatura con filtros temporales
+POST /reporte/temp controllers.ReportController.generateReportTemp
+
+#Genera un reporte de temperatura con filtros temporales
+POST /reporte/ener controllers.ReportController.generateReportEner
+
+#Genera un reporte de temperatura con filtros temporales
+POST /reporte/emerg controllers.ReportController.generateReportEmerg
+
+#Genera un reporte de temperatura con filtros temporales
+POST /reporte/bar controllers.ReportController.generateReportBarriles
+
+#Emite un registro de emergencia
+POST /emergencia controllers.AlertController.reportAlert
+
+#Marca una emergencia como resuelta y la elimina de la lista de notificaciones
+DELETE /notification/:id controllers.AlertController.removeNotification(id: Long)
 

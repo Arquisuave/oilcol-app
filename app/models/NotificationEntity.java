@@ -31,6 +31,11 @@ public class NotificationEntity extends Model{
     @NotNull
     private boolean resolved;
 
+    public NotificationEntity(Long id)
+    {
+        this.id = id;
+    }
+
     public NotificationEntity(Long id, UsuarioEntity username, String message, RegistroSensorEmergEntity register)
     {
         this.id = id;

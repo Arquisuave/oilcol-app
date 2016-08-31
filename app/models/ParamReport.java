@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -7,8 +9,12 @@ import java.util.Date;
  */
 public class ParamReport {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Date fechaInicio;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Date fechaFin;
+
     private String jefeDeCampo;
     private String region;
 
