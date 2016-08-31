@@ -32,4 +32,21 @@ public class UserController extends Controller
                 }
         );
     }
+
+    public CompletionStage<Result> createUser(){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nUser = request().body().asJson();
+        UsuarioEntity user = Json.fromJson(nUser, UsuarioEntity.class);
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    user.save();
+                    return user;
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                entity -> {
+                    return ok(Json.toJson(entity));
+                }
+        );
+    }    
 }
