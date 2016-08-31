@@ -9,6 +9,10 @@ import java.util.List;
 @Table(name = "usuarioentity")
 public class UsuarioEntity extends Model
 {
+    public TipoUsuario getTipoUsuario(String tipo)
+    {
+         return TipoUsuario.valueOf(tipo);
+    }
     private enum TipoUsuario
     {
 
