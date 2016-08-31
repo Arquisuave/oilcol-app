@@ -81,7 +81,28 @@ public class PozoController extends Controller{
                         if(usuario != null && usuario.getType() == ( usuario.getTipoUsuario(mensajeCompleto.getType())))
                         {
                             //si es jefe
-                            //CampoEntity campo = CampoEntity.FINDER.where().eq("jefeCampo", usuario.getUsername());
+                            CampoEntity campo = CampoEntity.FINDER.where().eq("idJefeCampo", usuario.getUsername()).setMaxRows(1).findUnique();
+                            if(campo != null)
+                            {
+                                PozoEntity pozoBuscado = PozoEntity.FINDER.where().eq("campo", campo.getId()).eq("id", idPozo).setMaxRows(1).findUnique();
+
+                                if(pozoBuscado != null)
+                                {
+                                    pozoBuscado.setEstado(pozoBuscado.getEstado(nuevoStatus));
+                                    pozoBuscado.update();
+                                    return pozoBuscado;
+                                }
+                                else
+                                {
+                                    return null;
+                                }
+
+                            }
+                            else
+                            {
+                                return null;
+                            }
+
 
                         }
                         else
@@ -92,16 +113,18 @@ public class PozoController extends Controller{
                     }
                     else
                     {
-
+                        return null;
                     }
-                    //pozo.update();
-                    return null;
+
+
                 }
                 ,jdbcDispatcher
         ).thenApply(
                 pozoEntity -> {
                     return ok(Json.toJson(pozoEntity));
                 }
+
+
         );
     }
 
