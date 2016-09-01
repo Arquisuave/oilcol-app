@@ -29,7 +29,7 @@ DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Lo
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
 
-POST /users controllers.UserController.createUser
+POST /users/register controllers.UserController.createUser
 
 
 
