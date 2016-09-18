@@ -64,7 +64,7 @@ public class RegistroSensorTempEntity extends Model
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "TIMESTAMP")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ssX")
     private Date timeStamp;
 
     public Date getTimeStamp()
