@@ -9,7 +9,7 @@ public class RegistroSensorEnerLogic {
 
 
     public static RegistroSensorEnerEntity promediar (RegistroSensorEnerEntity reg){
-        boolean necesita = false;
+        /**boolean necesita = false;
         RegistroSensorEnerEntity regActual = RegistroSensorEnerEntity.FINDER
                 .where().eq("pozo",reg.getPozo()).orderBy("timestamp desc").setFirstRow(1).findUnique();
         if (regActual != null && reg.getTimeStamp().getHours() == regActual.getTimeStamp().getHours()){
@@ -22,11 +22,11 @@ public class RegistroSensorEnerLogic {
             regActual.update();
             return regActual;
         }
-        else{
+        else{**/
             reg.setNumEntradas(1);
             reg.save();
             return reg;
-        }
+        //}
 
     }
 

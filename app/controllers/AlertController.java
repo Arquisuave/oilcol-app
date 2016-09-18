@@ -26,10 +26,10 @@ public class AlertController extends Controller {
         return CompletableFuture.supplyAsync(
                 ()->{
                      alert.save();
-                     PozoEntity p = PozoEntity.FINDER.byId(alert.getPozo().getId());
-                     UsuarioEntity u = p.getCampo().getIdJefeCampo();
-                     NotificationEntity not = new NotificationEntity(0L, u, "Alerta: Pozo "+p.getId()+" reporta una emergencia de tipo: "+alert.getTipo().getType(), alert);
-                     not.save();
+                     //PozoEntity p = PozoEntity.FINDER.byId(alert.getPozo().getId());
+                     //UsuarioEntity u = p.getCampo().getIdJefeCampo();
+                     //NotificationEntity not = new NotificationEntity(0L, u, "Alerta: Pozo "+p.getId()+" reporta una emergencia de tipo: "+alert.getTipo().getType(), alert);
+                     //not.save();
                      return "";
                 }
                 ,alertDispatcher

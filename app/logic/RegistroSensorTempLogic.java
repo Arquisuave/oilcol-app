@@ -14,7 +14,7 @@ import play.libs.Json;
 public class RegistroSensorTempLogic {
 
     public static RegistroSensorTempEntity actualizarRegistro(RegistroSensorTempEntity registro){
-        RegistroSensorTempEntity regViejo = RegistroSensorTempEntity.FINDER.where().eq("pozo",registro.getPozo()).eq("pozo.estado", PozoEntity.Estado.ABIERTO).orderBy("id_sensor_temp desc").setMaxRows(1).findUnique();
+        /**RegistroSensorTempEntity regViejo = RegistroSensorTempEntity.FINDER.where().eq("pozo",registro.getPozo()).eq("pozo.estado", PozoEntity.Estado.ABIERTO).orderBy("id_sensor_temp desc").setMaxRows(1).findUnique();
         if (regViejo!=null&&registro.getTimeStamp().getHours()==regViejo.getTimeStamp().getHours()){
             double promedio=regViejo.getInfo()*regViejo.getNumEntradas()+registro.getInfo();
             promedio/=(regViejo.getNumEntradas()+1);
@@ -22,10 +22,10 @@ public class RegistroSensorTempLogic {
             regViejo.setInfo(promedio);
             regViejo.update();
             return regViejo;
-        }else{
+        }else{**/
             registro.setNumEntradas(1);
             registro.save();
             return registro;
-        }
+        //}
     }
 }
