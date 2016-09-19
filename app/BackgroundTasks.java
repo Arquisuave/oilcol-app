@@ -52,12 +52,17 @@ public class BackgroundTasks {
                         {
                             nuevo.save();
                         }
+                        for(int i=0; i< tempEntities.size();i++)
+                        {
+                            RegistroSensorTempEntity actual = tempEntities.get(i);
+                            actual.delete();
+                        }
 
                     }
 
 
                     try {
-                        sleep(10000000);//100 segundos
+                        sleep(10000);// segundos
                         System.out.println("Se despierta a hacer cosas");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
