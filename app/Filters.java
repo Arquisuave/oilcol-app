@@ -19,16 +19,15 @@ import filters.AuthFilter;
 public class Filters implements HttpFilters {
 
     private final Environment env;
-    private final AuthFilter exampleFilter;
+    //private final AuthFilter exampleFilter;
 
     /**
      * @param env Basic environment settings for the current application.
-     * @param exampleFilter A demonstration filter that adds a header to
      */
     @Inject
-    public Filters(Environment env, AuthFilter exampleFilter) {
+    public Filters(Environment env) {
         this.env = env;
-        this.exampleFilter = exampleFilter;
+        //this.exampleFilter = exampleFilter;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class Filters implements HttpFilters {
       // we're running in production or test mode then don't use any
       // filters at all.
       if (env.mode().equals(Mode.DEV)) {
-          return new EssentialFilter[] { exampleFilter };
+          return new EssentialFilter[] { };
       } else {
          return new EssentialFilter[] {};
       }

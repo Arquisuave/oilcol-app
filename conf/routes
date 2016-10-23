@@ -73,4 +73,6 @@ POST    /reporte/emerg              controllers.ReportController.generateReportE
 #Genera un reporte de BARRILES con filtros temporales
 POST    /reporte/bar                controllers.ReportController.generateReportBarriles
 
+OPTIONS /:path                         controllers.OptionController.attend(path: String)
+
 
