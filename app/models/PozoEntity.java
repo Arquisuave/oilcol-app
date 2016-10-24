@@ -18,10 +18,10 @@ public class PozoEntity extends Model{
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Product")
     private Long id;
 
-    private Long lon;
+    private Double lon;
 
 
-    private Long lat;
+    private Double lat;
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
@@ -50,7 +50,7 @@ public class PozoEntity extends Model{
         ABIERTO, PRODUCCION, PARADO, CLAUSURADO
     }
 
-    public PozoEntity(Long lon, Long lat, Estado estado, CampoEntity campo,
+    public PozoEntity(Double lon, Double lat, Estado estado, CampoEntity campo,
                       List<RegistroSensorTempEntity> registrosTemp, List<RegistroSensorEmergEntity> registrosEmerg,
                       List<RegistroSensorEnerEntity> registrosEner, List<RegistroSensorBarrilesEntity> registrosBarriles) {
         this.lon = lon;
@@ -71,19 +71,19 @@ public class PozoEntity extends Model{
         this.id = id;
     }
 
-    public Long getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(Long lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
-    public Long getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(Long lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 

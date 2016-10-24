@@ -24,12 +24,14 @@ PUT     /updatePozo              controllers.PozoController.updatePozo
 GET     /pozo                       controllers.PozoController.getPozos
 #Borrar un pozo dado su ID
 DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Long)
+#
+
 
 #USUARIO
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
 
-POST /users/register controllers.UserController.createUser
+POST /users/register                controllers.UserController.createUser
 
 
 
@@ -44,6 +46,8 @@ GET     /campo/:id                  controllers.CampoController.getCampo(id: Lon
 GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
 #Borra un campo su ID
 DELETE /campo/:id                   controllers.CampoController.deleteCampo(id: Long)
+#
+GET /campo/:idJefe                  controllers.CampoController.getCampoJefe(idJefe:Long)
 
 #REGISTRO SENSOR DE TEMPERATURA
 #Agregar un registro de temperatura
