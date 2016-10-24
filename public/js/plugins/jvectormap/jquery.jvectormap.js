@@ -1179,6 +1179,7 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
                 series: that.params.main.series,
                 markers: that.params.main.markers,
                 markerStyle: that.params.main.markerStyle,
+                onMarkerClick: that.params.main.onMarkerClick,
                 map: name,
                 multiMapLevel: currentMap.params.multiMapLevel + 1
             }), that.history.push(that.maps[name]), that.backButton.show()

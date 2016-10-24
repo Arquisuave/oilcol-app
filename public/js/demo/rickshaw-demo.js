@@ -38,6 +38,37 @@ $(function() {
             color: '#1ab394'
         } ]
     } );
+
+    // var annotator = new Rickshaw.Graph.Annotate( {
+        // graph: graph,
+        // element: document.getElementById('timeline')
+    // } );
+
+    // var ticksTreatment = 'glow';
+
+    var xAxis = new Rickshaw.Graph.Axis.Time( {
+        graph: graph3,
+        timeFixture: new Rickshaw.Fixtures.Time.Local()
+    } );
+
+    
+    var y_axis = new Rickshaw.Graph.Axis.Y({
+        graph: graph3,
+        orientation: 'left',
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        element: document.getElementById('y_axis'),
+    });
+
+
+    // // xAxis.render();
+    
+    // var yAxis = new Rickshaw.Graph.Axis.Y( {
+    //     graph: graph3,
+    //     tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+    // } );
+
+    // yAxis.render();
+
     graph3.render();
 
     var graph4 = new Rickshaw.Graph({
