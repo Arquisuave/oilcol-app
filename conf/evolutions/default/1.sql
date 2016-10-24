@@ -24,8 +24,8 @@ create table notification_entity (
 
 create table pozo_entity (
   id                        bigint not null,
-  lon                       bigint,
-  lat                       bigint,
+  lon                       float,
+  lat                       float,
   estado                    varchar(10),
   campo_id                  bigint not null,
   constraint ck_pozo_entity_estado check (estado in ('ABIERTO','PRODUCCION','PARADO','CLAUSURADO')),

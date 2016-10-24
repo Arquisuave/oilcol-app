@@ -16,6 +16,22 @@ import static play.libs.Json.toJson;
  */
 public class CampoController extends Controller{
 
+    public CompletionStage<Result> getCampoJefe(long idJefe) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.
+                supplyAsync(
+                        () -> {
+                            return CampoEntity.FINDER.where().eq("id_jefe_campo_username",idJefe).findUnique();
+                        }
+                        ,jdbcDispatcher)
+                .thenApply(
+                        campoEntities -> {
+                            return ok(toJson(campoEntities));
+                        }
+                );
+    }
+
     public CompletionStage<Result> getCampos() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
