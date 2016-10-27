@@ -21,8 +21,27 @@
 
 
      var pozoSelecionado=undefined;
+     var mapaPozos ={};
 
 
+     function cuantosPozos(region)
+     {
+         var cuantos = 0;
+         $.ajax({
+             method: "GET",
+             url: "/pozoR/"+region
+         }).done(function (msg)
+         {
+             console.log("Mensaje que llega de traer del metodo"+msg);
+         }).fail(function (msg, textstat)
+         {
+             console.log(textstat + "error en funcion cuantosPozos");
+         }).always(function (msg) {
+             console.log("cuantos Pozos acaba de salir")
+         });
+
+         return cuantos;
+     }
 
      $.ajax({
          method: "GET",
@@ -34,10 +53,21 @@
          var convert=[];
          console.log(msg[1262]);
          for(var i=0;i<msg.length;i++){
-
-             var n = {latLng:[msg[i].lat,msg[i].lon],name:msg[i].id};
+             mapaPozos[msg[i].id]=msg[i];
+             var color=undefined;
+             if(msg[i].estado==="PRODUCCION"){
+                 color="green";
+             }
+             else if(msg[i].estado==="CERRADO"){
+                 color = "red";
+             }
+             else if(msg[i].estado==="CLAUSURADO"){
+                 color="black";
+             }
+             var n = {latLng:[msg[i].lat,msg[i].lon],name:msg[i].id,style:{fill:color}};
              convert.push(n);
          }
+         $('#numPozos').text(cuantosPozos()+"/1200");
          console.log(convert);
          var map = new jvm.MultiMap({
              container: $('#world-map'),
@@ -55,8 +85,15 @@
                      }
                  },
                  markers: convert,
+                 //$.ajax({
+                 //    method: "GET",
+                 //    url:"/"
+                 //   })
                  onMarkerClick:function(event, index){
-                   pozoSelecionado=markers[index].name;
+                     console.log(map);
+                     pozoSelecionado=map.params.main.markers[index].name;
+                     var pozo = mapaPozos[pozoSelecionado];
+                     $("#ener").replaceWith("<h1 class=\"no-margins\">"+1000+"</h1>kW/h");
                      console.log(pozoSelecionado);
                  },
                  markerStyle: {
@@ -103,6 +140,7 @@
                      var estadoPozosAntes = $('#estadoPozos').text();
                      estadoPozosAntes = estadoPozosAntes.split(":")[0];
                      $('#estadoPozos').text(estadoPozosAntes + ": " + reg[code]);
+                     $('#numPozos').text(cuantosPozos(reg[code])+"/1200");
 
                      var estadoEmergenciasPerc = $('#emergenciasPerc').text();
                      estadoEmergenciasPerc = estadoEmergenciasPerc.split(":")[0];
