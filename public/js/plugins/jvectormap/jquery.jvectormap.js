@@ -1106,6 +1106,8 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
                     stringP = string2[0].concat(": ",reg[code]);
                     console.log(stringP);
                     var stringP = $('#title-h').text(stringP);
+                    var numP = cuantosPozos();
+                   // $('#numPozos').text(numP+"/1200");
                     
                     //TITULO POZOS
                     var estadoPozosAntes = $('#estadoPozos').text();

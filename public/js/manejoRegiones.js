@@ -24,6 +24,24 @@
      var mapaPozos ={};
 
 
+     function cuantosPozos(region)
+     {
+         var cuantos = 0;
+         $.ajax({
+             method: "GET",
+             url: "/pozoR/"+region
+         }).done(function (msg)
+         {
+             console.log("Mensaje que llega de traer del metodo"+msg);
+         }).fail(function (msg, textstat)
+         {
+             console.log(textstat + "error en funcion cuantosPozos");
+         }).always(function (msg) {
+             console.log("cuantos Pozos acaba de salir")
+         });
+
+         return cuantos;
+     }
 
      $.ajax({
          method: "GET",
@@ -49,6 +67,7 @@
              var n = {latLng:[msg[i].lat,msg[i].lon],name:msg[i].id,style:{fill:color}};
              convert.push(n);
          }
+         $('#numPozos').text(cuantosPozos()+"/1200");
          console.log(convert);
          var map = new jvm.MultiMap({
              container: $('#world-map'),
@@ -121,6 +140,7 @@
                      var estadoPozosAntes = $('#estadoPozos').text();
                      estadoPozosAntes = estadoPozosAntes.split(":")[0];
                      $('#estadoPozos').text(estadoPozosAntes + ": " + reg[code]);
+                     $('#numPozos').text(cuantosPozos(reg[code])+"/1200");
 
                      var estadoEmergenciasPerc = $('#emergenciasPerc').text();
                      estadoEmergenciasPerc = estadoEmergenciasPerc.split(":")[0];
