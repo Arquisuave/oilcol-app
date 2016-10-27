@@ -40,7 +40,7 @@
              if(msg[i].estado==="PRODUCCION"){
                  color="green";
              }
-             else if(msg[i].estado==="CERRADO"){
+             else if(msg[i].estado==="PARADO"){
                  color = "red";
              }
              else if(msg[i].estado==="CLAUSURADO"){
