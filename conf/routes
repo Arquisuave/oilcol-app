@@ -43,7 +43,7 @@ GET     /campo                      controllers.CampoController.getCampos
 #Mostrar campo por ID
 GET     /campo/:id                  controllers.CampoController.getCampo(id: Long)
 #Trae todos los pozos de una region
-GET     /pozosDeCampos/:reg         controllers.CampoController.getPozosAllCamposRegion(String reg)
+GET     /pozosDeCampos/:reg         controllers.CampoController.getPozosAllCamposRegion(reg: String)
 #Muestra todos los campos dada una región
 GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
 #Borra un campo su ID
