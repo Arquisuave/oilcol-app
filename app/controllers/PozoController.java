@@ -31,21 +31,6 @@ public class PozoController extends Controller{
                         }
                 );
     }
-    public CompletionStage<Result> getPozosRegion(String region) {
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
-        return CompletableFuture.
-                supplyAsync(
-                        () -> {
-                            return PozoEntity.FINDER.all();
-                        }
-                        ,jdbcDispatcher)
-                .thenApply(
-                        pozoEntities -> {
-                            return ok(toJson(pozoEntities));
-                        }
-                );
-    }
 
     public CompletionStage<Result> createPozo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
