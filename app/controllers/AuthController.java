@@ -22,7 +22,7 @@ public class AuthController extends Controller {
 
     public CompletionStage<Result> authenticate(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nAuth = request().body().asJson();
+        JsonNode nAuth = request().body().asJson(); 
         AuthEntity auth = Json.fromJson( nAuth , AuthEntity.class ) ;
         AuthResponse resp = new AuthResponse(null, "", null, TipoUsuario.NONE);
         return CompletableFuture.supplyAsync(
