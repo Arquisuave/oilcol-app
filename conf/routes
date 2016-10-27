@@ -23,7 +23,7 @@ PUT     /updatePozo              controllers.PozoController.updatePozo
 #Mostrar pozos
 GET     /pozo                       controllers.PozoController.getPozos
 #Mostrar pozos por region
-GET     /pozoR/:region              controllers.PozoController.getPozosRegion
+GET     /pozoR/:region              controllers.PozoController.getPozosRegion(region: String)
 #Borrar un pozo dado su ID
 DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Long)
 #

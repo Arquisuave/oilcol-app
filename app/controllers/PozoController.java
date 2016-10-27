@@ -31,7 +31,7 @@ public class PozoController extends Controller{
                         }
                 );
     }
-    public CompletionStage<Result> getPozosRegion() {
+    public CompletionStage<Result> getPozosRegion(String region) {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
