@@ -21,6 +21,7 @@
 
 
      var pozoSelecionado=undefined;
+     var mapaPozos ={};
 
 
 
@@ -34,8 +35,18 @@
          var convert=[];
          console.log(msg[1262]);
          for(var i=0;i<msg.length;i++){
-
-             var n = {latLng:[msg[i].lat,msg[i].lon],name:msg[i].id};
+             mapaPozos[msg[i].id]=msg[i];
+             var color=undefined;
+             if(msg[i].estado==="PRODUCCION"){
+                 color="green";
+             }
+             else if(msg[i].estado==="CERRADO"){
+                 color = "red";
+             }
+             else if(msg[i].estado==="CLAUSURADO"){
+                 color="black";
+             }
+             var n = {latLng:[msg[i].lat,msg[i].lon],name:msg[i].id,style:{fill:color}};
              convert.push(n);
          }
          console.log(convert);
@@ -55,8 +66,15 @@
                      }
                  },
                  markers: convert,
+                 //$.ajax({
+                 //    method: "GET",
+                 //    url:"/"
+                 //   })
                  onMarkerClick:function(event, index){
-                   pozoSelecionado=markers[index].name;
+                     console.log(map);
+                     pozoSelecionado=map.params.main.markers[index].name;
+                     var pozo = mapaPozos[pozoSelecionado];
+                     $("#ener").replaceWith("<h1 class=\"no-margins\">"+1000+"</h1>kW/h");
                      console.log(pozoSelecionado);
                  },
                  markerStyle: {
