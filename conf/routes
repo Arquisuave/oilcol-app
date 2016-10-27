@@ -19,7 +19,7 @@ POST /login controllers.AuthController.authenticate
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
 #Modifica el estado del pozo
-PUT     /updatePozo/:id/:estado     controllers.PozoController.updatePozo
+PUT     /updatePozo/:id/:estado     controllers.PozoController.updatePozo(id: Long, estado: String)
 #Mostrar pozos
 GET     /pozo                       controllers.PozoController.getPozos
 #Borrar un pozo dado su ID

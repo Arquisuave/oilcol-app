@@ -49,12 +49,13 @@ public class PozoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> updatePozo(Long id, PozoEntity.Estado nuevoEstado)
+    public CompletionStage<Result> updatePozo(Long id, String nuevoEstado)
     {
+        PozoEntity.Estado estadito =PozoEntity.Estado.valueOf(nuevoEstado);
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    PozoEntity.FINDER.byId(id).setEstado(nuevoEstado);
+                    PozoEntity.FINDER.byId(id).setEstado(estadito);
                     PozoEntity.FINDER.byId(id).update();
                     return "Pozo con id "+id+" actualizado";
                 }
