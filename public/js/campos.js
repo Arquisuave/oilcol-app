@@ -5,72 +5,46 @@
  * Aquí hago las cositas de los pozos
  */
 
-//Get pozos
 $.ajax({
     method: "GET",
-    url:"/pozo"
+    url:"/campo"
 }).done(function(msg){
     console.log(msg [5]);
-    var pozos = [];
+    var campos = [];
     for(var i=0;i<msg.length;i++){
-        var este = {idPozo:msg[i].id,long:msg[i].lon,latt:msg[i].lat,est:msg[i].estado};
-        var pozoActual = [este.idPozo,este.long,este.latt,este.est];
-        pozos.push(pozoActual);
+        var este = {idCampo:msg[i].id,usernameJefe:msg[i].idJefeCampo.username,region:msg[i].region};
+        var campoActual = [este.idCampo,este.usernameJefe,este.region];
+        campos.push(campoActual);
     }
-    console.log(pozos);
+    console.log(campos);
     $('#tablita').DataTable({
-        data: pozos,
+        data: campos,
         columns: [
-            { title: "ID Pozo"},
-            { title: "Longitud"},
-            { title: "Latitud"},
-            { title: "Estado"}
+            { title: "ID Campo"},
+            { title: "Usuario jefe"},
+            { title: "Región"}
         ]
     });
 
 });
 
-//Post pozo
 $('#btnSave').click(function() {
     console.log("Click en Guardar")
-    console.log($('#longitud').val());
+    console.log($('#idJefeCampo').val());
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "/pozo");
+    xmlhttp.open("POST", "/campo");
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(JSON.stringify({
-        "lon": $('#longitud').val(),
-        "lat": $('#latitud').val(),
-        "estado": $('#estado').val(),
-        "campo": {
-            "id": 1,
-            "idJefeCampo": {
-                "username": "margarita",
-                "type": null,
-                "password": null,
-                "notifications": []
-            },
-            "region": "ANDINA",
-            "pozos": []
-        }
+        "idJefeCampo": $('#idJefeCampo').val(),
+        "region": $('#region').val()
     }));
 });
 
 //DELETE pozo
 $('#btnDelete').click(function() {
     console.log("Click en Delete")
-    var idPozo = $('#idPozo').val();
+    var idCampo = $('#idCampo').val();
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("DELETE", "/pozo/"+idPozo);
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send();
-});
-
-//PUT pozo
-$('#btnNuevoEstado').click(function() {
-    console.log("Click en Edit")
-    var idPozo = $('#idPozo2').val();
-    var nuevoEstado = $('#nuevoEstado').val();
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("PUT", "/updatePozo/"+idPozo+"/"+nuevoEstado);
+    xmlhttp.open("DELETE", "/campo/"+idCampo);
     xmlhttp.send();
 });

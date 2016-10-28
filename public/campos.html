@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OilCol | Pozos</title>
+    <title>OilCol | Campos</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -55,6 +55,9 @@
 
                 </li>
                 <li>
+                    <a href="campos.html"><i class="fa fa-map-marker"></i> <span class="nav-label">Campos</span></a>
+                </li>
+                <li>
                     <a href="pozos.html"><i class="fa fa-tint"></i> <span class="nav-label">Pozos</span></a>
                 </li>
                 <li>
@@ -83,7 +86,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Oil-Col Pozos</span>
+                        <span class="m-r-sm text-muted welcome-message">Oil-Col Campos</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -193,13 +196,13 @@
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Pozos</h2>
+                <h2>Campos</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="index.html">Home</a>
                     </li>
                     <li class="active">
-                        <strong>Pozos</strong>
+                        <strong>Campos</strong>
                     </li>
                 </ol>
             </div>
@@ -216,9 +219,9 @@
 
                             <div class="ibox-tools">
 
-                                <!--AÑADIR UN POZO-->
+                                <!--AÑADIR UN CAMPO-->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                    <i class="fa fa-plus modal-icon"></i> Añadir pozo
+                                    <i class="fa fa-plus modal-icon"></i> Añadir campo
                                 </button>
 
                                 <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -227,22 +230,16 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                 <i class="fa fa-plus modal-icon"></i>
-                                                <h4 class="modal-title">Agregar un pozo</h4>
-                                                <small class="font-bold">Por favor ingrese la información del pozo</small>
+                                                <h4 class="modal-title">Agregar un campo</h4>
+                                                <small class="font-bold">Por favor ingrese la información del campo</small>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group"><label>
-                                                    <i class="fa fa-globe"></i> Longitud:
-                                                </label> <input type="number" placeholder="e.g.: -74.587" class="form-control" id="longitud"></div>
+                                                    <i class="fa fa-globe"></i> ID Jefe:
+                                                </label> <input type="text" placeholder="e.g.: margarita" class="form-control" id="idJefeCampo"></div>
                                                 <div class="form-group"><label>
-                                                    <i class="fa fa-globe"></i> Latitud:
-                                                </label> <input type="number" placeholder="e.g.: 79.521" class="form-control" id="latitud"></div>
-                                                <div class="form-group"><label>
-                                                    <i class="fa fa-bolt"></i> Estado:
-                                                </label> <input type="text" placeholder="e.g.: Clausurado, abierto, en producción" class="form-control" id="estado"></div>
-                                                <div class="form-group"><label>
-                                                    <i class="fa fa-child"></i> Id campo:
-                                                </label> <input type="number" placeholder="e.g.: 12" class="form-control" id="idCampo"></div>
+                                                    <i class="fa fa-globe"></i> Región:
+                                                </label> <input type="text" placeholder="e.g.: ANDINA" class="form-control" id="region"></div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
@@ -252,9 +249,9 @@
                                     </div>
                                 </div>
 
-                                <!-- ELIMINAR POZO-->
+                                <!-- ELIMINAR CAMPO-->
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ventanaDelete">
-                                    <i class="fa fa-trash modal-icon"></i> Eliminar pozo
+                                    <i class="fa fa-trash modal-icon"></i> Eliminar campo
                                 </button>
 
                                 <div class="modal inmodal" id="ventanaDelete" tabindex="-1" role="dialog" aria-hidden="true">
@@ -263,13 +260,13 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                 <i class="fa fa-trash modal-icon"></i>
-                                                <h4 class="modal-title">Eliminar un pozo</h4>
-                                                <small class="font-bold">Por favor ingrese el ID del pozo que desea eliminar.</small>
+                                                <h4 class="modal-title">Eliminar un campo</h4>
+                                                <small class="font-bold">Por favor ingrese el ID del campo que desea eliminar.</small>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group"><label>
-                                                    <i class="fa fa-child"></i> ID Pozo:
-                                                </label> <input type="number" placeholder="e.g.: 55" class="form-control" id="idPozo"></div>
+                                                    <i class="fa fa-child"></i> ID Campo:
+                                                </label> <input type="number" placeholder="e.g.: 55" class="form-control" id="idCampo"></div>
 
                                             </div>
                                             <div class="modal-footer">
@@ -280,36 +277,7 @@
                                     </div>
                                 </div>
 
-                                <!--EDITAR ESTADO DE UN POZO-->
 
-                                <button type="button" class="btn btn-white" data-toggle="modal" data-target="#ventanaEstado">
-                                    <i class="fa fa-pencil modal-icon"></i> Cambiar estado pozo
-                                </button>
-
-                                <div class="modal inmodal" id="ventanaEstado" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content animated bounceInRight">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                <i class="fa fa-pencil modal-icon"></i>
-                                                <h4 class="modal-title">Cambiar estado de un pozo</h4>
-                                                <small class="font-bold">Por favor ingrese el ID del pozo que desea editar y el nuevo estado.</small>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group"><label>
-                                                    <i class="fa fa-child"></i> ID Pozo:
-                                                </label> <input type="number" placeholder="e.g.: 55" class="form-control" id="idPozo2"></div>
-                                                <div class="form-group"><label>
-                                                    <i class="fa fa-bolt"></i> Nuevo estado:
-                                                </label> <input type="text" placeholder="e.g.: CLAUSURADO, PARADO" class="form-control" id="nuevoEstado"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                                <button class="btn btn-success demo2" id="btnNuevoEstado" data-dismiss="modal">Guardar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
                             </div>
