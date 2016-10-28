@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OilCol | Pozos</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Margarita Gómez</strong>
+                             </span> <span class="text-muted text-xs block">Jefe de producción <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
+
+                </li>
+                <li>
+                    <a href="pozos.html"><i class="fa fa-tint"></i> <span class="nav-label">Pozos</span></a>
+                </li>
+                <li>
+                    <a href="graphs.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span></a>
+
+                <li>
+                    <a href="emergencias.html"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Emergencias</span>  </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">Oil-Col Pozos</span>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <small class="pull-right">46h ago</small>
+                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a4.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy">5h ago</small>
+                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/profile.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right">23h ago</small>
+                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="mailbox.html">
+                                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="grid_options.html">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Pozos</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Pozos</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+
+                            <div class="ibox-tools">
+
+                                <!--AÑADIR UN POZO-->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                    <i class="fa fa-plus modal-icon"></i> Añadir pozo
+                                </button>
+
+                                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated bounceInRight">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <i class="fa fa-plus modal-icon"></i>
+                                                <h4 class="modal-title">Agregar un pozo</h4>
+                                                <small class="font-bold">Por favor ingrese la información del pozo</small>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-globe"></i> Longitud:
+                                                </label> <input type="number" placeholder="e.g.: -74.587" class="form-control" id="longitud"></div>
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-globe"></i> Latitud:
+                                                </label> <input type="number" placeholder="e.g.: 79.521" class="form-control" id="latitud"></div>
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-bolt"></i> Estado:
+                                                </label> <input type="text" placeholder="e.g.: Clausurado, abierto, en producción" class="form-control" id="estado"></div>
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-child"></i> Id campo:
+                                                </label> <input type="number" placeholder="e.g.: 12" class="form-control" id="idCampo"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                <button class="btn btn-success demo2" id="btnSave" data-dismiss="modal">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ELIMINAR POZO-->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ventanaDelete">
+                                    <i class="fa fa-trash modal-icon"></i> Eliminar pozo
+                                </button>
+
+                                <div class="modal inmodal" id="ventanaDelete" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated bounceInRight">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <i class="fa fa-trash modal-icon"></i>
+                                                <h4 class="modal-title">Eliminar un pozo</h4>
+                                                <small class="font-bold">Por favor ingrese el ID del pozo que desea eliminar.</small>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-child"></i> ID Pozo:
+                                                </label> <input type="number" placeholder="e.g.: 55" class="form-control" id="idPozo"></div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                <button class="btn btn-danger demo4" id="btnDelete" data-dismiss="modal">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--EDITAR ESTADO DE UN POZO-->
+
+                                <button type="button" class="btn btn-white" data-toggle="modal" data-target="#ventanaEstado">
+                                    <i class="fa fa-pencil modal-icon"></i> Cambiar estado pozo
+                                </button>
+
+                                <div class="modal inmodal" id="ventanaEstado" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated bounceInRight">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <i class="fa fa-pencil modal-icon"></i>
+                                                <h4 class="modal-title">Cambiar estado de un pozo</h4>
+                                                <small class="font-bold">Por favor ingrese el ID del pozo que desea editar y el nuevo estado.</small>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-child"></i> ID Pozo:
+                                                </label> <input type="number" placeholder="e.g.: 55" class="form-control" id="idPozo2"></div>
+                                                <div class="form-group"><label>
+                                                    <i class="fa fa-bolt"></i> Nuevo estado:
+                                                </label> <input type="text" placeholder="e.g.: CLAUSURADO, PARADO" class="form-control" id="nuevoEstado"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                <button class="btn btn-success demo2" id="btnNuevoEstado" data-dismiss="modal">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+
+                            <div class="table-responsive">
+                                <table id="tablita" class="table table-hover issue-tracker">
+                                    <!--<tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-primary">Producción</span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <a href="#">
+                                                Pozo lindo
+                                            </a>
+
+                                            <small>
+                                                This is issue with the coresponding note
+                                            </small>
+                                        </td>
+                                        <td>
+                                            Adrian Novak
+                                        </td>
+                                        <td>
+                                            12.02.2015 10:00 am
+                                        </td>
+                                        <td>
+                                            <span class="pie">0.52,1.041</span>
+                                            2d
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                            <button class="btn btn-danger btn-sm demo4"> <i class="fa fa-ban"></i> </button>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <span class="label label-warning">Parado</span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <a href="#">
+                                                Pozo chévere
+                                            </a>
+
+                                            <small>
+                                                Injected humour, or randomised words which don't l
+                                            </small>
+                                        </td>
+                                        <td>
+                                            Anna Johnson
+                                        </td>
+                                        <td>
+                                            13.05.2014 09:20 pm
+                                        </td>
+                                        <td>
+                                            <span class="pie">2,7</span>
+                                            3d
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                            <button class="btn btn-danger btn-sm demo4"> <i class="fa fa-ban"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-danger">Clausurado</span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <a href="#">
+                                                Pozo nuevo
+                                            </a>
+
+                                            <small>
+                                                This is issue with the coresponding note
+                                            </small>
+                                        </td>
+                                        <td>
+                                            Adrian Novak
+                                        </td>
+                                        <td>
+                                            12.02.2015 10:00 am
+                                        </td>
+                                        <td>
+                                            <span class="pie">0.52,1.041</span>
+                                            2d
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                            <button class="btn btn-danger btn-sm demo4"> <i class="fa fa-ban"></i> </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span class="label label-danger">Clausurado</span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <a href="#">
+                                                Pocito
+                                            </a>
+
+                                            <small>
+                                                Always free from repetition, injected humour, or non-characteristic words etc.
+                                            </small>
+                                        </td>
+                                        <td>
+                                            Alex Ferguson
+                                        </td>
+                                        <td>
+                                            28.11.2015 05:10 pm
+                                        </td>
+                                        <td>
+                                            <span class="pie">1,2</span>
+                                            2d
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                            <button class="btn btn-danger btn-sm demo4"> <i class="fa fa-ban"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-danger">Clausurado</span>
+                                        </td>
+                                        <td class="issue-info">
+                                            <a href="#">
+                                                Pozo viejo
+                                            </a>
+
+                                            <small>
+                                                Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit am
+                                            </small>
+                                        </td>
+                                        <td>
+                                            Mark Conor
+                                        </td>
+                                        <td>
+                                            18.09.2015 06:20 pm
+                                        </td>
+                                        <td>
+                                            <span class="pie">3,2</span>
+                                            3d
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                                            <button class="btn btn-danger btn-sm demo4"> <i class="fa fa-ban"></i> </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>-->
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Arquisuave &copy; 2016
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Peity demo data -->
+<script src="js/demo/peity-demo.js"></script>
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- DataTable-->
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<script src="js/campos.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+
+
+        $('.demo2').click(function(){
+            swal({
+                title: "¡Se ha guardado exitosamente!",
+                text: ":)",
+                type: "success"
+            });
+        });
+
+        $('.demo4').click(function () {
+            swal({
+                        title: "¿Seguro?",
+                        text: "Este campo no podrá ser recuperado",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Si, ¡borrar!",
+                        cancelButtonText: "No, cancelar",
+                        closeOnConfirm: false,
+                        closeOnCancel: false },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            swal("¡Eliminado!", "El campo ha sido eliminado", "success");
+                        } else {
+                            swal("Cancelado", "El campo está seguro :)", "error");
+                        }
+                    });
+        });
+
+    });
+
+</script>
+</body>
+
+</html>
