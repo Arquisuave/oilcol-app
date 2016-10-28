@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    var current = 'Nacional'
 
     Highcharts.setOptions({
         global: {
@@ -24,7 +25,7 @@ $(document).ready(function() {
             // }
         },
         title: {
-            text: 'Live random data'
+            text: current
         },
         xAxis: {
             type: 'datetime',
@@ -44,7 +45,7 @@ $(document).ready(function() {
             formatter: function() {
                 return '<b>' + this.series.name + '</b><br/>' +
                     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2);
+                    Highcharts.numberFormat(this.y, 2) + '°C';
             }
         },
         legend: {
@@ -90,7 +91,7 @@ $(document).ready(function() {
             // }
         },
         title: {
-            text: 'Live random data'
+            text: current
         },
         xAxis: {
             type: 'datetime',
@@ -110,7 +111,7 @@ $(document).ready(function() {
             formatter: function() {
                 return '<b>' + this.series.name + '</b><br/>' +
                     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2);
+                    Highcharts.numberFormat(this.y, 2) + " Barriles";
             }
         },
         legend: {
@@ -156,7 +157,7 @@ $(document).ready(function() {
             // }
         },
         title: {
-            text: 'Live random data'
+            text: current
         },
         xAxis: {
             type: 'datetime',
@@ -176,7 +177,7 @@ $(document).ready(function() {
             formatter: function() {
                 return '<b>' + this.series.name + '</b><br/>' +
                     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2);
+                    Highcharts.numberFormat(this.y, 2) + ' kW/h';
             }
         },
         legend: {
@@ -216,6 +217,7 @@ $(document).ready(function() {
                 timePicker: true,
                 timePickerIncrement: 1,
                 timePicker12Hour: true,
+                autoUpdateInput:true,
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -248,10 +250,23 @@ $(document).ready(function() {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
 
+    $('.region-select').select2({
+        placeholder: "Seleccionar una opción",
+        allowClear: true
+    });
+
+    $('.region-select').val('').trigger('change');
+
+    $(".campo-select").prop("disabled", false);
+    $(".pozo-select").prop("disabled", false);
+    $(".region-select").prop("disabled", false);
+
     $(".pozo-select").select2({
         // tags: true,
         // multiple: true,
         // tokenSeparators: [',', ' '],
+        placeholder: "Seleccionar un pozo",
+        allowClear: true,
         minimumInputLength: 1,
         minimumResultsForSearch: 1000,
         ajax: {
@@ -280,6 +295,111 @@ $(document).ready(function() {
             }
         }
 });
+
+    var camp_url = '/campo';
+    $('.campo-select').select2({
+        placeholder: "Seleccionar un campo",
+        allowClear: true,
+        minimumInputLength: 1,
+        minimumResultsForSearch: 1000,
+        ajax: {
+            url: camp_url,
+            dataType: "json",
+            type: "GET",
+            delay: 250,
+            data: function(params) {
+                console.log(this);
+                // this.url += '/'+params.term;
+                console.log(this);
+                // var queryParameters = {
+                //     term: params.term
+                // }
+                return {};
+            },
+            processResults: function(data) {
+
+                return {
+                    results: $.map(data, function(item) {
+                        console.log(item);
+                        var obj = {
+                            id: item.id,
+                            text: 'Pozo: ' + item.id +" - "+ item.region
+                        };
+                        console.log(obj);
+                        return obj;
+                    })
+                };
+            }
+        }
+    });
+
+    $('.region-select').on('select2:select', function (evt) {
+         $(".campo-select").prop("disabled", true);
+         $(".pozo-select").prop("disabled", true);
+        // Do something
+    });
+
+    $('.region-select').on('select2:unselect', function (evt) {
+         $(".campo-select").prop("disabled", false);
+         $(".pozo-select").prop("disabled", false);
+        // Do something
+    });
+
+    $('.campo-select').on('select2:select', function (evt) {
+         $(".region-select").prop("disabled", true);
+         $(".pozo-select").prop("disabled", true);
+        // Do something
+    });
+
+    $('.campo-select').on('select2:unselect', function (evt) {
+         $(".region-select").prop("disabled", false);
+         $(".pozo-select").prop("disabled", false);
+        // Do something
+    });
+
+
+    $('.pozo-select').on('select2:select', function (evt) {
+         $(".region-select").prop("disabled", true);
+         $(".campo-select").prop("disabled", true);
+        // Do something
+    });
+
+    $('.pozo-select').on('select2:unselect', function (evt) {
+         $(".region-select").prop("disabled", false);
+         $(".campo-select").prop("disabled", false);
+        // Do something
+    });
+
+
+    $('#report-search').click(function(event) {
+        var idReg = $('.region-select').val();
+        var idCamp = $('.campo-select').val();
+        var idPozo = $('.pozo-select').val();
+        console.log("Región: "+idReg);
+        console.log("Campo: "+idCamp);
+        console.log("Pozo: "+idPozo);
+        var datepick = $('#reportrange').data('daterangepicker');
+        var startDate = datepick.startDate.toISOString();
+        var endDate = datepick.endDate.toISOString();
+
+        console.log("Dates: "+startDate+" - "+endDate);
+    });
+
+    $('#reset-params').click(function(event) {
+        $('.region-select').val('').trigger('change');
+        $('.pozo-select').val('').trigger('change');
+        $('.campo-select').val('').trigger('change');
+        current = 'Nacional';
+        var datepick = $('#reportrange').data('daterangepicker');
+        console.log(datepick);
+        // datepick.val('');
+
+        $(".campo-select").prop("disabled", false);
+        $(".pozo-select").prop("disabled", false);
+        $(".region-select").prop("disabled", false);
+
+    });
+
 
     // $.ajaxSetup({
     //     contentType: "application/json; charset=utf-8"
