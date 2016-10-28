@@ -68,8 +68,6 @@ $('#btnNuevoEstado').click(function() {
     var idPozo = $('#idPozo2').val();
     var nuevoEstado = $('#nuevoEstado').val();
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("PUT", "/pozo");
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(JSON.stringify({
-        }));
+    xmlhttp.open("PUT", "/updatePozo/"+idPozo+"/"+nuevoEstado);
+    xmlhttp.send();
 });
