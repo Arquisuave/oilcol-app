@@ -7,9 +7,11 @@ import com.avaje.ebean.RawSqlBuilder;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.CampoEntity;
+import models.PozoEntity;
 import play.libs.*;
 import play.mvc.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -118,8 +120,51 @@ public class CampoController extends Controller{
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            System.out.println(reg);
+                            System.out.println("La region que llega es: "+reg);
 
+                            int cuantosTotal = 0;
+                            int cuantosAbiertos=0;
+                            int cuantosParados=0;
+                            int cuantosClausurados=0;
+                            int cuantosProduccion=0;
+
+                            List listaCamposDeRegion;
+                            if(reg.equals("NACIONAL"))
+                            {
+                                listaCamposDeRegion = CampoEntity.FINDER.all();
+                            }
+                            else
+                            {
+                                listaCamposDeRegion = CampoEntity.FINDER.where().eq("region", reg).findList();
+                            }
+                            List listaDePozosEnRegion = new ArrayList();
+                            for(int i=0;i< listaCamposDeRegion.size();i++)
+                            {
+                                Long idCampo = ((CampoEntity)listaCamposDeRegion.get(i)).getId();
+                                List listaPozosDeCampo = PozoEntity.FINDER.where().eq("campo_id", idCampo ).findList();
+                                cuantosTotal += listaPozosDeCampo.size();
+                                for(int j=0;j<listaPozosDeCampo.size();j++)
+                                {
+                                    PozoEntity pozoActual = (PozoEntity)listaPozosDeCampo.get(j);
+                                    switch (pozoActual.getEstado())
+                                    {
+                                        case ABIERTO:
+                                            cuantosAbiertos+=1;
+                                            break;
+                                        case CLAUSURADO:
+                                            cuantosClausurados+=1;
+                                            break;
+                                        case PRODUCCION:
+                                            cuantosProduccion+=1;
+                                            break;
+                                        case PARADO:
+                                            cuantosParados+=1;
+                                            break;
+                                    }
+                                }
+                            }
+
+                            /**
                             String sql = "";
                             RawSql rawSql = RawSqlBuilder.parse(sql)
                                     // map the sql result columns to bean properties
@@ -129,9 +174,11 @@ public class CampoController extends Controller{
                                     .columnMapping("c.name", "order.customer.name")
                                     .create();
 
-                            List list = Ebean.find(CampoEntity.class).setRawSql(rawSql).findList();
+                            List list = Ebean.find(CampoEntity.class).setRawSql(rawSql).findList();*/
 
-                            return list.size();
+                            return "{ \"cuantos\":"+cuantosTotal+", \"clausurados\":"+cuantosClausurados+"," +
+                                    "\"abiertos\":"+cuantosAbiertos+", \"parados\":"+cuantosParados+"," +"\"produccion\":"+
+                             cuantosProduccion+ "}";
 
                         }
                         ,jdbcDispatcher)
