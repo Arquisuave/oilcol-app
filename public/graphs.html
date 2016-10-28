@@ -14,6 +14,8 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="css/plugins/select2/select2.min.css" rel="stylesheet">
 
 </head>
 
@@ -201,13 +203,42 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
+                    <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Temperatura
-                            </h5>
+                            <h5>Filtros y Opciones de Consulta</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="ibox-content">
-                            <div id="containerhc" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <select class="pozo-select" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Rango de Fechas</h4>
+                                <div id="reportrange" class="form-control">
+                                    <i class="fa fa-calendar"></i>
+                                    <span></span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -220,7 +251,20 @@
                             </h5>
                         </div>
                         <div class="ibox-content">
-                            <div id="containerTemp" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+                            <div class="temprt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Consumo Energético
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="energrt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
                         </div>
                     </div>
                 </div>
@@ -233,7 +277,7 @@
                             </h5>
                         </div>
                         <div class="ibox-content">
-                            <div id="barrTemp" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+                            <div class="barrrt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
                         </div>
                     </div>
                 </div>
@@ -275,83 +319,12 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-        Highcharts.setOptions({
-            global: {
-                useUTC: false
-            }
-        });
+    <script src="js/plugins/fullcalendar/moment.min.js"></script>
+    <script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="js/plugins/select2/select2.full.min.js"></script>
 
-        $('#containerhc').highcharts({
-            chart: {
-                type: 'spline',
-                animation: Highcharts.svg, // don't animate in old IE
-                marginRight: 10,
-                events: {
-                    load: function () {
+    <script src="js/graphs.js"></script>
 
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                y = Math.random()+Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 500);
-                    }
-                }
-            },
-            title: {
-                text: 'Live random data'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150
-            },
-            yAxis: {
-                title: {
-                    text: 'Value'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 2);
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: false
-            },
-            credits: false,
-            series: [{
-                name: 'Random data',
-                data: (function () {
-                    // generate an array of random data
-                    var data = [],
-                        time = (new Date()).getTime(),
-                        i;
-
-                    for (i = -19; i <= 0; i += 1) {
-                        data.push({
-                            x: time + i * 1000,
-                            y: Math.random()
-                        });
-                    }
-                    return data;
-                }())
-            }]
-        });
-    });
-    </script>
 </body>
 
 </html>

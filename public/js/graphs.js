@@ -1,144 +1,290 @@
 $(document).ready(function() {
-    var seriesData = [
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
-    ];
-    var random = new Rickshaw.Fixtures.RandomData(150);
-    for (var i = 0; i < 150; i++) {
-        random.addData(seriesData);
-    }
-    var palette = new Rickshaw.Color.Palette({
-        scheme: 'classic9'
+
+
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
     });
-    // instantiate our graph!
-    var graph = new Rickshaw.Graph({
-        element: document.getElementById("chart"),
-        width: 900,
-        height: 500,
-        renderer: 'area',
-        stroke: true,
-        preserve: true,
+    $('.temprt-graph').highcharts({
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, // don't animate in old IE
+            marginRight: 10,
+            // events: {
+            //     load: function () {
+            //         // set up the updating of the chart each second
+            //         var series = this.series[0];
+            //         setInterval(function () {
+            //             var x = (new Date()).getTime(), // current time
+            //                 y = Math.random()+Math.random();
+            //             series.addPoint([x, y], true, true);
+            //         }, 500);
+            //     }
+            // }
+        },
+        title: {
+            text: 'Live random data'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Value'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: false,
         series: [{
-            color: palette.color(),
-            data: seriesData[0],
-            name: 'Moscow'
-        }, {
-            color: palette.color(),
-            data: seriesData[1],
-            name: 'Shanghai'
-        }, {
-            color: palette.color(),
-            data: seriesData[2],
-            name: 'Amsterdam'
-        }, {
-            color: palette.color(),
-            data: seriesData[3],
-            name: 'Paris'
-        }, {
-            color: palette.color(),
-            data: seriesData[4],
-            name: 'Tokyo'
-        }, {
-            color: palette.color(),
-            data: seriesData[5],
-            name: 'London'
-        }, {
-            color: palette.color(),
-            data: seriesData[6],
-            name: 'New York'
+            name: 'Random data',
+            data: (function() {
+                // generate an array of random data
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data;
+            }())
         }]
     });
-    graph.render();
-    var preview = new Rickshaw.Graph.RangeSlider({
-        graph: graph,
-        element: document.getElementById('preview'),
-    });
-    var hoverDetail = new Rickshaw.Graph.HoverDetail({
-        graph: graph,
-        xFormatter: function(x) {
-            return new Date(x * 1000).toString();
-        }
-    });
-    var annotator = new Rickshaw.Graph.Annotate({
-        graph: graph,
-        element: document.getElementById('timeline')
-    });
-    var legend = new Rickshaw.Graph.Legend({
-        graph: graph,
-        element: document.getElementById('legend')
-    });
-    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-        graph: graph,
-        legend: legend
-    });
-    var order = new Rickshaw.Graph.Behavior.Series.Order({
-        graph: graph,
-        legend: legend
-    });
-    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-        graph: graph,
-        legend: legend
-    });
-    var smoother = new Rickshaw.Graph.Smoother({
-        graph: graph,
-        element: document.querySelector('#smoother')
-    });
-    var ticksTreatment = 'glow';
-    var xAxis = new Rickshaw.Graph.Axis.Time({
-        graph: graph,
-        ticksTreatment: ticksTreatment,
-        timeFixture: new Rickshaw.Fixtures.Time.Local()
-    });
-    xAxis.render();
-    var yAxis = new Rickshaw.Graph.Axis.Y({
-        graph: graph,
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        ticksTreatment: ticksTreatment
-    });
-    yAxis.render();
-    var controls = new RenderControls({
-        element: document.querySelector('form'),
-        graph: graph
-    });
-    // add some data every so often
-    var messages = [
-        "Changed home page welcome message",
-        "Minified JS and CSS",
-        "Changed button color from blue to green",
-        "Refactored SQL query to use indexed columns",
-        "Added additional logging for debugging",
-        "Fixed typo",
-        "Rewrite conditional logic for clarity",
-        "Added documentation for new methods"
-    ];
-    setInterval(function() {
-        random.removeData(seriesData);
-        random.addData(seriesData);
-        graph.update();
-    }, 3000);
 
-    function addAnnotation(force) {
-        if (messages.length > 0 && (force || Math.random() >= 0.95)) {
-            annotator.add(seriesData[2][seriesData[2].length - 1].x, messages.shift());
-            annotator.update();
-        }
-    }
-    addAnnotation(true);
-    setTimeout(function() {
-        setInterval(addAnnotation, 6000)
-    }, 6000);
-    var previewXAxis = new Rickshaw.Graph.Axis.Time({
-        graph: preview.previews[0],
-        timeFixture: new Rickshaw.Fixtures.Time.Local(),
-        ticksTreatment: ticksTreatment
+    $('.barrrt-graph').highcharts({
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, // don't animate in old IE
+            marginRight: 10,
+            // events: {
+            //     load: function () {
+            //         // set up the updating of the chart each second
+            //         var series = this.series[0];
+            //         setInterval(function () {
+            //             var x = (new Date()).getTime(), // current time
+            //                 y = Math.random()+Math.random();
+            //             series.addPoint([x, y], true, true);
+            //         }, 500);
+            //     }
+            // }
+        },
+        title: {
+            text: 'Live random data'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Value'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: false,
+        series: [{
+            name: 'Random data',
+            data: (function() {
+                // generate an array of random data
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data;
+            }())
+        }]
     });
-    previewXAxis.render();
+
+    $('.energrt-graph').highcharts({
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, // don't animate in old IE
+            marginRight: 10,
+            // events: {
+            //     load: function () {
+            //         // set up the updating of the chart each second
+            //         var series = this.series[0];
+            //         setInterval(function () {
+            //             var x = (new Date()).getTime(), // current time
+            //                 y = Math.random()+Math.random();
+            //             series.addPoint([x, y], true, true);
+            //         }, 500);
+            //     }
+            // }
+        },
+        title: {
+            text: 'Live random data'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Value'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: false,
+        series: [{
+            name: 'Random data',
+            data: (function() {
+                // generate an array of random data
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data;
+            }())
+        }]
+    });
+
+    $('#reportrange').daterangepicker({
+                format: 'DD/MM/YYYY',
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2016',
+                maxDate: '12/31/2017',
+                dateLimit: { days: 60 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: true,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'Trimestral': [moment().subtract(3, 'month'), moment()],
+                    'Semestral':[moment().subtract(6, 'month'), moment()],
+                    'Yearly':[moment().subtract(12, 'month'), moment()]
+                },
+                opens: 'right',
+                drops: 'down',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
+    $(".pozo-select").select2({
+        // tags: true,
+        // multiple: true,
+        // tokenSeparators: [',', ' '],
+        minimumInputLength: 1,
+        minimumResultsForSearch: 1000,
+        ajax: {
+            url: '/pozo',
+            dataType: "json",
+            type: "GET",
+            delay: 250,
+            // data: function(params) {
+                // var queryParameters = {
+                    // term: params.term
+                // }
+                // return queryParameters;
+            // },
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        console.log(item);
+                        var obj = {
+                            id: item.id,
+                            text: 'Pozo: ' + item.id 
+                        };
+                        console.log(obj);
+                        return obj;
+                    })
+                };
+            }
+        }
+});
+
+    // $.ajaxSetup({
+    //     contentType: "application/json; charset=utf-8"
+    // });
+
+    // $.post("http://localhost:4892/emergency", {"pozo":1, "tipo":"INCENDIO"}, function(msg){console.log(msg)});
 
 });
