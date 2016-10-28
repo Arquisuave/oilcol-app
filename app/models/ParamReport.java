@@ -17,16 +17,18 @@ public class ParamReport {
 
     private String jefeDeCampo;
     private String region;
+    private long pozoId=-1;
 
     private ParamReport(){
 
     }
 
-    public ParamReport(Date fechaInicio, Date fechaFin, String jefeDeCampo, String region) {
+    public ParamReport(Date fechaInicio, Date fechaFin, String jefeDeCampo, String region, long id) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.jefeDeCampo = jefeDeCampo;
         this.region = region;
+        this.pozoId = id;
     }
 
     public ParamReport(Date fechaInicio, Date fechaFin) {
@@ -70,6 +72,14 @@ public class ParamReport {
         this.region = region;
     }
 
+    public long getPozoId() {
+        return pozoId;
+    }
+
+    public void setPozoId(long pozoId) {
+        this.pozoId = pozoId;
+    }
+
     @Override
     public String toString(){
         String total = "";
@@ -77,6 +87,7 @@ public class ParamReport {
         total+= "fecha fin :"+fechaFin+"\n";
         total+= "jefe :"+jefeDeCampo+"\n";
         total+= "region :"+region+"\n";
+        total+= "id :"+pozoId+"\n";
         return total;
     }
 }

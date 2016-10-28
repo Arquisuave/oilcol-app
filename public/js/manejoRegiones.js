@@ -90,10 +90,38 @@
                  //    url:"/"
                  //   })
                  onMarkerClick:function(event, index){
-                     console.log(map);
+                     //console.log(map);
                      pozoSelecionado=map.params.main.markers[index].name;
                      var pozo = mapaPozos[pozoSelecionado];
-                     $("#ener").replaceWith("<h1 class=\"no-margins\">"+1000+"</h1>kW/h");
+                     /*$.get("/registro/ener/"+pozo.id,function(data,status){
+                         console.log(data.info);
+                         $("#ener").text(data.info);
+                     });*/
+                     $.ajax({
+                         method: "GET",
+                         url:"/registro/ener/"+pozo.id
+                     }).done(function (msg){
+                         console.log(msg["info"]);
+                         $("#ener").text(msg["info"]);
+                     });
+
+                     $.ajax({
+                         method: "GET",
+                         url:"/registro/temp/"+pozo.id
+                     }).done(function (msg){
+                         console.log(msg["info"]);
+                         $("#temp").text(msg["info"]);
+                     });
+
+                     $.ajax({
+                         method: "GET",
+                         url:"/registro/barr/"+pozo.id
+                     }).done(function (msg){
+                         console.log(msg["info"]);
+                         $("#barr").text(msg["info"]);
+                     });
+
+
                      console.log(pozoSelecionado);
                  },
                  markerStyle: {

@@ -9,6 +9,7 @@ import models.ParamReport;
 public class ReportLogic {
 
     public static Junction crearQuery(Junction clause, ParamReport params){
+        System.out.print(params.getPozoId());
         if(params.getFechaInicio()!=null&&params.getFechaFin()!=null){
             clause.between("TIMESTAMP", params.getFechaInicio(),params.getFechaFin());
         }
@@ -22,7 +23,10 @@ public class ReportLogic {
             clause.eq("pozo.campo.idJefeCampo.username",params.getJefeDeCampo());
         }
         if(params.getRegion()!=null){
-            clause.ilike("pozo.campo.region","CARIBE");
+            clause.eq("pozo.campo.region",params.getRegion());
+        }
+        if(params.getPozoId()>0){
+            clause.eq("pozo_id",params.getPozoId());
         }
         return clause;
     }
