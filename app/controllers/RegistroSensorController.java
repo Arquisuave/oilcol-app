@@ -218,4 +218,46 @@ public class RegistroSensorController extends Controller {
         );
     }
 
+    public CompletionStage<Result> getLastRegistroSensorTemp(long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    return RegistroSensorTempEntity.FINDER.where().eq("pozo_id",id).orderBy("id_sensor_temp desc").setMaxRows(1).findUnique();
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                registroSensorTempEntity -> {
+                    return ok(Json.toJson(registroSensorTempEntity));
+                }
+        );
+    }
+
+    public CompletionStage<Result> getLastRegistroSensorBarr(Long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    return RegistroSensorBarrilesEntity.FINDER.where().eq("pozo_id",id).orderBy("id_sensor_barriles desc").setMaxRows(1).findUnique();
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                registroSensorBarrilesEntity -> {
+                    return ok(Json.toJson(registroSensorBarrilesEntity));
+                }
+        );
+    }
+
+    public CompletionStage<Result> getLastRegistroSensorEner(Long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    return RegistroSensorEnerEntity.FINDER.where().eq("pozo_id",id).orderBy("id_sensor_ener desc").setMaxRows(1).findUnique();
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                registroSensorEnerEntity -> {
+                    return ok(Json.toJson(registroSensorEnerEntity));
+                }
+        );
+    }
+
 }
