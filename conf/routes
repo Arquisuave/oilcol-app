@@ -19,7 +19,7 @@ POST /login controllers.AuthController.authenticate
 #Agregar un pozo
 POST    /pozo                       controllers.PozoController.createPozo
 #Modifica el estado del pozo
-PUT     /updatePozo              controllers.PozoController.updatePozo
+PUT     /updatePozo/:id/:estado     controllers.PozoController.updatePozo(id: Long, estado: String)
 #Mostrar pozos
 GET     /pozo                       controllers.PozoController.getPozos
 #Borrar un pozo dado su ID
@@ -31,7 +31,7 @@ DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Lo
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
 
-POST /users/register                controllers.UserController.createUser
+POST    /users/register             controllers.UserController.createUser
 
 
 
@@ -42,6 +42,8 @@ POST    /campo                      controllers.CampoController.createCampo
 GET     /campo                      controllers.CampoController.getCampos
 #Mostrar campo por ID
 GET     /campo/:id                  controllers.CampoController.getCampo(id: Long)
+#Trae todos los pozos de una region
+GET     /pozosDeCampos/:reg         controllers.CampoController.getPozosAllCamposRegion(reg: String)
 #Muestra todos los campos dada una región
 GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
 #Borra un campo su ID
