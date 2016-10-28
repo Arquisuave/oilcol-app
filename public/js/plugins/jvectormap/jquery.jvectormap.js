@@ -1125,6 +1125,8 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
                     var estadoListaEmer = $('#listaEmergen').text();
                     estadoListaEmer = estadoListaEmer.split(":")[0].concat(": ",reg[code]);
                     $('#listaEmergen').text(estadoListaEmer);
+
+                    cuantosPozos(reg[code].toUpperCase());
                 }
                 
     }), this.spinner = jvm.$("<div/>").addClass("jvectormap-spinner").appendTo(this.params.container), this.spinner.hide()
@@ -1213,3 +1215,38 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
         return "jquery-jvectormap-data-" + code.toLowerCase() + "-" + multiMap.defaultProjection + "-en.js"
     }
 };
+
+function cuantosPozos(region)
+{
+    var cuantos = " ";
+    //if(region==undefined){region = "NACIONAL";}
+    $.ajax({
+        method: "GET",
+        url: "/pozosDeCampos/"+region
+    }).done(function (msg)
+    {
+        var msgJ = JSON.parse(msg);
+        console.log("Mensaje que llega de traer del metodo "+msgJ+" region "+region);
+        console.log(msgJ);
+
+        $('#numProduccion').text(msgJ.produccion+"/"+msgJ.cuantos);
+        $('#percentageProduccion').css("width", (msgJ.produccion*100/msgJ.cuantos)+"%");
+
+        $('#numAbiertos').text(msgJ.abiertos+"/"+msgJ.cuantos);
+        $('#percentageAbiertos').css("width",(msgJ.abiertos*100/msgJ.cuantos)+"%");
+
+        $('#numParados').text(msgJ.parados+"/"+msgJ.cuantos);
+        $('#percentageParados').css("width",(msgJ.parados*100/msgJ.cuantos)+"%");
+
+        $('#numClausurados').text(msgJ.clausurados+"/"+msgJ.cuantos);
+        $('#percentageClausurados').css("width",(msgJ.clausurados*100/msgJ.cuantos)+"%");
+
+    }).fail(function (msg, textstat)
+    {
+        console.log(textstat + "error en funcion cuantosPozos");
+    }).always(function (msg) {
+        console.log("cuantos Pozos acaba de salir")
+    });
+
+    return cuantos;
+}

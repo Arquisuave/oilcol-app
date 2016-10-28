@@ -39,14 +39,14 @@ $('#btnSave').click(function() {
         "lat": $('#latitud').val(),
         "estado": $('#estado').val(),
         "campo": {
-            "id": 1,
+            "id": 2,
             "idJefeCampo": {
-                "username": "margarita",
+                "username": "tamuTAMU1",
                 "type": null,
                 "password": null,
                 "notifications": []
             },
-            "region": "ANDINA",
+            "region": "AMAZONAS",
             "pozos": []
         }
     }));

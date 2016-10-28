@@ -85,6 +85,7 @@ OPTIONS /:path                         controllers.OptionController.attend(path:
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
 GET /                               controllers.Assets.at(path="/public",file="index.html")
 GET /pozos                          controllers.Assets.at(path="/public",file="pozos.html")
+GET /campos                         controllers.Assets.at(path="/public",file="campos.html")
 GET /graficas                       controllers.Assets.at(path="/public",file="graphs.html")
 GET /emergencias                    controllers.Assets.at(path="/public",file="emergency.html")
 GET /css/*file                      controllers.Assets.at(path="/public/css",file)
