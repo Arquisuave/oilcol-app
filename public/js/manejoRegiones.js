@@ -26,13 +26,29 @@
 
      function cuantosPozos(region)
      {
-         var cuantos = 0;
+         var cuantos = " ";
+         //if(region==undefined){region = "NACIONAL";}
          $.ajax({
              method: "GET",
-             url: "/pozoR/"+region
+             url: "/pozosDeCampos/"+region
          }).done(function (msg)
          {
-             console.log("Mensaje que llega de traer del metodo"+msg);
+             var msgJ = JSON.parse(msg);
+             console.log("Mensaje que llega de traer del metodo "+msgJ+" region "+region);
+
+
+             $('#numProduccion').text(msgJ.produccion+"/"+msgJ.cuantos);
+             $('#percentageProduccion').css("width", (msgJ.produccion*100/msgJ.cuantos)+"%");
+
+             $('#numAbiertos').text(msgJ.abiertos+"/"+msgJ.cuantos);
+             $('#percentageAbiertos').css("width",(msgJ.abiertos*100/msgJ.cuantos)+"%");
+
+             $('#numParados').text(msgJ.parados+"/"+msgJ.cuantos);
+             $('#percentageParados').css("width",(msgJ.parados*100/msgJ.cuantos)+"%");
+
+             $('#numClausurados').text(msgJ.clausurados+"/"+msgJ.cuantos);
+             $('#percentageClausurados').css("width",(msgJ.clausurados*100/msgJ.cuantos)+"%");
+
          }).fail(function (msg, textstat)
          {
              console.log(textstat + "error en funcion cuantosPozos");
@@ -49,6 +65,8 @@
          //headers: {'OilCol-Token':'123'},
          url: "/pozo"
      }).done(function (msg) {
+         cuantosPozos("NACIONAL");// se hace siempre al principio
+
          console.log(map);
          var convert=[];
          console.log(msg[1262]);
@@ -138,8 +156,7 @@
                      }]
 
                  }
-             },
-             mapUrlByCode: function (code, multiMap) {
+             },mapUrlByCode: function (code, multiMap) {
                  // var id = code.toLowerCase()+'_merc';
                  // return id;
                  // console.log("CODIGO REGION "+code);
@@ -148,19 +165,21 @@
                  var reg = {
                      'CO-RCA': "Caribe",
                      'CO-RAN': "Andina",
-                     'CO-RAM': "Amazonía",
+                     'CO-RAM': "Amazonia",
                      'CO-RPA': "Pacifico",
-                     'CO-ROR': "Orinoquía",
+                     'CO-ROR': "Orinoquia",
                      'CO-COMPL': "Nacional"
                  };
                  var stringP = $('#title-h').text();
                  // console.log(stringP);
                  string2 = stringP.split(":");
                  //console.log(string2[0]);
-
-                 if (reg[code] == undefined) {
+                 var cuantos = cuantosPozos(reg[code].toUpperCase());
+                 if (reg[code] == undefined)
+                 {
                      //no hace nada
                  } else {
+
                      stringP = string2[0].concat(": ", reg[code]);
                      //console.log(stringP);
                      var stringP = $('#title-h').text(stringP);
@@ -168,7 +187,6 @@
                      var estadoPozosAntes = $('#estadoPozos').text();
                      estadoPozosAntes = estadoPozosAntes.split(":")[0];
                      $('#estadoPozos').text(estadoPozosAntes + ": " + reg[code]);
-                     $('#numPozos').text(cuantosPozos(reg[code])+"/1200");
 
                      var estadoEmergenciasPerc = $('#emergenciasPerc').text();
                      estadoEmergenciasPerc = estadoEmergenciasPerc.split(":")[0];
@@ -178,11 +196,14 @@
                      estadoListaEmergen = estadoListaEmergen.split(":")[0];
                      $('#listaEmergen').text(estadoListaEmergen + ": " + reg[code]);
 
-                 }
+                     cuantosPozos(reg[code].toUpperCase());
 
+                 }
+                 
 
                  return path;
              }
+
          })
 
      }).fail(function (msg, textstat) {
