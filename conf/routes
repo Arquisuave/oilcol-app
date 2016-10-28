@@ -55,6 +55,7 @@ GET /campo/:idJefe                  controllers.CampoController.getCampoJefe(idJ
 #Agregar un registro de temperatura
 POST    /registro/temp              controllers.RegistroSensorController.createRegistroSensorTemp
 
+
 #REGISTRO SENSOR DE BARRILES
 #Agregar un registro de barril
 POST    /registro/barril            controllers.RegistroSensorController.createRegistroSensorBarriles
@@ -91,3 +92,8 @@ GET /fonts/*file                    controllers.Assets.at(path="/public/fonts",f
 GET /img/*file                      controllers.Assets.at(path="/public/img",file)
 GET /font-awesome/*file             controllers.Assets.at(path="/public/font-awesome",file)
 GET /locales/*file                  controllers.Assets.at(path="/public/locales",file)
+
+
+GET     /registro/temp/:id           controllers.RegistroSensorController.getLastRegistroSensorTemp(id: Long)
+GET     /registro/barr/:id             controllers.RegistroSensorController.getLastRegistroSensorBarr(id: Long)
+GET     /registro/ener/:id             controllers.RegistroSensorController.getLastRegistroSensorEner(id: Long)
