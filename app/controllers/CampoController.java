@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.CampoEntity;
 import models.PozoEntity;
+import models.RegistroSensorBarrilesEntity;
 import play.libs.*;
 import play.mvc.*;
 
@@ -114,12 +115,13 @@ public class CampoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> getPozosAllCamposRegion(String reg) {
+    public CompletionStage<Result> getPozosAllCamposRegion(String regG) {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
+                            String reg = regG;
                             System.out.println("La region que llega es: "+reg);
 
                             int cuantosTotal = 0;
@@ -135,17 +137,22 @@ public class CampoController extends Controller{
                             }
                             else
                             {
+                                if(reg.equals("PACIFICO")){reg = "PACIFICA";}
+                                if(reg.equals("AMAZONIA")){reg = "AMAZONAS";}
+
                                 listaCamposDeRegion = CampoEntity.FINDER.where().eq("region", reg).findList();
+                                System.out.println("analizando la region "+reg + " .la encontro "+ listaCamposDeRegion);
                             }
-                            List listaDePozosEnRegion = new ArrayList();
                             for(int i=0;i< listaCamposDeRegion.size();i++)
                             {
                                 Long idCampo = ((CampoEntity)listaCamposDeRegion.get(i)).getId();
                                 List listaPozosDeCampo = PozoEntity.FINDER.where().eq("campo_id", idCampo ).findList();
                                 cuantosTotal += listaPozosDeCampo.size();
+                                System.out.println("id campo: "+idCampo);
                                 for(int j=0;j<listaPozosDeCampo.size();j++)
                                 {
                                     PozoEntity pozoActual = (PozoEntity)listaPozosDeCampo.get(j);
+                                    System.out.println("pozo actual : "+pozoActual.getId());
                                     switch (pozoActual.getEstado())
                                     {
                                         case ABIERTO:
@@ -175,7 +182,7 @@ public class CampoController extends Controller{
                                     .create();
 
                             List list = Ebean.find(CampoEntity.class).setRawSql(rawSql).findList();*/
-
+                            System.out.println("Termina de recolectar info de pozos");
                             return "{ \"cuantos\":"+cuantosTotal+", \"clausurados\":"+cuantosClausurados+"," +
                                     "\"abiertos\":"+cuantosAbiertos+", \"parados\":"+cuantosParados+"," +"\"produccion\":"+
                              cuantosProduccion+ "}";

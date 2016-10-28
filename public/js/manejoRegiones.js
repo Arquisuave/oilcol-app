@@ -35,7 +35,7 @@
          {
              var msgJ = JSON.parse(msg);
              console.log("Mensaje que llega de traer del metodo "+msgJ+" region "+region);
-
+             console.log(msgJ);
 
              $('#numProduccion').text(msgJ.produccion+"/"+msgJ.cuantos);
              $('#percentageProduccion').css("width", (msgJ.produccion*100/msgJ.cuantos)+"%");
@@ -56,7 +56,7 @@
              console.log("cuantos Pozos acaba de salir")
          });
 
-         return cuantos;
+        // return cuantos;
      }
 
      $.ajax({
@@ -174,7 +174,7 @@
                  // console.log(stringP);
                  string2 = stringP.split(":");
                  //console.log(string2[0]);
-                 var cuantos = cuantosPozos(reg[code].toUpperCase());
+                // var cuantos = cuantosPozos(reg[code].toUpperCase());
                  if (reg[code] == undefined)
                  {
                      //no hace nada
@@ -199,7 +199,7 @@
                      cuantosPozos(reg[code].toUpperCase());
 
                  }
-                 
+
 
                  return path;
              }
