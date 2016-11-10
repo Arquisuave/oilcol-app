@@ -83,10 +83,11 @@ POST    /reporte/bar                controllers.ReportController.generateReportB
 OPTIONS /:path                         controllers.OptionController.attend(path: String)
 
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
-GET /                               controllers.Assets.at(path="/public",file="index.html")
+GET /                               controllers.Assets.at(path="/public",file="login.html")
+GET /index                          controllers.Assets.at(path="/public",file="index.html")
 GET /pozos                          controllers.Assets.at(path="/public",file="pozos.html")
 GET /campos                         controllers.Assets.at(path="/public",file="campos.html")
-GET /graficas                       controllers.Assets.at(path="/public",file="graphs.html")
+GET /graphs                       controllers.Assets.at(path="/public",file="graphs.html")
 GET /emergencias                    controllers.Assets.at(path="/public",file="emergency.html")
 GET /css/*file                      controllers.Assets.at(path="/public/css",file)
 GET /fonts/*file                    controllers.Assets.at(path="/public/fonts",file)
