@@ -7,203 +7,10 @@ $(document).ready(function() {
             useUTC: false
         }
     });
-    $('.temprt-graph').highcharts({
-        chart: {
-            type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
-            marginRight: 10,
-            // events: {
-            //     load: function () {
-            //         // set up the updating of the chart each second
-            //         var series = this.series[0];
-            //         setInterval(function () {
-            //             var x = (new Date()).getTime(), // current time
-            //                 y = Math.random()+Math.random();
-            //             series.addPoint([x, y], true, true);
-            //         }, 500);
-            //     }
-            // }
-        },
-        title: {
-            text: current
-        },
-        xAxis: {
-            type: 'datetime',
-            tickPixelInterval: 150
-        },
-        yAxis: {
-            title: {
-                text: 'Value'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            formatter: function() {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2) + '°C';
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        credits: false,
-        series: [{
-            name: 'Random data',
-            data: (function() {
-                // generate an array of random data
-                var data = [],
-                    time = (new Date()).getTime(),
-                    i;
-                for (i = -19; i <= 0; i += 1) {
-                    data.push({
-                        x: time + i * 1000,
-                        y: Math.random()
-                    });
-                }
-                return data;
-            }())
-        }]
-    });
 
-    $('.barrrt-graph').highcharts({
-        chart: {
-            type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
-            marginRight: 10,
-            // events: {
-            //     load: function () {
-            //         // set up the updating of the chart each second
-            //         var series = this.series[0];
-            //         setInterval(function () {
-            //             var x = (new Date()).getTime(), // current time
-            //                 y = Math.random()+Math.random();
-            //             series.addPoint([x, y], true, true);
-            //         }, 500);
-            //     }
-            // }
-        },
-        title: {
-            text: current
-        },
-        xAxis: {
-            type: 'datetime',
-            tickPixelInterval: 150
-        },
-        yAxis: {
-            title: {
-                text: 'Value'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            formatter: function() {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2) + " Barriles";
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        credits: false,
-        series: [{
-            name: 'Random data',
-            data: (function() {
-                // generate an array of random data
-                var data = [],
-                    time = (new Date()).getTime(),
-                    i;
-                for (i = -19; i <= 0; i += 1) {
-                    data.push({
-                        x: time + i * 1000,
-                        y: Math.random()
-                    });
-                }
-                return data;
-            }())
-        }]
-    });
 
-    $('.energrt-graph').highcharts({
-        chart: {
-            type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
-            marginRight: 10,
-            // events: {
-            //     load: function () {
-            //         // set up the updating of the chart each second
-            //         var series = this.series[0];
-            //         setInterval(function () {
-            //             var x = (new Date()).getTime(), // current time
-            //                 y = Math.random()+Math.random();
-            //             series.addPoint([x, y], true, true);
-            //         }, 500);
-            //     }
-            // }
-        },
-        title: {
-            text: current
-        },
-        xAxis: {
-            type: 'datetime',
-            tickPixelInterval: 150
-        },
-        yAxis: {
-            title: {
-                text: 'Value'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            formatter: function() {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2) + ' kW/h';
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        credits: false,
-        series: [{
-            name: 'Random data',
-            data: (function() {
-                // generate an array of random data
-                var data = [],
-                    time = (new Date()).getTime(),
-                    i;
-                for (i = -19; i <= 0; i += 1) {
-                    data.push({
-                        x: time + i * 1000,
-                        y: Math.random()
-                    });
-                }
-                return data;
-            }())
-        }]
-    });
+
+
 
     $('#reportrange').daterangepicker({
                 format: 'DD/MM/YYYY',
@@ -379,10 +186,227 @@ $(document).ready(function() {
         console.log("Campo: "+idCamp);
         console.log("Pozo: "+idPozo);
         var datepick = $('#reportrange').data('daterangepicker');
-        var startDate = datepick.startDate.toISOString();
-        var endDate = datepick.endDate.toISOString();
-
+        var startDateB = datepick.startDate.toISOString();
+        var sD=new Date(startDateB);
+        var startDate = sD.getFullYear()+"-"+(sD.getMonth()+1)+"-"+sD.getUTCDate()+" "+sD.getHours()+":"+sD.getMinutes()+":"+sD.getSeconds();
+        var endDateB = datepick.endDate.toISOString();
+        var eD=new Date(endDateB);
+        var endDate = eD.getFullYear()+"-"+(eD.getMonth()+1)+"-"+eD.getUTCDate()+" "+eD.getHours()+":"+eD.getMinutes()+":"+eD.getSeconds();
+        console.log(startDate);
+        console.log(endDate);
+        var json = {};
+        if(idReg!==null){
+            json["region"]=idReg;
+        }
+        if(idCamp!==null){
+            json["jefeDeCampo"]=idCamp;
+        }
+        if(idPozo!==null){
+            json["pozoId"]=idPozo;
+        }
+        json["fechaInicio"]=startDate;
+        json["fechaFin"]=endDate;
         console.log("Dates: "+startDate+" - "+endDate);
+        $.ajax({
+            method: "POST",
+            url: "/reporte/temp",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(json)
+        }).done(function(msg){
+            var dat = [];
+            for (var i=0;i<msg.length;i++){
+                console.log(new Date(msg[i]["timeStamp"]));
+               dat.push([new Date(msg[i]["timeStamp"]),parseInt(msg[i]["info"])]);
+            }
+            $('.temprt-graph').highcharts({
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    // events: {
+                    //     load: function () {
+                    //         // set up the updating of the chart each second
+                    //         var series = this.series[0];
+                    //         setInterval(function () {
+                    //             var x = (new Date()).getTime(), // current time
+                    //                 y = Math.random()+Math.random();
+                    //             series.addPoint([x, y], true, true);
+                    //         }, 500);
+                    //     }
+                    // }
+                },
+                title: {
+                    text: current
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2) + '°C';
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: false,
+                series: [{
+                    name: 'Temperatura',
+                    data: dat
+                }]
+            });
+
+
+        });
+        $.ajax({
+            method: "POST",
+            url: "/reporte/bar",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(json)
+        }).done(function(msg) {
+            var dat = [];
+            for (var i = 0; i < msg.length; i++) {
+                console.log(new Date(msg[i]["timeStamp"]));
+                dat.push([new Date(msg[i]["timeStamp"]), parseInt(msg[i]["info"])]);
+            }
+            $('.barrrt-graph').highcharts({
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    // events: {
+                    //     load: function () {
+                    //         // set up the updating of the chart each second
+                    //         var series = this.series[0];
+                    //         setInterval(function () {
+                    //             var x = (new Date()).getTime(), // current time
+                    //                 y = Math.random()+Math.random();
+                    //             series.addPoint([x, y], true, true);
+                    //         }, 500);
+                    //     }
+                    // }
+                },
+                title: {
+                    text: current
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2) + " Barriles";
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: false,
+                series: [{
+                    name: 'Random data',
+                    data: dat
+                }]
+            });
+        });
+        $.ajax({
+            method: "POST",
+            url: "/reporte/ener",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(json)
+        }).done(function(msg) {
+            var dat = [];
+            for (var i = 0; i < msg.length; i++) {
+                console.log(new Date(msg[i]["timeStamp"]));
+                dat.push([new Date(msg[i]["timeStamp"]), parseInt(msg[i]["info"])]);
+            }
+            $('.energrt-graph').highcharts({
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    // events: {
+                    //     load: function () {
+                    //         // set up the updating of the chart each second
+                    //         var series = this.series[0];
+                    //         setInterval(function () {
+                    //             var x = (new Date()).getTime(), // current time
+                    //                 y = Math.random()+Math.random();
+                    //             series.addPoint([x, y], true, true);
+                    //         }, 500);
+                    //     }
+                    // }
+                },
+                title: {
+                    text: current
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2) + ' kW/h';
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: false,
+                series: [{
+                    name: 'Random data',
+                    data: dat
+                }]
+            });
+        });
     });
 
     $('#reset-params').click(function(event) {
