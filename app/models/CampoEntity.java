@@ -36,12 +36,13 @@ public class CampoEntity extends Model{
     @OneToMany(mappedBy ="campo")
     private List<PozoEntity> pozos;
 
-    public CampoEntity(Long pId, UsuarioEntity pIdJefeCampo){
-        id = pId;
-        idJefeCampo = pIdJefeCampo;
-    }
+   // public CampoEntity(Long pId, UsuarioEntity pIdJefeCampo){
+     //   id = pId;
+       // idJefeCampo = pIdJefeCampo;
+   // }
 
-    public CampoEntity(UsuarioEntity idJefeCampo, Region region, List<PozoEntity> pozos) {
+    public CampoEntity(long id, UsuarioEntity idJefeCampo, Region region, List<PozoEntity> pozos) {
+        this.id = id;
         this.idJefeCampo = idJefeCampo;
         this.region = region;
         this.pozos = pozos;
