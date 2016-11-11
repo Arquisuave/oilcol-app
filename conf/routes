@@ -13,7 +13,10 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 #Login
-POST /login controllers.AuthController.authenticate
+GET     /logIn              controllers.AuthController.logIn()
+GET     /callback           controllers.AuthController.callback(code: Option[String])
+GET     /logout             controllers.AuthController.logOut()
+
 
 #POZO
 #Agregar un pozo
