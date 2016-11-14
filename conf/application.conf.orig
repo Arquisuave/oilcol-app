@@ -65,6 +65,9 @@ contexts{
 # This must be changed for production, but we don't recommend you change it in this file.
 play.crypto.secret = "changeme"
 
+
+
+
 ## Modules
 # https://www.playframework.com/documentation/latest/Modules
 # ~~~~~
@@ -84,7 +87,10 @@ play.modules {
 
   # If there are any built-in modules that you want to disable, you can list them here.
   #disabled += ""
+  enabled += be.objectify.deadbolt.scala.DeadboltModule
+  enabled += modules.CustomBindings
 }
+
 
 ## IDE
 # https://www.playframework.com/documentation/latest/IDE
@@ -211,6 +217,7 @@ play.ws {
   # https://www.playframework.com/documentation/latest/WsSSL
   # ~~~~~
   ssl {
+<<<<<<< HEAD
     # Configuring HTTPS with Play WS does not require programming.  You can
     # set up both trustManager and keyManager for mutual authentication, and
     # turn on JSSE debugging in development with a reload.
@@ -218,8 +225,27 @@ play.ws {
     #trustManager = {
     #  stores = [
     #    { type = "JKS", path = "exampletrust.jks" }
-    #  ]
+    #     { type = "PEM", path = "server.crt" }
+     # ]
     #}
+=======
+    trustManager = {
+      stores = [
+        { path: /priv/server.crt, type: "PEM" }  # Added trust store
+      ]
+    }
+    keyManager = {
+      stores = [
+        {
+          type: "pkcs12",
+          path: "keystore.p12",
+          password: "password1"
+        }
+      ]
+    }
+
+
+>>>>>>> 42e54f0df9360b0bfdb961c289197bcd75bd1db4
   }
 }
 
@@ -366,11 +392,7 @@ db {
 
   # https://www.playframework.com/documentation/latest/Developing-with-the-H2-Database
   default.driver = org.postgresql.Driver
-<<<<<<< HEAD
-  default.url = "jdbc:postgresql://192.168.0.9:5432/oilcol"
-=======
   default.url = "jdbc:postgresql://localhost:5432/oilcol"
->>>>>>> 5a9be3bbc114e7fd0db2d442767530e4d9e7c899
   default.username = "oilcol"
   default.password = "password"
 
@@ -382,3 +404,13 @@ db {
 applyEvolutions.default = true
 ebean.default = ["models.*"]
 //play.modules.enabled+="OnStartModule"
+
+authentication {
+  auth0 {
+    clientSecret="6MQmXSN-ZoatrbU0iKL7WzfXfh4-8y5e_A8iEnVo56gcCQCCH9GXn2UGpmOVNwXy"
+    clientId="C6VWikKCO2mFr9Q8xVJJuWbDJToZCN4Q"
+    domain="andfoy.auth0.com"
+# make sure you set up the redirect URI in Auth0.  For the default application here, http://localhost:9000/callback will work
+    redirectURI="http://localhost:9000/callback"
+  }
+}

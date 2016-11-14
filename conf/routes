@@ -13,7 +13,7 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 #Login
-GET     /logIn              controllers.AuthController.logIn()
+# GET     /logIn              controllers.AuthController.login()
 GET     /callback           controllers.AuthController.callback(code: Option[String])
 GET     /logout             controllers.AuthController.logOut()
 
@@ -85,9 +85,10 @@ POST    /reporte/bar                controllers.ReportController.generateReportB
 
 OPTIONS /:path                         controllers.OptionController.attend(path: String)
 
+GET /                               controllers.Application.index
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
-GET /                               controllers.Assets.at(path="/public",file="login.html")
-GET /index                          controllers.Assets.at(path="/public",file="index.html")
+GET /login                               controllers.Assets.at(path="/public",file="login.html")
+GET /home                          controllers.Assets.at(path="/public",file="index.html")
 GET /pozos                          controllers.Assets.at(path="/public",file="pozos.html")
 GET /campos                         controllers.Assets.at(path="/public",file="campos.html")
 GET /graphs                       controllers.Assets.at(path="/public",file="graphs.html")

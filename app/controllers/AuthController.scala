@@ -31,7 +31,7 @@ class AuthController @Inject()(cache: CacheApi,
           authSupport.bindAndCache(idToken,
                                     userJson)
           System.out.println("askdjsklad");
-          Redirect("/").withSession(authSupport.authenticatedSession(request.session,
+          Redirect("/home").withSession(authSupport.authenticatedSession(request.session,
                                                                      idToken,
                                                                      accessToken))
         }
@@ -53,11 +53,11 @@ class AuthController @Inject()(cache: CacheApi,
 
   def logOut = Action.async { request =>
     Future {
-              Redirect("/login")
+              Redirect("/")
              // Ok(views.html.security.login(clientId,
                                           // domain,
                                           // redirectUri))
-      // .withSession(authSupport.cleanUp(request.session))
+      .withSession(authSupport.cleanUp(request.session))
     }
   }
 }

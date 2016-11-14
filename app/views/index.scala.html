@@ -1,20 +1,14 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@import models.User
+@(title: String, maybeUser: Option[User])
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+@main(title, maybeUser) {
+    @if(maybeUser.isDefined) {
+        @defining(maybeUser.get) { user =>
+            <p>Hello @user.name</p>
+            <img src="@user.avatarUrl"/>
+        }
+    }
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Java")
-
+    <p>This content is only visible to authenticated users.</p>
+    <p><a href="@controllers.routes.AuthController.logOut()">Log out</a></p>
 }

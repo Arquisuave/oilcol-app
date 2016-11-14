@@ -7,10 +7,10 @@ import be.objectify.deadbolt.scala.models.{Role, Permission, Subject}
   *
   * @author Steve Chaloner (steve@objectify.be)
   */
-case class User(userId: String, name: String, avatarUrl: String) extends Subject {
+case class User(userId: String, name: String, avatarUrl: String, role: Role, permission:Permission) extends Subject {
   override def identifier: String = userId
 
-  override def roles: List[_ <: Role] = List.empty
+  override def roles: List[_ <: Role] = List(role)
 
-  override def permissions: List[_ <: Permission] = List.empty
+  override def permissions: List[_ <: Permission] = List(permission)
 }

@@ -3,7 +3,7 @@ package security
 import javax.inject.{Inject, Singleton}
 
 import be.objectify.deadbolt.scala.AuthenticatedRequest
-import models.User
+import models.{User, OilColRole, OilColPermission}
 import play.api.http.{HeaderNames, MimeTypes}
 import play.api.mvc.Session
 import play.api.{Configuration}
@@ -43,6 +43,7 @@ class AuthSupport @Inject()(cache: CacheApi,
     */
   def currentUser[A](request: AuthenticatedRequest[A]): Future[Option[User]] = {
     val maybeIdToken: Option[String] = request.session.get(SessionKeys.IdToken)
+    System.out.println(maybeIdToken)
     maybeIdToken match {
       case Some(idToken) =>
         val maybeLocalUser: Option[User] = request.subject.map(subject => subject.asInstanceOf[User]).orElse {
@@ -52,6 +53,7 @@ class AuthSupport @Inject()(cache: CacheApi,
             case None => Option.empty
           }
         }
+        System.out.println(maybeLocalUser)
         maybeLocalUser match {
           case Some(user) => Future.successful(maybeLocalUser)
           case None => getUser(request.session(SessionKeys.AccessToken))
@@ -103,9 +105,11 @@ class AuthSupport @Inject()(cache: CacheApi,
     * @return a future containing the user's attributes in JSON
     */
   def getUser(accessToken: String): Future[JsValue] = {
+    System.out.println(s"https://$domain/userinfo")
     val userResponse = ws.url(s"https://$domain/userinfo")
                        .withQueryString("access_token" -> accessToken)
                        .get()
+    // System.out.println(userResponse)
 
     userResponse.flatMap(response => Future.successful(response.json))
   }
@@ -119,9 +123,15 @@ class AuthSupport @Inject()(cache: CacheApi,
     */
   def bindAndCache(idToken: String,
                    userJson: JsValue): User = {
+    System.out.println(userJson)
+    val role: OilColRole = OilColRole(roleName = (userJson \ "role").get.as[String]) 
+    val perm: OilColPermission = OilColPermission(permValue = (userJson \ "user_metadata" \ "pozos").get.as[String])
     val user: User = User(userId = (userJson \ "user_id").get.as[String],
                            name = (userJson \ "name").get.as[String],
-                           avatarUrl = (userJson \ "picture").get.as[String])
+                           avatarUrl = (userJson \ "picture").get.as[String],
+                           role = role,
+                           permission = perm)
+    System.out.println(user)
     cache.set(cacheKey(idToken),
                user)
     user
