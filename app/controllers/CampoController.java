@@ -10,11 +10,16 @@ import models.CampoEntity;
 import models.PozoEntity;
 import models.RegistroSensorBarrilesEntity;
 import play.libs.*;
+import play.api.mvc.Result;
 import play.mvc.*;
+// import play.api.mvc.Result;
+import scala.concurrent.Future;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+
+import be.objectify.deadbolt.scala.ActionBuilders;
 
 import static play.libs.Json.toJson;
 
@@ -23,10 +28,10 @@ import static play.libs.Json.toJson;
  */
 public class CampoController extends Controller{
 
-    public CompletionStage<Result> getCampoJefe(long idJefe) {
+    public Future<Result> getCampoJefe(long idJefe) {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
-        return CompletableFuture.
+        return Utilities.toScala(CompletableFuture.
                 supplyAsync(
                         () -> {
                             return CampoEntity.FINDER.where().eq("id_jefe_campo_username",idJefe).findUnique();
@@ -34,15 +39,15 @@ public class CampoController extends Controller{
                         ,jdbcDispatcher)
                 .thenApply(
                         campoEntities -> {
-                            return ok(toJson(campoEntities));
+                            return ok(toJson(campoEntities)).asScala();
                         }
-                );
+                ));
     }
 
-    public CompletionStage<Result> getCampos() {
+    public Future<Result> getCampos() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
-        return CompletableFuture.
+        return Utilities.toScala(CompletableFuture.
                 supplyAsync(
                         () -> {
                             return CampoEntity.FINDER.all();
@@ -50,150 +55,151 @@ public class CampoController extends Controller{
                         ,jdbcDispatcher)
                 .thenApply(
                         campoEntities -> {
-                            return ok(toJson(campoEntities));
+                            return ok(toJson(campoEntities)).asScala();
                         }
-                );
+                ));
     }
 
-    public CompletionStage<Result> createCampo(){
+    public Future<Result> createCampo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nCampo = request().body().asJson();
         CampoEntity campo = Json.fromJson( nCampo , CampoEntity.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    campo.save();
-                    return campo;
-                }
-        ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            campo.save();
+                            return campo;
+                        }
+                ).thenApply(
+                        campoEntity -> {
+                            return ok(Json.toJson(campoEntity)).asScala();
+                        }
+                ));
     }
 
-    public CompletionStage<Result> getCampo(Long id){
+    public Future<Result> getCampo(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    return CampoEntity.FINDER.byId(id);
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            return CampoEntity.FINDER.byId(id);
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        campoEntity -> {
+                            return ok(Json.toJson(campoEntity)).asScala();
+                        }
+                ));
     }
 
-    public CompletionStage<Result> deleteCampo(Long id){
+    public Future<Result> deleteCampo(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    CampoEntity.FINDER.byId(id).delete();
-                    return "Campo con id "+id+" eliminado";
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            CampoEntity.FINDER.byId(id).delete();
+                            return "Campo con id "+id+" eliminado";
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        campoEntity -> {
+                            return ok(Json.toJson(campoEntity)).asScala();
+                        }
+                ));
     }
 
 
-    public CompletionStage<Result> getCampoReg(String reg){
+    public Future<Result> getCampoReg(String reg){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    return CampoEntity.FINDER.where().eq("region", reg).findList();
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            return CampoEntity.FINDER.where().eq("region", reg).findList();
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        campoEntity -> {
+                            return ok(Json.toJson(campoEntity)).asScala();
+                        }
+                ));
     }
 
-    public CompletionStage<Result> getPozosAllCamposRegion(String regG) {
+    public Future<Result> getPozosAllCamposRegion(String regG) {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
-        return CompletableFuture.
-                supplyAsync(
-                        () -> {
-                            String reg = regG;
-                            System.out.println("La region que llega es: "+reg);
-
-                            int cuantosTotal = 0;
-                            int cuantosAbiertos=0;
-                            int cuantosParados=0;
-                            int cuantosClausurados=0;
-                            int cuantosProduccion=0;
-
-                            List listaCamposDeRegion;
-                            if(reg.equals("NACIONAL"))
-                            {
-                                listaCamposDeRegion = CampoEntity.FINDER.all();
-                            }
-                            else
-                            {
-                                if(reg.equals("PACIFICO")){reg = "PACIFICA";}
-                                if(reg.equals("AMAZONIA")){reg = "AMAZONAS";}
-
-                                listaCamposDeRegion = CampoEntity.FINDER.where().eq("region", reg).findList();
-                                System.out.println("analizando la region "+reg + " .la encontro "+ listaCamposDeRegion);
-                            }
-                            for(int i=0;i< listaCamposDeRegion.size();i++)
-                            {
-                                Long idCampo = ((CampoEntity)listaCamposDeRegion.get(i)).getId();
-                                List listaPozosDeCampo = PozoEntity.FINDER.where().eq("campo_id", idCampo ).findList();
-                                cuantosTotal += listaPozosDeCampo.size();
-                                System.out.println("id campo: "+idCampo);
-                                for(int j=0;j<listaPozosDeCampo.size();j++)
-                                {
-                                    PozoEntity pozoActual = (PozoEntity)listaPozosDeCampo.get(j);
-                                    System.out.println("pozo actual : "+pozoActual.getId());
-                                    switch (pozoActual.getEstado())
+        return Utilities.toScala(CompletableFuture.
+                        supplyAsync(
+                                () -> {
+                                    String reg = regG;
+                                    System.out.println("La region que llega es: "+reg);
+        
+                                    int cuantosTotal = 0;
+                                    int cuantosAbiertos=0;
+                                    int cuantosParados=0;
+                                    int cuantosClausurados=0;
+                                    int cuantosProduccion=0;
+        
+                                    List listaCamposDeRegion;
+                                    if(reg.equals("NACIONAL"))
                                     {
-                                        case ABIERTO:
-                                            cuantosAbiertos+=1;
-                                            break;
-                                        case CLAUSURADO:
-                                            cuantosClausurados+=1;
-                                            break;
-                                        case PRODUCCION:
-                                            cuantosProduccion+=1;
-                                            break;
-                                        case PARADO:
-                                            cuantosParados+=1;
-                                            break;
+                                        listaCamposDeRegion = CampoEntity.FINDER.all();
                                     }
+                                    else
+                                    {
+                                        if(reg.equals("PACIFICO")){reg = "PACIFICA";}
+                                        if(reg.equals("AMAZONIA")){reg = "AMAZONAS";}
+        
+                                        listaCamposDeRegion = CampoEntity.FINDER.where().eq("region", reg).findList();
+                                        System.out.println("analizando la region "+reg + " .la encontro "+ listaCamposDeRegion);
+                                    }
+                                    for(int i=0;i< listaCamposDeRegion.size();i++)
+                                    {
+                                        Long idCampo = ((CampoEntity)listaCamposDeRegion.get(i)).getId();
+                                        List listaPozosDeCampo = PozoEntity.FINDER.where().eq("campo_id", idCampo ).findList();
+                                        cuantosTotal += listaPozosDeCampo.size();
+                                        System.out.println("id campo: "+idCampo);
+                                        for(int j=0;j<listaPozosDeCampo.size();j++)
+                                        {
+                                            PozoEntity pozoActual = (PozoEntity)listaPozosDeCampo.get(j);
+                                            System.out.println("pozo actual : "+pozoActual.getId());
+                                            switch (pozoActual.getEstado())
+                                            {
+                                                case ABIERTO:
+                                                    cuantosAbiertos+=1;
+                                                    break;
+                                                case CLAUSURADO:
+                                                    cuantosClausurados+=1;
+                                                    break;
+                                                case PRODUCCION:
+                                                    cuantosProduccion+=1;
+                                                    break;
+                                                case PARADO:
+                                                    cuantosParados+=1;
+                                                    break;
+                                            }
+                                        }
+                                    }
+        
+                                    /**
+                                    *String sql = "";
+                                    *RawSql rawSql = RawSqlBuilder.parse(sql)
+                                    *        // map the sql result columns to bean properties
+                                    *        .columnMapping("order_id", "order.id")
+                                    *        .columnMapping("o.status", "order.status")
+                                    *        .columnMapping("c.id", "order.customer.id")
+                                    *        .columnMapping("c.name", "order.customer.name")
+                                    *        .create();
+                                    *
+                                    *List list = Ebean.find(CampoEntity.class).setRawSql(rawSql).findList();
+                                    **/
+                                    System.out.println("Termina de recolectar info de pozos");
+                                    return "{ \"cuantos\":"+cuantosTotal+", \"clausurados\":"+cuantosClausurados+"," +
+                                            "\"abiertos\":"+cuantosAbiertos+", \"parados\":"+cuantosParados+"," +"\"produccion\":"+
+                                     cuantosProduccion+ "}";
+        
                                 }
-                            }
-
-                            /**
-                            String sql = "";
-                            RawSql rawSql = RawSqlBuilder.parse(sql)
-                                    // map the sql result columns to bean properties
-                                    .columnMapping("order_id", "order.id")
-                                    .columnMapping("o.status", "order.status")
-                                    .columnMapping("c.id", "order.customer.id")
-                                    .columnMapping("c.name", "order.customer.name")
-                                    .create();
-
-                            List list = Ebean.find(CampoEntity.class).setRawSql(rawSql).findList();*/
-                            System.out.println("Termina de recolectar info de pozos");
-                            return "{ \"cuantos\":"+cuantosTotal+", \"clausurados\":"+cuantosClausurados+"," +
-                                    "\"abiertos\":"+cuantosAbiertos+", \"parados\":"+cuantosParados+"," +"\"produccion\":"+
-                             cuantosProduccion+ "}";
-
-                        }
-                        ,jdbcDispatcher)
-                .thenApply(
-                        pozoEntities -> {
-                            return ok(toJson(pozoEntities));
-                        }
-                );
+                                ,jdbcDispatcher)
+                        .thenApply(
+                                pozoEntities -> {
+                                    return ok(toJson(pozoEntities)).asScala();
+                                }
+                        ));
     }
 
 }

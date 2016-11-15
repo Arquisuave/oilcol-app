@@ -20,15 +20,16 @@ GET     /logout             controllers.AuthController.logOut()
 
 #POZO
 #Agregar un pozo
-POST    /pozo                       controllers.PozoController.createPozo
+POST    /pozo                       controllers.PozoAuthWrapper.createPozo
 #Modifica el estado del pozo
-PUT     /updatePozo/:id/:estado     controllers.PozoController.updatePozo(id: Long, estado: String)
+PUT     /updatePozo/:id/:estado     controllers.PozoAuthWrapper.updatePozo(id: Long, estado: String)
 #Mostrar pozos
-GET     /pozo                       controllers.PozoController.getPozos
+GET     /pozo                       controllers.PozoAuthWrapper.getPozos
 #Borrar un pozo dado su ID
-DELETE  /pozo/:id                   controllers.PozoController.deletePozo(id: Long)
+DELETE  /pozo/:id                   controllers.PozoAuthWrapper.deletePozo(id: Long)
 #
 
+GET /pozo/:id controllers.PozoAuthWrapper.getPozo(id: Long)
 
 #USUARIO
 #Listar todos los Usuarios
@@ -40,19 +41,19 @@ POST    /users/register             controllers.UserController.createUser
 
 #CAMPO
 #Agregar un campo
-POST    /campo                      controllers.CampoController.createCampo
+POST    /campo                      controllers.CampoAuthWrapper.createCampo
 #Mostrar campos
-GET     /campo                      controllers.CampoController.getCampos
+GET     /campo                      controllers.CampoAuthWrapper.getCampos
 #Mostrar campo por ID
-GET     /campo/:id                  controllers.CampoController.getCampo(id: Long)
+GET     /campo/:id                  controllers.CampoAuthWrapper.getCampo(id: Long)
 #Trae todos los pozos de una region
-GET     /pozosDeCampos/:reg         controllers.CampoController.getPozosAllCamposRegion(reg: String)
+GET     /pozosDeCampos/:reg         controllers.CampoAuthWrapper.getPozosAllCamposRegion(reg: String)
 #Muestra todos los campos dada una región
-GET     /campo/:reg                 controllers.CampoController.getCampoReg(reg: String)
+GET     /campo/:reg                 controllers.CampoAuthWrapper.getCampoReg(reg: String)
 #Borra un campo su ID
-DELETE /campo/:id                   controllers.CampoController.deleteCampo(id: Long)
+DELETE /campo/:id                   controllers.CampoAuthWrapper.deleteCampo(id: Long)
 #
-GET /campo/:idJefe                  controllers.CampoController.getCampoJefe(idJefe:Long)
+GET /campo/:idJefe                  controllers.CampoAuthWrapper.getCampoJefe(idJefe:Long)
 
 #REGISTRO SENSOR DE TEMPERATURA
 #Agregar un registro de temperatura
@@ -69,30 +70,30 @@ POST    /registro/energia           controllers.RegistroSensorController.createR
 
 #REGISTRO SENSOR DE EMERGENCIA
 #Emite un registro de emergencia
-POST    /emergencia                 controllers.AlertController.reportAlert
+#POST    /emergencia                 controllers.AlertController.reportAlert
 #Marca una emergencia como resuelta y la elimina de la lista de notificaciones
-DELETE  /notification/:id           controllers.AlertController.removeNotification(id: Long)
+#DELETE  /notification/:id           controllers.AlertController.removeNotification(id: Long)
 
 #REPORTES
 #Genera un reporte de TEMPERATURA con filtros temporales
-POST    /reporte/temp               controllers.ReportController.generateReportTemp
+POST    /reporte/temp               controllers.ReportAuthWrapper.generateReportTemp
 #Genera un reporte de ENERGIA con filtros temporales
-POST    /reporte/ener               controllers.ReportController.generateReportEner
+POST    /reporte/ener               controllers.ReportAuthWrapper.generateReportEner
 #Genera un reporte de EMERGENCIAS con filtros temporales
-POST    /reporte/emerg              controllers.ReportController.generateReportEmerg
+#POST    /reporte/emerg              controllers.ReportAuthWrapper.generateReportEmerg
 #Genera un reporte de BARRILES con filtros temporales
-POST    /reporte/bar                controllers.ReportController.generateReportBarriles
+POST    /reporte/bar                controllers.ReportAuthWrapper.generateReportBarriles
 
 OPTIONS /:path                         controllers.OptionController.attend(path: String)
 
 GET /                               controllers.Application.index
+#GET /login                               controllers.Assets.at(path="/public",file="login.html")
+GET /home                           controllers.Application.home
+GET /pozos                          controllers.Application.pozos
+GET /campos                         controllers.Application.campos
+GET /graphs                         controllers.Application.graphs
+GET /emergencias                    controllers.Application.emergencies
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
-GET /login                               controllers.Assets.at(path="/public",file="login.html")
-GET /home                          controllers.Assets.at(path="/public",file="index.html")
-GET /pozos                          controllers.Assets.at(path="/public",file="pozos.html")
-GET /campos                         controllers.Assets.at(path="/public",file="campos.html")
-GET /graphs                       controllers.Assets.at(path="/public",file="graphs.html")
-GET /emergencias                    controllers.Assets.at(path="/public",file="emergency.html")
 GET /css/*file                      controllers.Assets.at(path="/public/css",file)
 GET /fonts/*file                    controllers.Assets.at(path="/public/fonts",file)
 GET /img/*file                      controllers.Assets.at(path="/public/img",file)
@@ -100,6 +101,8 @@ GET /font-awesome/*file             controllers.Assets.at(path="/public/font-awe
 GET /locales/*file                  controllers.Assets.at(path="/public/locales",file)
 
 
-GET     /registro/temp/:id           controllers.RegistroSensorController.getLastRegistroSensorTemp(id: Long)
-GET     /registro/barr/:id             controllers.RegistroSensorController.getLastRegistroSensorBarr(id: Long)
-GET     /registro/ener/:id             controllers.RegistroSensorController.getLastRegistroSensorEner(id: Long)
+GET     /registro/temp/:id           controllers.RegistroSensorAuthWrapper.getLastRegistroSensorTemp(id: Long)
+GET     /registro/barr/:id             controllers.RegistroSensorAuthWrapper.getLastRegistroSensorBarr(id: Long)
+GET     /registro/ener/:id             controllers.RegistroSensorAuthWrapper.getLastRegistroSensorEner(id: Long)
+
+

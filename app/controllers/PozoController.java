@@ -8,7 +8,10 @@ import models.MensajeDeUsuarioDTO;
 import models.PozoEntity;
 import models.UsuarioEntity;
 import play.libs.Json;
+import play.api.mvc.Result;
 import play.mvc.*;
+// import play.api.mvc.Result;
+import scala.concurrent.Future;
 
 import java.util.concurrent.*;
 
@@ -16,10 +19,10 @@ import static play.libs.Json.toJson;
 
 public class PozoController extends Controller{
 
-    public CompletionStage<Result> getPozos() {
+    public Future<Result> getPozos() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
-        return CompletableFuture.
+        return Utilities.toScala(CompletableFuture.
                 supplyAsync(
                         () -> {
                             return PozoEntity.FINDER.all();
@@ -27,16 +30,16 @@ public class PozoController extends Controller{
                         ,jdbcDispatcher)
                 .thenApply(
                         pozoEntities -> {
-                            return ok(toJson(pozoEntities));
+                            return ok(toJson(pozoEntities)).asScala();
                         }
-                );
+                ));
     }
 
-    public CompletionStage<Result> createPozo(){
+    public Future<Result> createPozo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo = request().body().asJson();
         PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
-        return CompletableFuture.supplyAsync(
+        return Utilities.toScala(CompletableFuture.supplyAsync(
                 ()->{
                     pozo.save();
                     return pozo;
@@ -44,17 +47,17 @@ public class PozoController extends Controller{
                 ,jdbcDispatcher
         ).thenApply(
                 pozoEntity -> {
-                    return ok(Json.toJson(pozoEntity));
+                    return ok(Json.toJson(pozoEntity)).asScala();
                 }
-        );
+        ));
     }
 
-    public CompletionStage<Result> updatePozo(Long id, String nuevoEstado)
+    public Future<Result> updatePozo(Long id, String nuevoEstado)
     {
         PozoEntity.Estado estadito =PozoEntity.Estado.valueOf(nuevoEstado);
         System.out.println(estadito);
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
+        return Utilities.toScala(CompletableFuture.supplyAsync(
                 ()->{
                     PozoEntity pozoo = PozoEntity.FINDER.byId(id);
                     pozoo.setEstado(estadito);
@@ -65,29 +68,29 @@ public class PozoController extends Controller{
                 ,jdbcDispatcher
         ).thenApply(
                 productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                    return ok(Json.toJson(productEntity)).asScala();
                 }
-        );
+        ));
     }
 
 
-    public CompletionStage<Result> getPozo(Long id){
+    public Future<Result> getPozo(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
+        return Utilities.toScala(CompletableFuture.supplyAsync(
                 ()->{
                     return PozoEntity.FINDER.byId(id);
                 }
                 ,jdbcDispatcher
         ).thenApply(
                 productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                    return ok(Json.toJson(productEntity)).asScala();
                 }
-        );
+        ));
     }
 
-    public CompletionStage<Result> deletePozo(Long id){
+    public Future<Result> deletePozo(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
+        return Utilities.toScala(CompletableFuture.supplyAsync(
                 ()->{
                     PozoEntity.FINDER.byId(id).delete();
                     return "Pozo con id "+id+" eliminado";
@@ -95,8 +98,8 @@ public class PozoController extends Controller{
                 ,jdbcDispatcher
         ).thenApply(
                 productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                    return ok(Json.toJson(productEntity)).asScala();
                 }
-        );
+        ));
     }
 }

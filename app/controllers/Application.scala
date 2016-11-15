@@ -17,4 +17,30 @@ class Application @Inject()(actionBuilder: ActionBuilders,
     authSupport.currentUser(authRequest).map(maybeUser =>
       Redirect("/home")) 
   }
+
+  def home = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="index.html")(authRequest)
+        result
+  }
+
+  def pozos = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="pozos.html")(authRequest)
+        result
+  }
+
+  def campos = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="campos.html")(authRequest)
+        result
+  }
+
+  def graphs = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="graphs.html")(authRequest)
+        result
+  }
+
+  def emergencies = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="emergency.html")(authRequest)
+        result
+  }
+
 }

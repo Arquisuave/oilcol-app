@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.postgresql" % "postgresql" % "9.4-1206-jdbc42",
   "com.fasterxml.jackson.core" % "jackson-annotations" % "2.8.1",
-  "be.objectify" %% "deadbolt-scala" % "2.5.0"
+  "be.objectify" %% "deadbolt-scala" % "2.5.0",
+  "be.objectify" %% "deadbolt-java" % "2.4.3"
 )
 
 
