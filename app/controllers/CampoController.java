@@ -9,6 +9,8 @@ import dispatchers.AkkaDispatcher;
 import models.CampoEntity;
 import models.PozoEntity;
 import models.RegistroSensorBarrilesEntity;
+import models.User;
+import models.OilColPermission;
 import play.libs.*;
 import play.api.mvc.Result;
 import play.mvc.*;
@@ -44,20 +46,23 @@ public class CampoController extends Controller{
                 ));
     }
 
-    public Future<Result> getCampos() {
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+    public Result getCampos(User user) {
+        System.out.println(user);
+        String perm = ((OilColPermission) user.getPermissions().head()).getValue();
+        System.out.println(perm);
+        // MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
-        return Utilities.toScala(CompletableFuture.
-                supplyAsync(
-                        () -> {
-                            return CampoEntity.FINDER.all();
-                        }
-                        ,jdbcDispatcher)
-                .thenApply(
-                        campoEntities -> {
-                            return ok(toJson(campoEntities)).asScala();
-                        }
-                ));
+        // return Utilities.toScala(CompletableFuture.
+                // supplyAsync(
+                        // () -> {
+                            return ok(toJson(CampoEntity.FINDER.all())).asScala();
+                        // }
+                        // ,jdbcDispatcher)
+                // .thenApply(
+                        // campoEntities -> {
+                            // return ok(toJson(campoEntities)).asScala();
+                        // }
+                // ));
     }
 
     public Future<Result> createCampo(){

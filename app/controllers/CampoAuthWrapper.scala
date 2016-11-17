@@ -21,7 +21,7 @@ class CampoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
     }
 
     def getCampos() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.getCampos()
+            authSupport.currentUser(authRequest).map(user => campoC.getCampos(user.get))
     }
 
     def getCampo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>

@@ -13,4 +13,8 @@ case class User(userId: String, name: String, avatarUrl: String, role: Role, per
   override def roles: List[_ <: Role] = List(role)
 
   override def permissions: List[_ <: Permission] = List(permission)
+
+  def getPermissions: List[Permission] = {
+        permissions
+  }
 }

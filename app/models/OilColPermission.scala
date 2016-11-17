@@ -10,4 +10,8 @@ import be.objectify.deadbolt.scala.models.{Role, Permission, Subject}
 
 case class OilColPermission(permValue: String) extends Permission {
     override def value: String = permValue
+
+    def getValue: String = {
+        value
+    }
 }
