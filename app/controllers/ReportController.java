@@ -11,8 +11,13 @@ import models.*;
 import play.libs.Json;
 import play.mvc.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static play.libs.Json.toJson;
 
@@ -20,6 +25,60 @@ import static play.libs.Json.toJson;
  * Created by camilagarciahernandez on 8/30/16.
  */
 public class ReportController extends Controller {
+
+    public class MyClass{
+        private Long pozoId;
+        private Integer numRegs;
+        public MyClass(Long p, Integer n){
+            pozoId  = p;
+            numRegs = n;
+        }
+    }
+
+    public CompletionStage<Result> maxRegs(){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    List<RegistroSensorTempEntity> temps = RegistroSensorTempEntity.FINDER.findList();
+                    List<RegistroSensorEnerEntity> eners = RegistroSensorEnerEntity.FINDER.findList();
+                    List<RegistroSensorBarrilesEntity> bars = RegistroSensorBarrilesEntity.FINDER.findList();
+
+                    List<MyClass> nTemps = temps.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+                    List<MyClass> nEners = eners.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+                    List<MyClass> nBars = bars.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+
+                    List<MyClass> all = new ArrayList<MyClass>(nTemps);
+                    all.addAll(nEners);
+                    all.addAll(nBars);
+
+                    HashMap<Long, MyClass> map = new HashMap<Long, MyClass>();
+
+                    for(MyClass c: all){
+                        myHash(map,c);
+                    }
+
+                    MyClass biggest = map.values().stream().reduce((new MyClass(new Long(0),0)),(x,y)->Math.max(x.numRegs,y.numRegs)==x.numRegs?x:y);
+
+                    return biggest.pozoId;
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                registroEntities -> {
+                    return ok(toJson(registroEntities));
+                }
+        );
+    }
+
+
+
+    private void myHash(HashMap<Long, MyClass> map, MyClass m){
+        if(map.containsKey(m.pozoId)){
+            map.get(m.pozoId).numRegs+=m.numRegs;
+        }
+        else{
+            map.put(m.pozoId,m);
+        }
+    }
 
     public CompletionStage<Result> generateReportTemp(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;

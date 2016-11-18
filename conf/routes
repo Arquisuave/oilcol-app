@@ -82,6 +82,8 @@ POST    /reporte/bar                controllers.ReportController.generateReportB
 
 OPTIONS /:path                         controllers.OptionController.attend(path: String)
 
+GET /registro/mayor                 controllers.ReportController.maxRegs
+
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
 GET /                               controllers.Assets.at(path="/public",file="login.html")
 GET /index                          controllers.Assets.at(path="/public",file="index.html")
