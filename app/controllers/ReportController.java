@@ -9,7 +9,10 @@ import logic.RegistroSensorTempLogic;
 import logic.ReportLogic;
 import models.*;
 import play.libs.Json;
+import play.api.mvc.Result;
 import play.mvc.*;
+// import play.api.mvc.Result;
+import scala.concurrent.Future;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,77 +83,77 @@ public class ReportController extends Controller {
         }
     }
 
-    public CompletionStage<Result> generateReportTemp(){
+    public Future<Result> generateReportTemp(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Junction<RegistroSensorTempEntity> clause = RegistroSensorTempEntity.FINDER.where().conjunction();
-                    ReportLogic.crearQuery(clause,params);
-                    return clause.findList();
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                registroEntities -> {
-                    return ok(toJson(registroEntities));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            Junction<RegistroSensorTempEntity> clause = RegistroSensorTempEntity.FINDER.where().conjunction();
+                            ReportLogic.crearQuery(clause,params);
+                            return clause.findList();
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        registroEntities -> {
+                            return ok(toJson(registroEntities)).asScala();
+                        }
+                ));
     }
 
 
 
-    public CompletionStage<Result> generateReportBarriles(){
+    public Future<Result> generateReportBarriles(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Junction<RegistroSensorBarrilesEntity> clause = RegistroSensorBarrilesEntity.FINDER.where().conjunction();
-                    ReportLogic.crearQuery(clause,params);
-                    return clause.findList();
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                registroEntities -> {
-                    return ok(toJson(registroEntities));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            Junction<RegistroSensorBarrilesEntity> clause = RegistroSensorBarrilesEntity.FINDER.where().conjunction();
+                            ReportLogic.crearQuery(clause,params);
+                            return clause.findList();
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        registroEntities -> {
+                            return ok(toJson(registroEntities)).asScala();
+                        }
+                ));
     }
 
-    public CompletionStage<Result> generateReportEmerg(){
+    public Future<Result> generateReportEmerg(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Junction<RegistroSensorEmergEntity> clause = RegistroSensorEmergEntity.FINDER.where().conjunction();
-                    ReportLogic.crearQuery(clause,params);
-                    return clause.findList();
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                registroEntities -> {
-                    return ok(toJson(registroEntities));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            Junction<RegistroSensorEmergEntity> clause = RegistroSensorEmergEntity.FINDER.where().conjunction();
+                            ReportLogic.crearQuery(clause,params);
+                            return clause.findList();
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        registroEntities -> {
+                            return ok(toJson(registroEntities)).asScala();
+                        }
+                ));
     }
 
-    public CompletionStage<Result> generateReportEner(){
+    public Future<Result> generateReportEner(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Junction<RegistroSensorEnerEntity> clause = RegistroSensorEnerEntity.FINDER.where().conjunction();
-                    ReportLogic.crearQuery(clause,params);
-                    return clause.findList();
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                registroEntities -> {
-                    return ok(toJson(registroEntities));
-                }
-        );
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                        ()->{
+                            Junction<RegistroSensorEnerEntity> clause = RegistroSensorEnerEntity.FINDER.where().conjunction();
+                            ReportLogic.crearQuery(clause,params);
+                            return clause.findList();
+                        }
+                        ,jdbcDispatcher
+                ).thenApply(
+                        registroEntities -> {
+                            return ok(toJson(registroEntities)).asScala();
+                        }
+                ));
     }
 }

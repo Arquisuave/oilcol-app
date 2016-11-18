@@ -50,9 +50,9 @@ public class AuthFilter extends Filter {
                     exec
             );
         }
-        if(!route.equals("/login") && !route.startsWith("/registro") && !route.startsWith("/emergencia"))
+        if(route.equals("/registro/temp") || route.equals("/registro/barril") || route.equals("/registro/energia"))
         {
-            if(requestHeader.hasHeader("Oilcol-Token"))
+            if(requestHeader.hasHeader("Passwordcita"))
             {
                 return next.apply(requestHeader).thenApplyAsync(
                     result -> result.withHeader("X-ExampleFilter", "foo"),

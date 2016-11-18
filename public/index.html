@@ -15,22 +15,22 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar-default navbar-static-side" role="navigation">
+            <nav class="navbar-default navbar-static-side" role="navigation"  >
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
-                        <li class="nav-header">
+                        <li class="nav-header" >
                             <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                                <img alt="image" id="imagenUser" class="img-circle" src="img/Nosotros/inicio.jpg" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Margarita Gómez</strong>
-                                    </span> <span class="text-muted text-xs block">Jefe de Producción <b class="caret"></b></span> </span> </a>
+                                <span class="clear"> <span   class="block m-t-xs"> <strong id= "nombreUser" class="font-bold">j</strong>
+                                    </span> <span id="rolUser" class="text-muted text-xs block">Jefe de Producción <b class="caret"></b></span> </span> </a>
                                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                         <li><a href="profile.html">Profile</a></li>
                                         <li><a href="contacts.html">Contacts</a></li>
                                         <li><a href="mailbox.html">Mailbox</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="/login">Logout</a></li>
+                                        <li><a href="/logout">Logout</a></li>
                                     </ul>
                                 </div>
                                 <div class="logo-element">
@@ -74,7 +74,7 @@
                                                 <li>
                                                     <div class="dropdown-messages-box">
                                                         <a href="profile.html" class="pull-left">
-                                                            <img alt="image" class="img-circle" src="img/a7.jpg">
+                                                            <img alt="image" class="img-circle" src="">
                                                         </a>
                                                         <div>
                                                             <small class="pull-right">46h ago</small>
@@ -162,7 +162,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="/login">
+                                            <a href="/logout">
                                                 <i class="fa fa-sign-out"></i> Log out
                                             </a>
                                         </li>
@@ -239,11 +239,11 @@
                                                             <span class="label label-danger pull-right">Hoy</span>
                                                             <h5 id="emergenciasPerc">Emergencias</h5>
                                                         </div>
-                                                        <div class="ibox-content">
+                                                        <div  class="ibox-content">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="m-c-md inline">
-                                                                        <input type="text" value="12" class="dial m-r-lg" data-fgColor="#ED5565" data-width="200" data-height="190" data-angleOffset=-125 data-angleArc=250 />
+                                                                        <input id="emergenciasIbox" type="text" value="4" class="dial m-r-lg" data-fgColor="#ED5565" data-width="200" data-height="190" data-angleOffset=-125 data-angleArc=250 />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -916,5 +916,6 @@
             <script src="js/plugins/jsKnob/jquery.knob.js"></script>
             <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
             <script src="js/manejoRegiones.js"></script>
+            <script src="js/sse.js"></script>
         </body>
     </html>

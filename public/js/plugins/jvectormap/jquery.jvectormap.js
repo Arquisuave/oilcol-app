@@ -1106,7 +1106,7 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
                     stringP = string2[0].concat(": ",reg[code]);
                     console.log(stringP);
                     var stringP = $('#title-h').text(stringP);
-                    var numP = cuantosPozos();
+                    //var numP = cuantosPozos();
                    // $('#numPozos').text(numP+"/1200");
                     
                     //TITULO POZOS
@@ -1154,9 +1154,9 @@ jvm.$ = jQuery, Array.prototype.indexOf || (Array.prototype.indexOf = function(s
         console.log(this.mapsLoaded);
         
         return this.mapsLoaded[code] ? deferred.resolve() : jvm.$.ajax({
-                "type":"GET", 
-                "url":this.params.mapUrlByCode(code, this), 
-                "dataType":"text", 
+                "type":"GET",
+            "url":this.params.mapUrlByCode(code, this),
+            "dataType":"text",
         }).then(function() {
             that.mapsLoaded[code] = !0, deferred.resolve()
         }, function() {
@@ -1240,6 +1240,10 @@ function cuantosPozos(region)
 
         $('#numClausurados').text(msgJ.clausurados+"/"+msgJ.cuantos);
         $('#percentageClausurados').css("width",(msgJ.clausurados*100/msgJ.cuantos)+"%");
+
+        //var  random = Math.random()*5;
+        //console.log("PORCENTAJEEE JUPUEASDF "+random);
+        //$('#emergenciasIbox').css("width",random+"%"); no funciona todaviaa
 
     }).fail(function (msg, textstat)
     {

@@ -1,0 +1,95 @@
+@(clientId: String, domain: String, redirectUri: String)
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OilCol App | Login </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Bienvenido a OilColApp</h2>
+
+                <p>
+                    Ingrese su usuario y contraseña
+                </p>
+
+
+                <p>
+                    <small></small>
+                </p>
+
+            </div>
+            <div id="login-box" class="col-md-6">
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Arquisuave
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2016</small>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="https://cdn.auth0.com/js/lock/10.5/lock.min.js"></script>
+    <link href="css/auth.css" rel="stylesheet">
+        <script>
+                var options = { 
+                                allowSignUp: false, 
+                                theme:{
+                                    logo:'/img/oilcol-icon.png',
+                                    primaryColor: 'green'
+                                },
+                                container: 'login-box',
+                                responseType: 'code',
+                                auth:{
+                                    redirectUrl: '@redirectUri',
+                                    params:{
+                                        scope:'openid profile'
+                                    }
+                                },
+                                rememberLastLogin: false,
+                                language: 'es'
+
+                              }
+                var lock = new Auth0Lock('@clientId', '@domain', options);
+                console.log(lock);
+                lock.show();
+
+                lock.on('authorization_error', function(error) {
+                      lock.show({
+                        flashMessage: {
+                          type: 'error',
+                          text: error.error_description
+                        }
+                      });
+                });
+
+                $('.auth0-lock-header-bg-blur').css({
+                    "background-image": 'none'
+                });
+
+                $('.auth0-lock-name').text("OilCol");
+        </script>
+</body>
+
+</html>
