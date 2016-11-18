@@ -19,15 +19,15 @@ import filters.AuthFilter;
 public class Filters implements HttpFilters {
 
     private final Environment env;
-    //private final AuthFilter exampleFilter;
+    private final AuthFilter exampleFilter;
 
     /**
      * @param env Basic environment settings for the current application.
      */
     @Inject
-    public Filters(Environment env) {
+    public Filters(Environment env, AuthFilter exampleFilter) {
         this.env = env;
-        //this.exampleFilter = exampleFilter;
+        this.exampleFilter = exampleFilter;
     }
 
     @Override
