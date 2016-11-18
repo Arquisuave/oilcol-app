@@ -35,6 +35,8 @@ GET /pozo/:id controllers.PozoAuthWrapper.getPozo(id: Long)
 #Listar todos los Usuarios
 GET     /users                      controllers.UserController.getUsers
 
+GET     /userActual                 controllers.UserAuthWrapper.getUser
+
 POST    /users/register             controllers.UserController.createUser
 
 

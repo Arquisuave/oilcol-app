@@ -17,4 +17,8 @@ case class User(userId: String, name: String, avatarUrl: String, role: Role, per
   def getPermissions: List[Permission] = {
         permissions
   }
+
+  def getName: String = {
+    name
+  }
 }

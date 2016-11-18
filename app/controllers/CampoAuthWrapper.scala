@@ -11,13 +11,13 @@ import scala.concurrent.{ Future, Promise, ExecutionContext, ExecutionContextExe
 import java.util.concurrent.{ CompletionStage, Executor, ExecutorService, CompletableFuture }
 
 /**
-  * @author Steve Chaloner (steve@objectify.be)
+  * @author edgar ft tamu
   */
 class CampoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
                            authSupport: AuthSupport, campoC: CampoController) extends Controller {
 
     def getCampoJefe(idJefe: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.getCampoJefe(idJefe)
+            authSupport.currentUser(authRequest).map(user =>  campoC.getCampoJefe(idJefe, user.get))
     }
 
     def getCampos() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
@@ -25,23 +25,23 @@ class CampoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
     }
 
     def getCampo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.getCampo(id)
+            authSupport.currentUser(authRequest).map(user => campoC.getCampo(id,user.get))
     }
 
     def createCampo() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.createCampo()
+            authSupport.currentUser(authRequest).map(user => campoC.createCampo(user.get))
     }
 
     def deleteCampo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.deleteCampo(id)
+            authSupport.currentUser(authRequest).map(user => campoC.deleteCampo(id, user.get))
     }
 
     def getCampoReg(reg: String) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.getCampoReg(reg)
+            authSupport.currentUser(authRequest).map(user => campoC.getCampoReg(reg, user.get))
     }
 
     def getPozosAllCamposRegion(reg: String) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            campoC.getPozosAllCamposRegion(reg)
+            authSupport.currentUser(authRequest).map(user => campoC.getPozosAllCamposRegion(reg, user.get))
     }    
 
 

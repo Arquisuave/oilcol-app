@@ -3,23 +3,35 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.CampoEntity;
-import models.MensajeDeUsuarioDTO;
-import models.PozoEntity;
-import models.UsuarioEntity;
+import models.*;
 import play.libs.Json;
 import play.api.mvc.Result;
 import play.mvc.*;
 // import play.api.mvc.Result;
 import scala.concurrent.Future;
 
+import java.util.List;
 import java.util.concurrent.*;
 
 import static play.libs.Json.toJson;
 
 public class PozoController extends Controller{
 
-    public Future<Result> getPozos() {
+    public Result getPozos(User user ) {
+        System.out.println(user);
+        String perm = ((OilColPermission) user.getPermissions().head()).getValue();
+        System.out.println(perm);
+        if(perm.equals("ALL"))
+        {
+            return ok(toJson(PozoEntity.FINDER.all())).asScala();
+        }
+        else
+        {
+             List pozosL = PozoEntity.FINDER.where().eq("campo.id",Long.parseLong(perm)).findList();
+            System.out.println(pozosL.size());
+            return ok(toJson(pozosL)).asScala();
+        }
+        /**
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return Utilities.toScala(CompletableFuture.
@@ -32,7 +44,7 @@ public class PozoController extends Controller{
                         pozoEntities -> {
                             return ok(toJson(pozoEntities)).asScala();
                         }
-                ));
+                ));*/
     }
 
     public Future<Result> createPozo(){

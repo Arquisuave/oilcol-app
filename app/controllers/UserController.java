@@ -2,6 +2,8 @@ package controllers;
 
 import dispatchers.AkkaDispatcher;
 import java.util.concurrent.CompletableFuture;
+
+import models.User;
 import play.mvc.*;
 import static play.libs.Json.toJson;
 import models.AuthEntity;
@@ -9,7 +11,6 @@ import models.UsuarioEntity;
 import models.AuthResponse;
 import akka.dispatch.MessageDispatcher;
 import java.util.Date;
-
 
 import java.util.concurrent.CompletionStage;
 import play.libs.Json;
@@ -48,5 +49,6 @@ public class UserController extends Controller
                     return ok(Json.toJson(entity));
                 }
         );
-    }    
+    }
+
 }

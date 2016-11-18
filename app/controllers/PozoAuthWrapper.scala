@@ -17,7 +17,7 @@ class PozoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
                            authSupport: AuthSupport, pozoC:PozoController) extends Controller {
 
     def getPozos = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            pozoC.getPozos()
+            authSupport.currentUser(authRequest).map(user => pozoC.getPozos(user.get))
     }
 
     def createPozo = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
