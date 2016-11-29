@@ -22,7 +22,7 @@ GET     /logout             controllers.AuthController.logOut()
 #Agregar un pozo
 POST    /pozo                       controllers.PozoAuthWrapper.createPozo
 
-POST /pozoSinSeg                    controllers.PozoController.createPozo
+#POST /pozoSinSeg                    controllers.PozoController.createPozo
 #Modifica el estado del pozo
 PUT     /updatePozo/:id/:estado     controllers.PozoAuthWrapper.updatePozo(id: Long, estado: String)
 #Mostrar pozos

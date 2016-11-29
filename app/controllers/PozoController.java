@@ -35,6 +35,7 @@ public class PozoController extends Controller{
 
     public Future<Result> createPozo(String body){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nPozo = Json.parse(body);
         // JsonNode nPozo = request().body().asJson();
         PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
         return Utilities.toScala(CompletableFuture.supplyAsync(
