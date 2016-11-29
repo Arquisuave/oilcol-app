@@ -21,7 +21,7 @@ class PozoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
     }
 
     def createPozo = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            pozoC.createPozo()
+            pozoC.createPozo(authRequest.body.asJson.get.toString)
     }    
 
     def updatePozo(id: Long, estado: String) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>

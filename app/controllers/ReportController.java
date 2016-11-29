@@ -143,7 +143,7 @@ public class ReportController extends Controller {
                 ));
     }
 
-    public Future<Result> generateReportEner(){
+    public Future<Result> generateReportEner(String body){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
