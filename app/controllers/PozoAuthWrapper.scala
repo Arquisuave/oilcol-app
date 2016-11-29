@@ -29,7 +29,7 @@ class PozoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
     }
 
     def getPozo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            pozoC.getPozo(id)
+      authSupport.currentUser(authRequest).map(user => pozoC.getPozo(user.get, id))
     }
 
     def deletePozo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>

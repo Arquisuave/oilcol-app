@@ -72,8 +72,30 @@ public class PozoController extends Controller{
     }
 
 
-    public Future<Result> getPozo(Long id){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+    public Result getPozo(User user, Long id){
+        System.out.println(user);
+        String perm = ((OilColPermission) user.getPermissions().head()).getValue();
+        System.out.println(perm);
+        if(perm.equals("ALL"))
+        {
+            return ok(toJson(PozoEntity.FINDER.byId(id))).asScala();
+        }
+        else
+        {
+            List pozosL = PozoEntity.FINDER.where().eq("campo.id",Long.parseLong(perm)).findList();
+            System.out.println(pozosL.size());
+            PozoEntity pozo = null;
+            for(int i=0; i< pozosL.size() && pozo==null;i++)
+            {
+                PozoEntity actual = ((PozoEntity)pozosL.get(i));
+                if(actual.getId() == id)
+                {
+                    pozo = actual;
+                }
+            }
+            return ok(toJson(pozo)).asScala();
+        }
+       /** MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return Utilities.toScala(CompletableFuture.supplyAsync(
                 ()->{
                     return PozoEntity.FINDER.byId(id);
@@ -83,7 +105,7 @@ public class PozoController extends Controller{
                 productEntity -> {
                     return ok(Json.toJson(productEntity)).asScala();
                 }
-        ));
+        ));*/
     }
 
     public Future<Result> deletePozo(Long id){
