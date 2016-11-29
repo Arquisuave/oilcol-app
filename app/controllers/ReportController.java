@@ -67,7 +67,7 @@ public class ReportController extends Controller {
                 ,jdbcDispatcher
         ).thenApply(
                 registroEntities -> {
-                    return ok(toJson(registroEntities));
+                    return ok(toJson(registroEntities)).asScala();
                 }
         );
     }
