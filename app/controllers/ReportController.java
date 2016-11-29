@@ -38,39 +38,39 @@ public class ReportController extends Controller {
         }
     }
 
-    public CompletionStage<Result> maxRegs(){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    List<RegistroSensorTempEntity> temps = RegistroSensorTempEntity.FINDER.findList();
-                    List<RegistroSensorEnerEntity> eners = RegistroSensorEnerEntity.FINDER.findList();
-                    List<RegistroSensorBarrilesEntity> bars = RegistroSensorBarrilesEntity.FINDER.findList();
+    // public CompletionStage<Result> maxRegs(){
+    //     MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+    //     return CompletableFuture.supplyAsync(
+    //             ()->{
+    //                 List<RegistroSensorTempEntity> temps = RegistroSensorTempEntity.FINDER.findList();
+    //                 List<RegistroSensorEnerEntity> eners = RegistroSensorEnerEntity.FINDER.findList();
+    //                 List<RegistroSensorBarrilesEntity> bars = RegistroSensorBarrilesEntity.FINDER.findList();
 
-                    List<MyClass> nTemps = temps.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
-                    List<MyClass> nEners = eners.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
-                    List<MyClass> nBars = bars.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+    //                 List<MyClass> nTemps = temps.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+    //                 List<MyClass> nEners = eners.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+    //                 List<MyClass> nBars = bars.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
 
-                    List<MyClass> all = new ArrayList<MyClass>(nTemps);
-                    all.addAll(nEners);
-                    all.addAll(nBars);
+    //                 List<MyClass> all = new ArrayList<MyClass>(nTemps);
+    //                 all.addAll(nEners);
+    //                 all.addAll(nBars);
 
-                    HashMap<Long, MyClass> map = new HashMap<Long, MyClass>();
+    //                 HashMap<Long, MyClass> map = new HashMap<Long, MyClass>();
 
-                    for(MyClass c: all){
-                        myHash(map,c);
-                    }
+    //                 for(MyClass c: all){
+    //                     myHash(map,c);
+    //                 }
 
-                    MyClass biggest = map.values().stream().reduce((new MyClass(new Long(0),0)),(x,y)->Math.max(x.numRegs,y.numRegs)==x.numRegs?x:y);
+    //                 MyClass biggest = map.values().stream().reduce((new MyClass(new Long(0),0)),(x,y)->Math.max(x.numRegs,y.numRegs)==x.numRegs?x:y);
 
-                    return biggest.pozoId;
-                }
-                ,jdbcDispatcher
-        ).thenApply(
-                registroEntities -> {
-                    return ok(toJson(registroEntities));
-                }
-        );
-    }
+    //                 return biggest.pozoId;
+    //             }
+    //             ,jdbcDispatcher
+    //     ).thenApply(
+    //             x -> {
+    //                 return ok(toJson(x));
+    //             }
+    //     );
+    // }
 
 
 
