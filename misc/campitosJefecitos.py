@@ -65,7 +65,7 @@ for i in range(0, len(r)):
         lats = np.random.uniform(lats[i][0],lats[i][1])
         lon = np.random.uniform(lons[i][0],lons[i][1])
         p = {'lon':lon,'lat':lat,'estado': estadoT ,'campo':{'id':_id}}
-        requests.post('http://localhost:9000/pozo', headers=headers, json=p)
+        requests.post('http://localhost:9000/pozoSinSeg', headers=headers, json=p)
 
 
         
