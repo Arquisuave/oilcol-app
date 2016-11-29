@@ -123,4 +123,24 @@ public class PozoController extends Controller{
                 }
         ));
     }
+
+
+
+
+    public Future<Result> createPozoSinSeg(){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nPozo = request().body().asJson();
+        PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
+        return Utilities.toScala(CompletableFuture.supplyAsync(
+                ()->{
+                    pozo.save();
+                    return pozo;
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                pozoEntity -> {
+                    return ok(Json.toJson(pozoEntity)).asScala();
+                }
+        ));
+    }
 }
