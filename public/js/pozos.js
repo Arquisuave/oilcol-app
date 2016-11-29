@@ -32,7 +32,7 @@ $.ajax({
     }
     if(msg.startsWith("mm.gomez10"))
     {
-        msg= "Margarita Gomez";
+        msg= "Margarita Gómez";
         $('#imagenUser').attr("src", "img/Nosotros/Margari.jpg");
     }
     $('#nombreUser').text(msg);
