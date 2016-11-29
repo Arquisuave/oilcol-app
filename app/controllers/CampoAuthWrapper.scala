@@ -29,7 +29,7 @@ class CampoAuthWrapper @Inject()(actionBuilder: ActionBuilders,
     }
 
     def createCampo() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            authSupport.currentUser(authRequest).map(user => campoC.createCampo(user.get))
+            authSupport.currentUser(authRequest).map(user => campoC.createCampo(user.get,authRequest.body.asJson.get.toString))
     }
 
     def deleteCampo(id: Long) = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>

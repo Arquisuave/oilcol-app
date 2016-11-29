@@ -93,14 +93,15 @@ public class CampoController extends Controller{
                 // ));
     }
 
-    public Result createCampo(User user)
+    public Result createCampo(User user,String body)
     {
         System.out.println(user);
         String perm = ((OilColPermission) user.getPermissions().head()).getValue();
         System.out.println(perm);
         if(perm.equals("ALL"))
         {
-            JsonNode nCampo = request().body().asJson();
+            //JsonNode nCampo = request().body().asJson();
+            JsonNode nCampo = Json.parse(body);
             CampoEntity campo = Json.fromJson( nCampo , CampoEntity.class ) ;
             campo.save();
             return ok(Json.toJson(campo)).asScala();
