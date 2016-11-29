@@ -127,11 +127,11 @@ public class PozoController extends Controller{
 
 
 
-    public Future<Result> createPozoSinSeg(){
+    public CompletionStage<play.mvc.Result> createPozoSinSeg(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo = request().body().asJson();
         PozoEntity pozo = Json.fromJson( nPozo , PozoEntity.class ) ;
-        return Utilities.toScala(CompletableFuture.supplyAsync(
+        return CompletableFuture.supplyAsync(
                 ()->{
                     pozo.save();
                     return pozo;
@@ -139,8 +139,8 @@ public class PozoController extends Controller{
                 ,jdbcDispatcher
         ).thenApply(
                 pozoEntity -> {
-                    return ok(Json.toJson(pozoEntity)).asScala();
+                    return ok(Json.toJson(pozoEntity));
                 }
-        ));
+        );
     }
 }
