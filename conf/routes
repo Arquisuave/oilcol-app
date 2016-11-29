@@ -45,6 +45,8 @@ POST    /users/register             controllers.UserController.createUser
 #CAMPO
 #Agregar un campo
 POST    /campo                      controllers.CampoAuthWrapper.createCampo
+
+POST /campoSinSeg                   controllers.CampoController.createCampoSinSeg
 #Mostrar campos
 GET     /campo                      controllers.CampoAuthWrapper.getCampos
 #Mostrar campo por ID

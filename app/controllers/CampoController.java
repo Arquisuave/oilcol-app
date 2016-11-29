@@ -391,4 +391,23 @@ public class CampoController extends Controller{
                         ));*/
     }
 
+
+    public CompletionStage<play.mvc.Result> createCampoSinSeg()
+    {
+
+         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+         JsonNode nCampo = request().body().asJson();
+         CampoEntity campo = Json.fromJson( nCampo , CampoEntity.class ) ;
+         return CompletableFuture.supplyAsync(
+         ()->{
+         campo.save();
+         return campo;
+         }
+         ).thenApply(
+         campoEntity -> {
+         return ok(Json.toJson(campoEntity));
+         }
+         );
+    }
+
 }

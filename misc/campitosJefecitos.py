@@ -16,14 +16,14 @@ headers = {'Oilcol-Token':'asdkljaskldjsakldjsad'}
 requests.post('http://localhost:9000/users/register', headers=headers, json=user)
 
 campo = {'idJefeCampo':{'username':user['username']}, 'region':'PACIFICA', 'pozos':[]}
-r.append(requests.post('http://localhost:9000/campo', headers=headers, json=campo))
+r.append(requests.post('http://localhost:9000/campoSinSeg', headers=headers, json=campo))
 
 user = {'username':'jg.tamura10@uniandes.edu.co', 'password':"lomaximo", 'type':'JEFE_CAMPO'}
 headers = {'Oilcol-Token':'asdkljaskldjsakldjsad'}
 requests.post('http://localhost:9000/users/register', headers=headers, json=user)
 
 campo = {'idJefeCampo':{'username':user['username']}, 'region':'CARIBE', 'pozos':[]}
-r.append(requests.post('http://localhost:9000/campo', headers=headers, json=campo))
+r.append(requests.post('http://localhost:9000/campoSinSeg', headers=headers, json=campo))
 
 
 user = {'username':'example1@uniandes.edu.co', 'password':"lomaximo", 'type':'JEFE_CAMPO'}
@@ -31,14 +31,14 @@ headers = {'Oilcol-Token':'asdkljaskldjsakldjsad'}
 requests.post('http://localhost:9000/users/register', headers=headers, json=user)
 
 campo = {'idJefeCampo':{'username':user['username']}, 'region':'ANDINA', 'pozos':[]}
-r.append(requests.post('http://localhost:9000/campo', headers=headers, json=campo))
+r.append(requests.post('http://localhost:9000/campoSinSeg', headers=headers, json=campo))
 
 user = {'username':'c.garcia11@uniandes.edu.co', 'password':"lomaximo", 'type':'JEFE_CAMPO'}
 headers = {'Oilcol-Token':'asdkljaskldjsakldjsad'}
 requests.post('http://localhost:9000/users/register', headers=headers, json=user)
 
 campo = {'idJefeCampo':{'username':user['username']}, 'region':'ORINOQUIA', 'pozos':[]}
-r.append(requests.post('http://localhost:9000/campo', headers=headers, json=campo))
+r.append(requests.post('http://localhost:9000/campoSinSeg', headers=headers, json=campo))
 
 
 user = {'username':'ea.margffoy10@uniandes.edu.co', 'password':"lomaximo", 'type':'JEFE_CAMPO'}
@@ -46,7 +46,7 @@ headers = {'Oilcol-Token':'asdkljaskldjsakldjsad'}
 requests.post('http://localhost:9000/users/register', headers=headers, json=user)
 
 campo = {'idJefeCampo':{'username':user['username']}, 'region':'AMAZONAS', 'pozos':[]}
-r.append(requests.post('http://localhost:9000/campo', headers=headers, json=campo))
+r.append(requests.post('http://localhost:9000/campoSinSeg', headers=headers, json=campo))
 
 
 lon=[[-77.5,-76.5],[-76.6,-73.2],[-74.98,-73.6],[-70.9,-68.12],[-73.70,-70.16]]
