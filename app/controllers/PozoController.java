@@ -31,20 +31,6 @@ public class PozoController extends Controller{
             System.out.println(pozosL.size());
             return ok(toJson(pozosL)).asScala();
         }
-        /**
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
-        return Utilities.toScala(CompletableFuture.
-                supplyAsync(
-                        () -> {
-                            return PozoEntity.FINDER.all();
-                        }
-                        ,jdbcDispatcher)
-                .thenApply(
-                        pozoEntities -> {
-                            return ok(toJson(pozoEntities)).asScala();
-                        }
-                ));*/
     }
 
     public Future<Result> createPozo(){

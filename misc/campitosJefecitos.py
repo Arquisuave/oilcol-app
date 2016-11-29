@@ -51,6 +51,7 @@ r.append(requests.post('http://localhost:9000/campo', headers=headers, json=camp
 lats=[[-77.5,-76.5],[-76.6,-73.2],[-74.98,-73.6],[-70.9,-68.12],[-73.70,-70.16]]
 lons = [[2.33,5.8],[8.464,12.7],[5.15,6.3],[4.25,5.9],[-1.46,0.885]]
 
+print r
 
 for i in range(0, len(r)):
     print(i)

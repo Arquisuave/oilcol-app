@@ -17,15 +17,15 @@ class ReportAuthWrapper @Inject()(actionBuilder: ActionBuilders,
                            authSupport: AuthSupport, reportC: ReportController) extends Controller {
 
     def generateReportTemp() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            reportC.generateReportTemp()
+            reportC.generateReportTemp(authRequest.body.asJson.get.toString)
     }    
 
     def generateReportBarriles() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            reportC.generateReportBarriles()
+            reportC.generateReportBarriles(authRequest.body.asJson.get.toString)
     }
 
     def generateReportEner() = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
-            reportC.generateReportEner()
+            reportC.generateReportEner(authRequest.body.asJson.get.toString)
     }
 
 }

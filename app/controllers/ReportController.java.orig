@@ -38,6 +38,7 @@ public class ReportController extends Controller {
         }
     }
 
+<<<<<<< HEAD
     // public CompletionStage<Result> maxRegs(){
     //     MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
     //     return CompletableFuture.supplyAsync(
@@ -71,6 +72,41 @@ public class ReportController extends Controller {
     //             }
     //     );
     // }
+=======
+    public CompletionStage<Result> maxRegs(){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    List<RegistroSensorTempEntity> temps = RegistroSensorTempEntity.FINDER.findList();
+                    List<RegistroSensorEnerEntity> eners = RegistroSensorEnerEntity.FINDER.findList();
+                    List<RegistroSensorBarrilesEntity> bars = RegistroSensorBarrilesEntity.FINDER.findList();
+
+                    List<MyClass> nTemps = temps.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+                    List<MyClass> nEners = eners.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+                    List<MyClass> nBars = bars.stream().map(s->new MyClass(s.getPozo().getId(),s.getNumEntradas())).collect(Collectors.toList());
+
+                    List<MyClass> all = new ArrayList<MyClass>(nTemps);
+                    all.addAll(nEners);
+                    all.addAll(nBars);
+
+                    HashMap<Long, MyClass> map = new HashMap<Long, MyClass>();
+
+                    for(MyClass c: all){
+                        myHash(map,c);
+                    }
+
+                    MyClass biggest = map.values().stream().reduce((new MyClass(new Long(0),0)),(x,y)->Math.max(x.numRegs,y.numRegs)==x.numRegs?x:y);
+
+                    return biggest.pozoId;
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                registroEntities -> {
+                    return ok(toJson(registroEntities)).asScala();
+                }
+        );
+    }
+>>>>>>> b327d23e8e34beb4f7829d5a6337881914cef5a6
 
 
 
@@ -83,12 +119,9 @@ public class ReportController extends Controller {
         }
     }
 
-    public Future<Result> generateReportTemp(String body){
+    public Future<Result> generateReportTemp(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        // JsonNode nParams = request().body().asJson();
-        // ObjectMapper mapper = new ObjectMapper();
-        System.out.println(body);
-        JsonNode nParams = Json.parse(body);
+        JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
         return Utilities.toScala(CompletableFuture.supplyAsync(
                         ()->{
@@ -106,10 +139,9 @@ public class ReportController extends Controller {
 
 
 
-    public Future<Result> generateReportBarriles(String body){
+    public Future<Result> generateReportBarriles(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        // JsonNode nParams = request().body().asJson();
-        JsonNode nParams = Json.parse(body);
+        JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
         return Utilities.toScala(CompletableFuture.supplyAsync(
                         ()->{
@@ -127,7 +159,7 @@ public class ReportController extends Controller {
 
     public Future<Result> generateReportEmerg(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nParams = Json.parse(body);
+        JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
         return Utilities.toScala(CompletableFuture.supplyAsync(
                         ()->{
