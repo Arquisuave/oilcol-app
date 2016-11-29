@@ -88,7 +88,7 @@ POST    /reporte/bar                controllers.ReportAuthWrapper.generateReport
 
 OPTIONS /:path                         controllers.OptionController.attend(path: String)
 
-GET /registro/mayor                 controllers.ReportController.maxRegs
+#GET /registro/mayor                 controllers.ReportController.maxRegs
 
 GET /                               controllers.Application.index
 #GET /login                               controllers.Assets.at(path="/public",file="login.html")
