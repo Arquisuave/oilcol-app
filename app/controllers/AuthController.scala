@@ -43,7 +43,7 @@ class AuthController @Inject()(cache: CacheApi,
 
   def getToken(idToken: Option[String] = None, accessToken: Option[String] = None) = Action.async { request =>
     ( for {
-        id <- codeOpt
+        id <- idToken
         access <- accessToken
       } yield {
             authSupport.getUser(access)map { userJson =>
