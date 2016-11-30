@@ -46,7 +46,7 @@ class AuthController @Inject()(cache: CacheApi,
         id <- idToken
         access <- accessToken
       } yield {
-            authSupport.getUser(access)map { userJson =>
+            authSupport.getUser(access).map { userJson =>
               authSupport.bindAndCache(id, userJson)
               Ok("Yei!").withSession(authSupport.authenticatedSession(request.session,
                                                                       id,
