@@ -45,11 +45,23 @@ class AuthController @Inject()(cache: CacheApi,
     ( for {
         code <- codeOpt
       } yield {
+<<<<<<< HEAD
           System.out.println(code)
           System.out.println("CAMINANDO ANDO")
           Future.successful(Ok("sadjshadkjasd"))
+=======
+          authSupport.getToken(code).flatMap { case (idToken, accessToken) =>
+            authSupport.getUser(accessToken)map { userJson =>
+              authSupport.bindAndCache(idToken, userJson)
+              Ok("Yei!").withSession(authSupport.authenticatedSession(request.session,
+                                                                      idToken,
+                                                                      accessToken))
+            }
+
+          }
+>>>>>>> 503a70aba8347e08660483c9574efd501161ed62
       }
-    ).get
+    ).getOrElse(Future.successful(BadRequest("No parameters supplied")))
   }
 
   // def logIn = Action.async {
