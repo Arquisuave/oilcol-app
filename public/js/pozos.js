@@ -13,6 +13,9 @@ $.ajax({
 
     if(msg.startsWith("jg.tamura10"))
     {
+        document.getElementById('campitos').style.visibility ='hidden';
+        document.getElementById('btnAñadir').style.visibility ='hidden';
+        document.getElementById('btnEliminar').style.visibility ='hidden';
         msg= "Jose Gabriel Tamura";
         $('#rolUser').text("Jefe de CAMPO #2");
         $('#imagenUser').attr("src", "img/Nosotros/Tamu.jpg");
@@ -20,12 +23,18 @@ $.ajax({
     }
     if(msg.startsWith("ea.margffoy"))
     {
+        document.getElementById('campitos').style.visibility ='hidden';
+        document.getElementById('btnAñadir').style.visibility ='hidden';
+        document.getElementById('btnEliminar').style.visibility ='hidden';
         msg= "Edgar Margffoy";
         $('#rolUser').text("Jefe de CAMPO #5");
         $('#imagenUser').attr("src", "img/Nosotros/Edgar.jpg");
     }
     if(msg.startsWith("c.garcia"))
     {
+        document.getElementById('campitos').style.visibility ='hidden';
+        document.getElementById('btnAñadir').style.visibility ='hidden';
+        document.getElementById('btnEliminar').style.visibility ='hidden';
         msg= "Camila Garcia";
         $('#rolUser').text("Jefe de CAMPO #4");
         $('#imagenUser').attr("src", "img/Nosotros/Cami.jpg");
@@ -110,7 +119,8 @@ $('#btnDelete').click(function() {
 $('#btnNuevoEstado').click(function() {
     console.log("Click en Edit")
     var idPozo = $('#idPozo2').val();
-    var nuevoEstado = $('#nuevoEstado').val();
+    var elemento = document.getElementById("nuevoEstado");
+    var nuevoEstado = elemento.options[elemento.selectedIndex].value;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("PUT", "/updatePozo/"+idPozo+"/"+nuevoEstado);
     xmlhttp.send();
