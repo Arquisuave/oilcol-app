@@ -239,6 +239,56 @@ $(document).ready(function () {
             $(".footer").addClass('fixed');
         }
     }
+
+
+    $.ajax({
+         method: "GET",
+         //beforeSend: function(xhr){xhr.setRequestHeader('OilCol-Token',123)},
+         //headers: {'OilCol-Token':'123'},
+         url: "/userActual"
+     }).done(function (msg) {
+
+         console.log("AQUI VIENE EL NOMBRE DEL USER ");
+         console.log(msg);
+
+         if(msg.startsWith("jg.tamura10"))
+         {
+             document.getElementById('usuarios').style.visibility ='hidden';
+             msg= "Jose Gabriel Tamura";
+             $('#rolUser').text("Jefe de CAMPO #2");
+             $('#imagenUser').attr("src", "img/Nosotros/Tamu.jpg");
+
+         }
+         if(msg.startsWith("ea.margffoy"))
+         {
+             document.getElementById('usuarios').style.visibility ='hidden';
+             msg= "Edgar Margffoy";
+             $('#rolUser').text("Jefe de CAMPO #5");
+             $('#imagenUser').attr("src", "img/Nosotros/Edgar.jpg");
+         }
+         if(msg.startsWith("c.garcia"))
+         {
+             document.getElementById('usuarios').style.visibility ='hidden';
+             msg= "Camila Garcia";
+             $('#rolUser').text("Jefe de CAMPO #4");
+             $('#imagenUser').attr("src", "img/Nosotros/Cami.jpg");
+         }
+         if(msg.startsWith("mm.gomez10"))
+         {
+             msg= "Margarita Gomez";
+             $('#imagenUser').attr("src", "img/Nosotros/Margari.jpg");
+         }
+         $('#nombreUser').text(msg);
+
+         var theImg = document.getElementById('imagenUser');
+         theImg.height = 125;
+         theImg.width = 125;
+
+     }).fail(function (msg, textstat) {
+         console.log(textstat);
+     }).always(function (msg) {
+         console.log("buu")
+     });
 });
 
 // check if browser support HTML5 local storage

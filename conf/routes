@@ -101,6 +101,7 @@ GET /pozos                          controllers.Application.pozos
 GET /campos                         controllers.Application.campos
 GET /graphs                         controllers.Application.graphs
 GET /emergencias                    controllers.Application.emergencies
+GET /registro                       controllers.Application.register
 GET /js/*file                       controllers.Assets.at(path="/public/js",file)
 GET /css/*file                      controllers.Assets.at(path="/public/css",file)
 GET /fonts/*file                    controllers.Assets.at(path="/public/fonts",file)

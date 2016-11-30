@@ -43,4 +43,9 @@ class Application @Inject()(actionBuilder: ActionBuilders,
         result
   }
 
+  def register = actionBuilder.SubjectPresentAction().defaultHandler() { authRequest =>
+        val result = controllers.Assets.at(path="/public",file="register.html")(authRequest)
+        result
+  }
+
 }

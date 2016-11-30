@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OilCol | Monitoreo y Estadísticas</title>
+    <title>OilCol | Registrar Usuario</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                 <li>
                     <a href="/home"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/graphs"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span></a>
                 </li>
                 <li>
@@ -57,7 +57,7 @@
                 <li id="campitos">
                     <a href="/campos"><i class="fa fa-map-marker"></i> <span class="nav-label">Campos</span></a>
                 </li>
-                <li id="usuarios">
+                <li id="usuarios" class="active">
                     <a href="/registro"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span></a>
                 </li>
             </ul>
@@ -185,16 +185,16 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Gráficas</h2>
+                    <h2>Registrar Nuevo Usuario</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/">Inicio</a>
                         </li>
                         <li>
-                            <a>Reportes</a>
+                            <a>Administración</a>
                         </li>
                         <li class="active">
-                            <strong>Gráficas</strong>
+                            <strong>Registro</strong>
                         </li>
                     </ol>
                 </div>
@@ -205,100 +205,49 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox">
+                    <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Filtros y Opciones de Consulta</h5>
+                            <h5>Registrar a un nuevo Jefe de Campo</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
                                 </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
                         <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Seleccionar una región</h4>
-                                <select class="region-select" style="width: 100%;" class="form-control">
-                                      <option value="ORINOQUIA">Orinoquía</option>
-                                      <option value="PACIFICA">Pacífica</option>
-                                      <option value="ANDINA">Andina</option>
-                                      <option value="CARIBE">Caribe</option>
-                                      <option value="AMAZONIA">Amazonía</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Seleccionar un campo</h4>
-                                <select class="campo-select" style="width: 100%;" class="form-control"></select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Seleccionar un pozo</h4>
-                                <select class="pozo-select" style="width: 100%;" class="form-control"></select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Rango de Fechas</h4>
-                                <div id="reportrange" class="form-control">
-                                    <i class="fa fa-calendar"></i>
-                                    <span></span> <b class="caret"></b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        </div>
-                        <div class="row">
-                            <h4>&nbsp;</h4>
-                            <div class="col-lg-4">
-                                <button id="report-search" class="btn btn-block btn-primary"><i class="fa fa-search"></i>&nbsp;Realizar Consulta</button>
-                            </div>
-                            <div class="col-lg-4">
-                                <button id="reset-params" class="btn btn-block btn-danger"><i class="fa fa-times"></i>&nbsp;Reiniciar Parámetros</button>
-                            </div>
-                        </div>
+                            <form class="form-horizontal">
+                                <div class="form-group"><label class="col-lg-2 control-label">Nombre</label>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Temperatura
-                            </h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="temprt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Consumo Energético
-                            </h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="energrt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Barriles
-                            </h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="barrrt-graph" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+                                    <div class="col-lg-10"><input type="text" placeholder="Nombre" class="form-control"></div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Apellido</label>
+                                    <div class="col-lg-10"><input type="text" placeholder="Nombre" class="form-control"></div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Correo Electrónico</label>
+                                    <div class="col-lg-10"><input type="email" placeholder="example@example.com" class="form-control">
+                                </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Contraseña</label>
+                                    <div class="col-lg-10"><input type="password" placeholder="Contraseña" class="form-control"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="submit">Registrar</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
