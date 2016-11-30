@@ -165,7 +165,10 @@
                  onMarkerClick:function(event, index){
                      //console.log(map);
                      pozoSelecionado=map.params.main.markers[index].name;
+                     //console.log("LLEGA AQUI HIJUEPUTA");
                      var pozo = mapaPozos[pozoSelecionado];
+                     $('#infoPozo').text(pozoSelecionado);
+
                      /*$.get("/registro/ener/"+pozo.id,function(data,status){
                          console.log(data.info);
                          $("#ener").text(data.info);
