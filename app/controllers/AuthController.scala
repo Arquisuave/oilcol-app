@@ -41,17 +41,16 @@ class AuthController @Inject()(cache: CacheApi,
     }).getOrElse(Future.successful(BadRequest("No parameters supplied")))
   }
 
-  def getToken(codeOpt: Option[String] = None) = Action.async { request =>
+  def getToken(idToken: Option[String] = None, accessToken: Option[String] = None) = Action.async { request =>
     ( for {
-        code <- codeOpt
+        id <- codeOpt
+        access <- accessToken
       } yield {
-          authSupport.getToken(code).flatMap { case (idToken, accessToken) =>
-            authSupport.getUser(accessToken)map { userJson =>
-              authSupport.bindAndCache(idToken, userJson)
+            authSupport.getUser(access)map { userJson =>
+              authSupport.bindAndCache(id, userJson)
               Ok("Yei!").withSession(authSupport.authenticatedSession(request.session,
-                                                                      idToken,
-                                                                      accessToken))
-            }
+                                                                      id,
+                                                                      access))
 
           }
       }
