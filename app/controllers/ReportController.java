@@ -145,7 +145,8 @@ public class ReportController extends Controller {
 
     public Future<Result> generateReportEner(String body){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nParams = request().body().asJson();
+        JsonNode nParams = Json.parse(body);
+        // JsonNode nParams = request().body().asJson();
         ParamReport params = Json.fromJson( nParams , ParamReport.class ) ;
         return Utilities.toScala(CompletableFuture.supplyAsync(
                         ()->{
