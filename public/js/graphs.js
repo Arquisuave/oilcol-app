@@ -177,7 +177,7 @@ $(document).ready(function() {
                         console.log(item);
                         var obj = {
                             id: item.id,
-                            text: 'Pozo: ' + item.id +" - "+ item.region
+                            text: 'Campo: ' + item.id +" - "+ item.region
                         };
                         console.log(obj);
                         return obj;
