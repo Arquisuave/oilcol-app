@@ -96,12 +96,12 @@ $('#btnSave').click(function() {
         "campo": {
             "id": 2,
             "idJefeCampo": {
-                "username": "tamuTAMU1",
+                "username": "jg.tamura10@uniandes.edu.co",
                 "type": null,
                 "password": null,
                 "notifications": []
             },
-            "region": "AMAZONAS",
+            "region": "CARIBE",
             "pozos": []
         }
     }));
