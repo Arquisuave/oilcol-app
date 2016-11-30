@@ -11,6 +11,7 @@ import static play.mvc.Results.ok;
 public class OptionController {
 
     public Result attend(String path) {
+        System.out.println("OPTIOOOOONS");
         return ok();
     }
 

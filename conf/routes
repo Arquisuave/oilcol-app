@@ -90,7 +90,7 @@ POST    /reporte/ener               controllers.ReportAuthWrapper.generateReport
 #Genera un reporte de BARRILES con filtros temporales
 POST    /reporte/bar                controllers.ReportAuthWrapper.generateReportBarriles
 
-OPTIONS /:path                         controllers.OptionController.attend(path: String)
+OPTIONS /:path                      controllers.OptionController.attend(path: String)
 
 #GET /registro/mayor                 controllers.ReportController.maxRegs
 

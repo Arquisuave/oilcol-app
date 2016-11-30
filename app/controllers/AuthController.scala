@@ -46,6 +46,7 @@ class AuthController @Inject()(cache: CacheApi,
         code <- codeOpt
       } yield {
           System.out.println(code)
+          System.out.println("CAMINANDO ANDO")
           Future.successful(Ok("sadjshadkjasd"))
       }
     ).get
