@@ -284,7 +284,7 @@ $(document).ready(function() {
                     // }
                 },
                 title: {
-                    text: current
+                    text: ''
                 },
                 xAxis: {
                     type: 'datetime',
@@ -292,7 +292,7 @@ $(document).ready(function() {
                 },
                 yAxis: {
                     title: {
-                        text: 'Value'
+                        text: '°C'
                     },
                     plotLines: [{
                         value: 0,
@@ -352,7 +352,7 @@ $(document).ready(function() {
                     // }
                 },
                 title: {
-                    text: current
+                    text: ''
                 },
                 xAxis: {
                     type: 'datetime',
@@ -360,7 +360,7 @@ $(document).ready(function() {
                 },
                 yAxis: {
                     title: {
-                        text: 'Value'
+                        text: 'Barriles'
                     },
                     plotLines: [{
                         value: 0,
@@ -418,7 +418,7 @@ $(document).ready(function() {
                     // }
                 },
                 title: {
-                    text: current
+                    text: ''
                 },
                 xAxis: {
                     type: 'datetime',
@@ -426,7 +426,7 @@ $(document).ready(function() {
                 },
                 yAxis: {
                     title: {
-                        text: 'Value'
+                        text: 'kW/h'
                     },
                     plotLines: [{
                         value: 0,
