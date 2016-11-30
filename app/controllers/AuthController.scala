@@ -41,15 +41,15 @@ class AuthController @Inject()(cache: CacheApi,
     }).getOrElse(Future.successful(BadRequest("No parameters supplied")))
   }
 
-  // def get_token(codeOpt: Option[String] = None) = Action.async { request =>
-  //   ( for {
-  //       code <- codeOpt
-  //     } yield {
-  //       println(code)
-  //     }
-  //   )
-
-  // }
+  def getToken(codeOpt: Option[String] = None) = Action.async { request =>
+    ( for {
+        code <- codeOpt
+      } yield {
+          System.out.println(code)
+          Future.successful(Ok("sadjshadkjasd"))
+      }
+    ).get
+  }
 
   // def logIn = Action.async {
   //   Future {

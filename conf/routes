@@ -41,6 +41,7 @@ GET     /userActual                 controllers.UserAuthWrapper.getUser
 POST    /users/register             controllers.UserController.createUser
 
 
+POST    /token                      controllers.AuthController.getToken(code: Option[String])
 
 #CAMPO
 #Agregar un campo
