@@ -263,9 +263,11 @@ $(document).ready(function() {
         }).done(function(msg){
             var dat = [];
             for (var i=0;i<msg.length;i++){
-                console.log(new Date(msg[i]["timeStamp"]));
-               dat.push([new Date(msg[i]["timeStamp"]),parseInt(msg[i]["info"])]);
+                var dal = new Date(msg[i]["timeStamp"]);
+                console.log(dal);
+                dat.push([dal.valueOf(), parseInt(msg[i]["info"])]);
             }
+            dat = dat.reverse();
             $('.temprt-graph').highcharts({
                 chart: {
                     type: 'spline',
@@ -331,9 +333,11 @@ $(document).ready(function() {
         }).done(function(msg) {
             var dat = [];
             for (var i = 0; i < msg.length; i++) {
-                console.log(new Date(msg[i]["timeStamp"]));
-                dat.push([new Date(msg[i]["timeStamp"]), parseInt(msg[i]["info"])]);
+                var dal = new Date(msg[i]["timeStamp"]);
+                console.log(dal);
+                dat.push([dal.valueOf(), parseInt(msg[i]["info"])]);
             }
+            dat = dat.reverse();
             $('.barrrt-graph').highcharts({
                 chart: {
                     type: 'spline',
@@ -397,9 +401,11 @@ $(document).ready(function() {
         }).done(function(msg) {
             var dat = [];
             for (var i = 0; i < msg.length; i++) {
-                console.log(new Date(msg[i]["timeStamp"]));
-                dat.push([new Date(msg[i]["timeStamp"]), parseInt(msg[i]["info"])]);
+                var dal = new Date(msg[i]["timeStamp"]);
+                console.log(dal);
+                dat.push([dal.valueOf(), parseInt(msg[i]["info"])]);
             }
+            dat = dat.reverse();
             $('.energrt-graph').highcharts({
                 chart: {
                     type: 'spline',
