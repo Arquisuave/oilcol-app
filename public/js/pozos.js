@@ -85,12 +85,14 @@ $('#btnSave').click(function() {
     console.log("Click en Guardar")
     console.log($('#longitud').val());
     var xmlhttp = new XMLHttpRequest();
+    var elemento = document.getElementById("estadito");
+    var nuevoEstado = elemento.options[elemento.selectedIndex].value;
     xmlhttp.open("POST", "/pozo");
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(JSON.stringify({
         "lon": $('#longitud').val(),
         "lat": $('#latitud').val(),
-        "estado": $('#estado').val(),
+        "estado": nuevoEstado,
         "campo": {
             "id": 2,
             "idJefeCampo": {
@@ -109,10 +111,14 @@ $('#btnSave').click(function() {
 $('#btnDelete').click(function() {
     console.log("Click en Delete")
     var idPozo = $('#idPozo').val();
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("DELETE", "/pozo/"+idPozo);
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send();
+    try{
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("DELETE", "/pozo/"+idPozo);
+        xmlhttp.send();
+    }
+    catch(err){
+
+    }
 });
 
 //PUT pozo

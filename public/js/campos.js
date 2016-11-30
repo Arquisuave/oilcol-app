@@ -29,13 +29,13 @@ $.ajax({
     }
     if(msg.startsWith("c.garcia"))
     {
-        msg= "Camila Garcia";
+        msg= "Camila García";
         $('#rolUser').text("Jefe de CAMPO #4");
         $('#imagenUser').attr("src", "img/Nosotros/Cami.jpg");
     }
     if(msg.startsWith("mm.gomez10"))
     {
-        msg= "Margarita Gomez";
+        msg= "Margarita Gómez";
         $('#imagenUser').attr("src", "img/Nosotros/Margari.jpg");
     }
     $('#nombreUser').text(msg);
@@ -54,7 +54,6 @@ $.ajax({
     method: "GET",
     url:"/campo"
 }).done(function(msg){
-    console.log(msg [5]);
     var campos = [];
     for(var i=0;i<msg.length;i++){
         var este = {idCampo:msg[i].id,usernameJefe:msg[i].idJefeCampo.username,region:msg[i].region};
@@ -73,23 +72,67 @@ $.ajax({
 
 });
 
+// Agregar Campo
 $('#btnSave').click(function() {
-    console.log("Click en Guardar")
-    console.log($('#idJefeCampo').val());
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "/campo");
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(JSON.stringify({
-        "idJefeCampo": $('#idJefeCampo').val(),
-        "region": $('#region').val()
-    }));
+    try{
+        console.log("Click en Guardar")
+        console.log($('#idJefeCampo').val());
+        var elemento = document.getElementById("region");
+        var region = elemento.options[elemento.selectedIndex].value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/campo");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        var hola = xmlhttp.send(JSON.stringify({
+            "idJefeCampo": $('#idJefeCampo').val(),
+            "region": region
+        }));
+    }
+   catch (err){
+       swal("Error", "El usuario ya tiene un campo asignado o no existe.", "error");
+   }
 });
 
-//DELETE pozo
-$('#btnDelete').click(function() {
-    console.log("Click en Delete")
-    var idCampo = $('#idCampo').val();
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("DELETE", "/campo/"+idCampo);
-    xmlhttp.send();
+//Sweet alert
+
+$(document).ready(function () {
+
+    $('.demo2').click(function(){
+        swal({
+            title: "¡Se ha guardado exitosamente!",
+            text: ":)",
+            type: "success"
+        });
+    });
+
+
+// DELETE CAMPO
+    $('.demo4').click(function () {
+        swal({
+                title: "¿Seguro?",
+                text: "Este campo no podrá ser recuperado",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Si, ¡borrar!",
+                cancelButtonText: "No, cancelar",
+                closeOnConfirm: false,
+                closeOnCancel: false },
+            function (isConfirm) {
+                if (isConfirm) {
+
+                        var idCampo = $('#idCampo').val();
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("DELETE", "/campo/"+idCampo);
+                        xmlhttp.send();
+                        swal("¡Eliminado!", "El campo ha sido eliminado", "success");
+
+
+                    window.location.reload();
+                } else {
+                    swal("Cancelado", "El campo está seguro :)", "error");
+                }
+            });
+    });
+
 });
+

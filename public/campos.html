@@ -236,7 +236,13 @@
                                                 </label> <input type="text" placeholder="e.g.: margarita" class="form-control" id="idJefeCampo"></div>
                                                 <div class="form-group"><label>
                                                     <i class="fa fa-globe"></i> Región:
-                                                </label> <input type="text" placeholder="e.g.: ANDINA" class="form-control" id="region"></div>
+                                                </label> <select id="region" class="form-control m-b" name="account">
+                                                    <option value="ANDINA">Andina</option>
+                                                    <option value="PACIFICA">Pacífica</option>
+                                                    <option value="CARIBE">Caribe</option>
+                                                    <option value="AMAZONAS">Amazonas</option>
+                                                    <option value="ORINOQUIA">Orinoquía</option>
+                                                </select></div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
@@ -474,43 +480,7 @@
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 <script src="js/campos.js"></script>
-<script>
 
-    $(document).ready(function () {
-
-
-
-        $('.demo2').click(function(){
-            swal({
-                title: "¡Se ha guardado exitosamente!",
-                text: ":)",
-                type: "success"
-            });
-        });
-
-        $('.demo4').click(function () {
-            swal({
-                        title: "¿Seguro?",
-                        text: "Este campo no podrá ser recuperado",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Si, ¡borrar!",
-                        cancelButtonText: "No, cancelar",
-                        closeOnConfirm: false,
-                        closeOnCancel: false },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            swal("¡Eliminado!", "El campo ha sido eliminado", "success");
-                        } else {
-                            swal("Cancelado", "El campo está seguro :)", "error");
-                        }
-                    });
-        });
-
-    });
-
-</script>
 </body>
 
 </html>
